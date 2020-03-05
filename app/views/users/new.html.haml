@@ -1,0 +1,27 @@
+.container
+  %h1 Register account
+
+  = form_tag users_path do
+
+    .card
+      .card-body
+
+        .form-group
+          = label :users, :first_name, 'First name'
+          = text_field :users, 'first_name', class: 'form-control'
+
+        .form-group
+          = label :users, :last_name, 'Last name'
+          = text_field :users, 'last_name', class: 'form-control'
+
+        .form-group
+          = label :users, :email, 'Email'
+          = email_field :users, 'email', class: 'form-control'
+
+        .form-group
+          = label :users, :password, 'Password'
+          = password_field :users, 'password', class: 'form-control'
+          %small(id="passwordHelp" class="form-text text-muted") Enter a secure password
+
+        .form-group
+          = submit_tag 'Register', class: 'btn btn-primary btn-lg btn-block'
