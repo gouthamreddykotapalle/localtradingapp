@@ -16,7 +16,6 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-
 # bootstrap for front end library
 gem 'bootstrap', '~> 4.2.1'
 
