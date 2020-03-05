@@ -14,4 +14,28 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      = link_to 'The Local Trading App', { :controller => 'static_page', action: 'home' }, :class => 'navbar-brand'
+      %button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation")
+        %span.navbar-toggler-icon
+      #navbarNavDropdown.collapse.navbar-collapse
+        %ul.navbar-nav
+          %li.nav-item
+            = link_to "Home", { :controller => 'static_page', :action => 'home'}, :class => 'nav-link'
+          %li.nav-item
+            %a(class="nav-link" href="#") Buy
+            -# = link_to "Buy", { :controller => 'posts??', :action => '???'}, :class => 'nav-link'
+          %li.nav-item
+            %a(class="nav-link" href="#") Sell
+            -# = link_to "Sell", { :controller => 'posts??', :action => '???'}, :class => 'nav-link'
+          %li.nav-item
+            = link_to 'About', { :controller => 'static_page', :action => 'about' }, :class => 'nav-link'
+          %li.nav-item.dropdown
+            %a(class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Account
+            %div(class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink")
+              %a(class="dropdown-item" ) Login
+              %a(class="dropdown-item" ) Register
+              -# = link_to 'Register', { :controller => 'user', :action => 'register' }, :class => 'dropdown-item'
+              -# = link_to 'Login', { :controller => 'user', :action => 'login' }, :class => 'dropdown-item'
+
     = yield
