@@ -1,0 +1,30 @@
+-#  This file is app/views/sell_posts/index.html.haml
+
+%h2 Sell Posts nearby you
+
+= form_tag sell_posts_path, :id => :category_form, :method => :get do
+  Include:
+  - @all_categories.each do |category|
+    = category
+    = check_box_tag "categories[#{category}]", 1, session[:categories].include?(category)
+  = submit_tag 'Refresh', id: :ratings_submit
+
+
+
+%table#sell-posts.table.table-striped.col-md-12
+  %thead
+    %tr
+      - @columns.each do |column|
+        - if column[:sort_allowed]
+          %th{:class => (:hilite if session[:sorted_key] == column[:id].to_s )}
+            = link_to column[:name], sell_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
+        - else
+          %th= column[:name]
+  %tbody
+    - @sell_posts.each do |post|
+      %tr
+        - @columns.each do |column|
+          - if (post.send column[:id]) != nil
+            %td= post.send column[:id]
+          - else
+            %td Maybe
