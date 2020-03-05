@@ -1,3 +1,15 @@
 .container
-  %h1 enter some erb form code to create a new user here
+  %h1 Register account
 
+  = form_tag users_path do
+
+    .card
+      .card-body
+
+        .form-group
+          = label :users, :first_name, 'First name'
+          = text_field :users, 'first_name', class: 'form-control'
+
+        .form-group
+          = label :users, :last_name, 'Last name'
+          = text_field :users, 'last_name', class: 'form-control'
