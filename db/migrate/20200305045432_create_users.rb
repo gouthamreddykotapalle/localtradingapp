@@ -3,8 +3,10 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.string :email, limit: 40
       t.string :password, limit: 512
-      t.datetime :created
+      t.string :first_name
+      t.string :last_name
       t.datetime :last_updated
+      t.integer :active_posts
       t.integer :active_posts
 
       t.timestamps

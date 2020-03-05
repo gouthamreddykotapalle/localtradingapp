@@ -1,4 +1,3 @@
 class User < ApplicationRecord
-  validates :account, uniqueness: true
-  validates :email, uniqueness: true
+  validates validates_presence_of :email
 end
