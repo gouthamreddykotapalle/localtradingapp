@@ -1,0 +1,2 @@
+class BuyPost < Post
+end
