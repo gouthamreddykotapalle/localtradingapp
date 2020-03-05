@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   def index
     #need to add this for now
+    @title = 'Login or USERNAME | ' + APP_NAME
   end
 
   def new
+    @title = 'Register | ' + APP_NAME
     @new_user = User.new
   end
 
