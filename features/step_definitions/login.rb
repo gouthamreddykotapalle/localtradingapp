@@ -9,4 +9,3 @@ end
 Then(/^I should see the "([^"]*)" notice$/) do |arg|
   expect(page.find('#notice')).to have_text arg
 end
-
