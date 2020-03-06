@@ -8,7 +8,9 @@ Scenario: register account from the homepage
   Given I am on the homepage
   When I click the "Register" link
   Then I should see the "Register account" page
-  When I enter my email "abc123@xyz123.com" into "email"
-  And I enter a password "abcdefg123" into "password"
+  When I enter my first name "John"
+  And I enter my last name "Doe"
+  And I enter my email "abc123@xyz123.com"
+  And I enter my password "abc123"
   And I click "Register" button
   Then I should see "An email was sent to abc123@xyz123.com" within "div.account_message"
