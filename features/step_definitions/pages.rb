@@ -1,5 +1,5 @@
-Given(/^I am anywhere on the website$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^I am on the homepage$/) do
+  pending
 end
 
 Given(/^I am at the "(.*)" page$/) do |arg|
