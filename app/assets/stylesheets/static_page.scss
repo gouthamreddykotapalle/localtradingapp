@@ -1,9 +1,13 @@
 // Place all the styles related to the StaticPage controller here.
-// They will automatically be included in application.css.
+// They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #the-question {
   font-size: 2em;
   text-align: center;
   margin: 3em 0;
+}
+
+#homepage-map {
+  margin-top: 6em;
 }

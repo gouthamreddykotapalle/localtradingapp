@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/', to: 'static_page#home'  # todo: change to root
+  root 'static_page#home'
   get '/about', to: 'static_page#about'
   get '/contact', to: 'static_page#contact'
   get '/privacypolicy', to: 'static_page#privacypolicy'
