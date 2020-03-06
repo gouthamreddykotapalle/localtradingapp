@@ -1,6 +1,4 @@
 class SellPostsController < ApplicationController
-  include Response
-  include ExceptionHandler
 
   # GET /sell_posts
   def index
@@ -11,7 +9,7 @@ class SellPostsController < ApplicationController
 
   # Post /sell_posts
   def create
-    sell_post = SellPost.create!(sell_post_params)
+    sell_post = SellPost.create!(sell_post_params use_current_user: true)
     if sell_post.is_a? SellPost
       flash[:notice] = "#{sell_post.title} was successfully created."
     end
@@ -77,36 +75,18 @@ class SellPostsController < ApplicationController
   end
 
   def index_with_categories
-    @all_categories = SellPost.all_categories
-    if @all_categories.include? nil
-      # sort categories with nil
-      @all_categories.delete nil
-      @all_categories.sort!.push nil
-    else
-      # sort categories without nil
-      @all_categories.sort!
-    end
-
-    categories = params.fetch(:categories, nil)
-    if categories != nil
-      # convert 'nil' to nil
-      if categories['nil'] != nil
-        categories[nil] = 1
-      end
-      session[:categories] = categories.keys
-    else
-      session[:categories] = @all_categories
-    end
+    @all_categories = sort_categories SellPost.all_categories
+    set_checked_categories default: @all_categories
 
     if session[:categories] != nil
       @sell_posts = @sell_posts.with_categories session[:categories]
     end
   end
 
-  def sell_post_params
+  def sell_post_params(use_current_user: false)
     post_param = params.require(:sell_post).permit(:title, :user_id, :category, :content, :price, :bargain_allowed)
-    unless post_param.include? :user_id
-      params[:user_id] = @current_user.email
+    if use_current_user && !post_param.include?(:user_id)
+      post_param[:user_id] = @current_user.email
     end
     post_param
   end
