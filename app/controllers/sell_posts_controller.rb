@@ -9,6 +9,10 @@ class SellPostsController < ApplicationController
     index_with_categories
   end
 
+  def new
+    redirect_to login_path unless @current_user
+  end
+
   # Post /sell_posts
   def create
     sell_post = SellPost.create!(create_params)
