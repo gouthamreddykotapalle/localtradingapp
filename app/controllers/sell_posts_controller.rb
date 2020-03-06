@@ -19,6 +19,7 @@ class SellPostsController < ApplicationController
   end
 
   private
+
   def before_index
     # Column Information for GET /sell_posts
     @columns = [
@@ -38,6 +39,7 @@ class SellPostsController < ApplicationController
   end
 
   private
+
   def sort_index
     sorted_key = params.fetch(:sorted, nil)
     if sorted_key != nil
@@ -50,7 +52,6 @@ class SellPostsController < ApplicationController
     end
   end
 
-  private
   def index_with_categories
     @all_categories = SellPost.all_categories
     categories = params.fetch(:categories, nil)
@@ -70,7 +71,7 @@ class SellPostsController < ApplicationController
     user_id = session.fetch(:user_id, nil)
     if user_id == nil
       flash[:notice] = "Login required!"
-      redirect_to '/login'
+      redirect_to login_path
     end
 
     post_param = get_post_object :sell_post
