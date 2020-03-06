@@ -34,7 +34,6 @@ class UsersController < ApplicationController
     # @new_user = User.find_by(email:params[:email])
   end
 
-
   private
   def user_params
     params.require(:email)
