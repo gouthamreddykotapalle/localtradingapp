@@ -1,20 +1,18 @@
 class SessionsController < ApplicationController
+  skip_before_action :set_current_user, only: [:create]
 
   def create
-    user = User.find_by(email:login_params[:email])
-
-    if user and user.authenticate( login_params[:email], login_params[:password])
-      session[:user_id] = user.id
-      redirect_to '/dashboard' #add this
-    else
-      flash[:login_errors] = ['invalid credentials']
-      redirect_to '/login'
-    end
+    login_info = get_post_object :login_info
+    email = login_info.require(:email)
+    password = login_info.require :password
+    user = User.authenticate email, password
+    session[:user_id] = user.email
+    redirect_back fallback_location: '/'
   end
 
-  private
-  def login_params
-    params.require(:users).permit(:email, :password)
+  def destroy
+    session.delete :user_id
+    redirect_to '/'
   end
 
 end
