@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get 'static_page/privacypolicy'
   get 'static_page/terms'
 
+  get '/login', to: 'users#login'
+  post '/login', to: 'users#post_login'
+
   resources :users
   resources :sell_posts
 end

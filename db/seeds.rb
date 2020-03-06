@@ -12,6 +12,14 @@ sell_posts = [
     {:title => 'Epic Chair', :user_id => 'tom@blah.com', :category => 'furniture', :price => 58}
 ]
 
+accounts = [
+    {:email => "a@b.com", :password => "123", :first_name => "NO", :last_name => "ONE"}
+]
+
 sell_posts.each do |post|
   SellPost.create!(post)
+end
+
+accounts.each do |account|
+  User.create!(account)
 end

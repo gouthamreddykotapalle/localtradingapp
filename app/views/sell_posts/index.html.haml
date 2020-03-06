@@ -24,7 +24,7 @@
     - @sell_posts.each do |post|
       %tr
         - @columns.each do |column|
-          - if (post.send column[:id]) != nil
-            %td= post.send column[:id]
-          - else
-            %td Maybe
+          %td= post.send column[:id]
+
+
+= link_to 'Reset', sell_posts_path(:reset => true), method: "get"

@@ -34,7 +34,13 @@
             %div(class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink")
               -#%a(class="dropdown-item" href="#" ) Login
               -#%a(class="dropdown-item" href="#" ) Register
-              = link_to 'Login', { :controller => 'users', :action => 'index' }, :class => 'dropdown-item'
+              = link_to 'Login', { :controller => 'users', :action => 'login' }, :class => 'dropdown-item'
               = link_to 'Register', { :controller => 'users', :action => 'new' }, :class => 'dropdown-item'
-
+      #main
+        - if flash[:notice]
+          %div.alert.alert-danger
+            #notice.message= flash[:notice]
+        - elsif flash[:warning]
+          %div.alert.alert-danger
+            #warning.message= flash[:warning]
     = yield
