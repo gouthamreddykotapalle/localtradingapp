@@ -28,6 +28,6 @@ Feature: login to account
     When I click the "Login" link
     Then I should see the "Login" page
     And I enter my email "john@doe.com"
-    And I enter my incorrect password "xyz321"
+    And I enter an incorrect password "xyz321"
     And I click the "Login" button
     Then I should see the "password is incorrect" notice

@@ -1,4 +1,4 @@
-And(/^I enter my incorrect password "([^"]*)"$/) do |arg|
+And(/^I enter an incorrect password "([^"]*)"$/) do |arg|
   fill_in 'Password', with: arg
 end
 
