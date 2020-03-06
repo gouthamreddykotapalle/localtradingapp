@@ -2,19 +2,11 @@ class UsersController < ApplicationController
   skip_before_action :set_current_user, only: [:login, :new, :create]
 
   def login
-    # GET only (login form)
-    # email = session.fetch(:user_id, nil)
-    # @user = User.find_by_email email if email != nil
-
-    # @user = User.find_by(id: session.fetch(:user_id, nil))
-    # render login if @user.nil? else redirect_to users_path
-    # if @user.nil?
-    #   render 'users/login'
-    # else
-    #   redirect_to users_path
-    # end
-    # render 'users/login' unless session.fetch(:user_id, nil)
-    # login template automatically rendered
+    email = session.fetch(:user_id, nil)
+    if email != nil
+      @user = User.find_by_email email
+    end
+    render login_path
   end
 
   def index
@@ -22,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.find_by_email(session.fetch(:user_id, nil)) # find the user from session obj
 
     # @user.nil? ? redirect_to(login_path) : render('users/show')
-    @user ? render('users/show') : redirect_to(users_path)
+    @user ? render('users/show') : redirect_to(login_path)
   end
 
   def new

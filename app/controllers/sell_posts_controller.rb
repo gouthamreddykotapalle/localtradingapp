@@ -11,10 +11,34 @@ class SellPostsController < ApplicationController
 
   # Post /sell_posts
   def create
-    sell_post = SellPost.create!(create_params)
+    sell_post = SellPost.create!(sell_post_params)
     if sell_post.is_a? SellPost
       flash[:notice] = "#{sell_post.title} was successfully created."
     end
+    redirect_to sell_posts_path
+  end
+
+  def show
+    id = params[:id] # retrieve movie ID from URI route
+    @sell_post = SellPost.find(id) # look up movie by unique ID
+    # will render app/views/movies/show.<extension> by default
+  end
+
+  def edit
+    @sell_post = SellPost.find params[:id]
+  end
+
+  def update
+    @sell_post = SellPost.find params[:id]
+    @sell_post.update_attributes!(sell_post_params)
+    flash[:notice] = "#{@sell_post.title} was successfully updated."
+    redirect_to sell_post_path(@sell_post)
+  end
+
+  def destroy
+    @sell_post = SellPost.find(params[:id])
+    @sell_post.destroy
+    flash[:notice] = "Movie '#{@sell_post.title}' deleted."
     redirect_to sell_posts_path
   end
 
@@ -66,15 +90,13 @@ class SellPostsController < ApplicationController
     end
   end
 
-  def create_params
-    user_id = session.fetch(:user_id, nil)
-    if user_id == nil
-      flash[:notice] = "Login required!"
-      redirect_to '/login'
+  private
+  def sell_post_params
+    post_param = params.require(:sell_post).permit(:title, :user_id, :category, :content, :price, :bargain_allowed)
+    unless post_param.include? :user_id
+      params[:user_id] = @current_user.email
     end
-
-    post_param = get_post_object :sell_post
-    post_param[:user_id] = user_id
-    post_param.permit(:title, :user_id, :category, :content, :price, :bargain_allowed)
+    post_param
   end
+
 end

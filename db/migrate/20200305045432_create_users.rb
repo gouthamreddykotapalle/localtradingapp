@@ -7,7 +7,6 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :last_name
       t.datetime :last_updated
       t.integer :active_posts
-      t.integer :active_posts
 
       t.timestamps
     end

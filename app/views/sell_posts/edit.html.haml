@@ -1,7 +1,7 @@
 .container
-  %h1 Sell Your Treasure
+  %h1 Edit your selling item
 
-  = form_tag sell_posts_path, :method => "post" do
+  = form_tag sell_post_path(@sell_post), :method => :put do
 
     .card
       .card-body
@@ -32,4 +32,4 @@
           = text_field :sell_post, :content, class: 'form-control'
 
         .form-group
-          = submit_tag 'Post Your Item!', class: 'btn btn-primary btn-lg btn-block'
+          = submit_tag 'Update Your Item!', class: 'btn btn-primary btn-lg btn-block'
