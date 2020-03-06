@@ -1,5 +1,6 @@
 Given(/^I am on the homepage$/) do
-  pending
+  # pending
+  visit 'http://0.0.0.0:3000'
 end
 
 Given(/^I am at the "(.*)" page$/) do |arg|
