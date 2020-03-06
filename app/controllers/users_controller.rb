@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if email != nil
       @user = User.find_by_email email
     end
-    render login_path
+    render 'users/login'
   end
 
   def index
