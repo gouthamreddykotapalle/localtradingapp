@@ -1,20 +1,15 @@
 .container
   %h1 Login
-  -# - if @account.logged_in?
-  - if @user
-    %h1= 'Welcome' + @user.first_name
-    %p <your account info here>
-  - else
-    = form_tag '/login', method: :post do
-      .card
-        .card-body
-          .form-group
-            = label :login_info, :email, 'Email'
-            = email_field :login_info, 'email', class: 'form-control'
+  = form_tag login_path, method: :post do
+    .card
+      .card-body
+        .form-group
+          = label :login_info, :email, 'Email'
+          = email_field :login_info, 'email', class: 'form-control'
 
-          .form-group
-            = label :login_info, :password, 'Password'
-            = password_field :login_info, 'password', class: 'form-control'
+        .form-group
+          = label :login_info, :password, 'Password'
+          = password_field :login_info, 'password', class: 'form-control'
 
-          .form-group
-            = submit_tag 'Login', class: 'btn btn-primary btn-lg btn-block'
+        .form-group
+          = submit_tag 'Login', class: 'btn btn-primary btn-lg btn-block'

@@ -14,13 +14,26 @@ Rails.application.routes.draw do
   get 'static_page/terms'
 
   #edited by goutham
-  get '/new' => 'users#new' #renders the new haml for registrations that takes you to create action on POST
-  post '/users' => 'users#create'
+  # get '/new' => 'users#new' #renders the new haml for registrations that takes you to create action on POST
+  # post '/users' => 'users#create'
 
-  get '/login', to: 'users#login'
-  post '/login', to: 'sessions#create'
+  # get '/users/login' => 'users#login' #login view rendered
+  # post '/users/login', to: 'sessions#create'
 
-  get '/logout', to: 'sessions#destroy'
+
+  # post '/sessions' => 'sessions#create'
+  #
+  # get '/dashboard' => 'users#show'
+  # get '/users' => 'users#show'
+
+  # get '/login' => 'users#login'
+  # post '/users' => 'sessions#create' # override default POST for users controller
+  #
+  # get '/logout' => 'sessions#destroy'
+
+  get  'login',  to: 'users#login'
+  post 'login',  to: 'sessions#create'
+  get  'logout', to: 'sessions#destroy'
 
   resources :users
   resources :sell_posts
