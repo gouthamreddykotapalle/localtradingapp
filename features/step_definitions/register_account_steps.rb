@@ -14,3 +14,7 @@ end
 And(/^I enter my password "([^"]*)"/) do |arg|
   fill_in 'Password', with: arg
 end
+
+Then(/^I should see "([^"]*)"$/) do |arg|
+  expect(page.find('#heading1')).to have_text arg
+end
