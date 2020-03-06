@@ -63,6 +63,14 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  #  Testing framework.
+  gem 'factory_bot_rails'
+  #  Provides RSpec with additional matchers.
+  gem 'shoulda-matchers'
+  # A library for generating fake data.
+  gem 'faker'
+  # cleans our test database to ensure a clean state in each test suite.
+  gem 'database_cleaner'
 end
 
 group :production do
