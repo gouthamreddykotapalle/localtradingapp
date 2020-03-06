@@ -78,9 +78,21 @@ class SellPostsController < ApplicationController
 
   def index_with_categories
     @all_categories = SellPost.all_categories
-    categories = params.fetch(:categories, nil)
+    if @all_categories.include? nil
+      # sort categories with nil
+      @all_categories.delete nil
+      @all_categories.sort!.push nil
+    else
+      # sort categories without nil
+      @all_categories.sort!
+    end
 
+    categories = params.fetch(:categories, nil)
     if categories != nil
+      # convert 'nil' to nil
+      if categories['nil'] != nil
+        categories[nil] = 1
+      end
       session[:categories] = categories.keys
     else
       session[:categories] = @all_categories
