@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     end
 
     session[:user_id] = user.email
-    # redirect_back fallback_location: users_path
+    # redirect_back fallback_location: users_path # kept going back to login page
     redirect_to users_path
   end
 

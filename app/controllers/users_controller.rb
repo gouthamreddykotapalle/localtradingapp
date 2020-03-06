@@ -3,18 +3,6 @@ class UsersController < ApplicationController
 
   def login
     # GET only (login form)
-    # email = session.fetch(:user_id, nil)
-    # @user = User.find_by_email email if email != nil
-
-    # @user = User.find_by(id: session.fetch(:user_id, nil))
-    # render login if @user.nil? else redirect_to users_path
-    # if @user.nil?
-    #   render 'users/login'
-    # else
-    #   redirect_to users_path
-    # end
-    # render 'users/login' unless session.fetch(:user_id, nil)
-    # login template automatically rendered
   end
 
   def index
