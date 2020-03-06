@@ -11,10 +11,8 @@ class UsersController < ApplicationController
 
   def index
     # GET only
-    @user = User.find_by_email(session.fetch(:user_id, nil)) # find the user from session obj
-
-    # @user.nil? ? redirect_to(login_path) : render('users/show')
-    @user ? render('users/show') : redirect_to(login_path)
+    # @user = User.find_by_email(session.fetch(:user_id, nil)) # find the user from session obj
+    @current_user ? render('users/show') : redirect_to(login_path)
   end
 
   def new
@@ -35,8 +33,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: session.fetch(:user_id, nil))
-    redirect_to login_path if @user.nil?
   end
 
   private

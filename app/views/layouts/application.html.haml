@@ -25,14 +25,15 @@
             %a(class="nav-link" href="#") Buy
             -# = link_to "Buy", { :controller => 'posts??', :action => '???'}, :class => 'nav-link'
           %li.nav-item.active
-            %a(class="nav-link" href="#") Sell
-            -# = link_to "Sell", { :controller => 'posts??', :action => '???'}, :class => 'nav-link'
+            -#%a(class="nav-link" href="#") Sell
+            = link_to "Sell", { :controller => 'sell_posts', :action => 'new'}, :class => 'nav-link'
           %li.nav-item.active
             = link_to 'About', { :controller => 'static_page', :action => 'about' }, :class => 'nav-link'
           %li.nav-item.active.dropdown
             %a(class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Account
             %div(class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink")
-              - if @user
+              - if @current_user
+                = link_to 'My Account', { :controller => 'users' }, :class => 'dropdown-item'
                 = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
               - else
                 = link_to 'Login', { :controller => 'users', :action => 'login' }, :class => 'dropdown-item'

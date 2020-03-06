@@ -43,6 +43,7 @@ class SellPostsController < ApplicationController
   end
 
   private
+
   def before_index
     # Column Information for GET /sell_posts
     @columns = [
@@ -62,6 +63,7 @@ class SellPostsController < ApplicationController
   end
 
   private
+
   def sort_index
     sorted_key = params.fetch(:sorted, nil)
     if sorted_key != nil
@@ -74,7 +76,6 @@ class SellPostsController < ApplicationController
     end
   end
 
-  private
   def index_with_categories
     @all_categories = SellPost.all_categories
     categories = params.fetch(:categories, nil)
@@ -90,7 +91,6 @@ class SellPostsController < ApplicationController
     end
   end
 
-  private
   def sell_post_params
     post_param = params.require(:sell_post).permit(:title, :user_id, :category, :content, :price, :bargain_allowed)
     unless post_param.include? :user_id
@@ -98,5 +98,4 @@ class SellPostsController < ApplicationController
     end
     post_param
   end
-
 end
