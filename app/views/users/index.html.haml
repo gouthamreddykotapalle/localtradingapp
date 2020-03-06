@@ -1,21 +1,2 @@
 .container
-  %h1 Login
-  -# - if @account.logged_in?
-  - @switch = false
-  - if @switch
-    %h1= 'Welcome' + @account.first_name
-    %p <your account info here>
-  - else
-    = form_tag sessions_path do
-      .card
-        .card-body
-          .form-group
-            = label :users, :email, 'Email'
-            = email_field :users, 'email', class: 'form-control'
-
-          .form-group
-            = label :users, :password, 'Password'
-            = password_field :users, 'password', class: 'form-control'
-
-          .form-group
-            = submit_tag 'Login', class: 'btn btn-primary btn-lg btn-block'
+  nothing to show here

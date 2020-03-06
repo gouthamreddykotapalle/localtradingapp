@@ -1,1 +1,5 @@
-.container show page. show user specific information.
+.container
+  .row
+    .col-12
+      %h1.heading1= "Hello, #{@current_user.first_name}"
+      %p {Account information here}
