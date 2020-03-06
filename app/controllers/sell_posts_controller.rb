@@ -5,9 +5,17 @@ class SellPostsController < ApplicationController
   # GET /sell_posts
   def index
     before_index
-    @sell_posts = SellPost.all
     sort_index
     index_with_categories
+  end
+
+  # Post /sell_posts
+  def create
+    sell_post = SellPost.create!(create_params)
+    if sell_post.is_a? SellPost
+      flash[:notice] = "#{sell_post.title} was successfully created."
+    end
+    redirect_to sell_posts_path
   end
 
   private
@@ -20,8 +28,16 @@ class SellPostsController < ApplicationController
         {name: :price, id: :price, sort_allowed: true},
         {name: :bargain?, id: :bargain_allowed, sort_allowed: false},
     ]
+
+    # clear session if indicated
+    if !!params.fetch(:reset, nil)
+      reset_session
+    end
+
+    @sell_posts = SellPost.all
   end
 
+  private
   def sort_index
     sorted_key = params.fetch(:sorted, nil)
     if sorted_key != nil
@@ -34,6 +50,7 @@ class SellPostsController < ApplicationController
     end
   end
 
+  private
   def index_with_categories
     @all_categories = SellPost.all_categories
     categories = params.fetch(:categories, nil)
@@ -47,5 +64,17 @@ class SellPostsController < ApplicationController
     if session[:categories] != nil
       @sell_posts = @sell_posts.with_categories session[:categories]
     end
+  end
+
+  def create_params
+    user_id = session.fetch(:user_id, nil)
+    if user_id == nil
+      flash[:notice] = "Login required!"
+      redirect_to '/login'
+    end
+
+    post_param = get_post_object :sell_post
+    post_param[:user_id] = user_id
+    post_param.permit(:title, :user_id, :category, :content, :price, :bargain_allowed)
   end
 end

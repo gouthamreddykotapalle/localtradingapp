@@ -13,6 +13,15 @@ Rails.application.routes.draw do
   get 'static_page/privacypolicy'
   get 'static_page/terms'
 
+  #edited by goutham
+  get '/new' => 'users#new' #renders the new haml for registrations that takes you to create action on POST
+  post '/users' => 'users#create'
+
+  get '/login', to: 'users#login'
+  post '/login', to: 'sessions#create'
+
+  get '/logout', to: 'sessions#destroy'
+
   resources :users
   resources :sell_posts
 end

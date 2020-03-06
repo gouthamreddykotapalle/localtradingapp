@@ -1,7 +1,16 @@
 class UsersController < ApplicationController
+  skip_before_action :set_current_user, only: [:login, :new, :create]
+
+  def login
+    email = session.fetch(:user_id, nil)
+    if email != nil
+      @user = User.find_by_email email
+    end
+    render "users/login"
+  end
+
   def index
-    #need to add this for now
-    @title = 'Login or USERNAME | ' + APP_NAME
+    redirect_to login
   end
 
   def new
@@ -10,21 +19,26 @@ class UsersController < ApplicationController
   end
 
   def create
-    @new_user = User.create(post_params)
-    if @new_user.save
-      redirect_to @new_user
+    user = User.new(user_params)
+    if user.save
+      session[:user_id] = user.id
+      redirect_to '/dashboard'
     else
-      render 'new'
+      flash[:register_errors] = user.errors.full_messages
+      redirect_to '/'
     end
   end
 
   def show
-    @new_user = User.find(params[:id])
+    # @new_user = User.find_(params[:id])
+    # @new_user = User.find_by(email:params[:email])
   end
 
+
   private
-  def post_params
-    params.require(:post).permit(:first_name, :last_name, :email, :password)
+  def user_params
+    params.require(:email)
+    params.permit(:first_name, :last_name, :email, :password)
   end
 
 end

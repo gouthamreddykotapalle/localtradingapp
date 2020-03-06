@@ -1,0 +1,31 @@
+.container
+  %h1 Sell Your Treasure
+
+  = form_tag sell_posts_path, :method => "post" do
+
+    .card
+      .card-body
+
+        .form-group
+          = label :sell_post, :title, 'Title'
+          = text_field :sell_post, :title, class: 'form-control'
+
+        .form-group
+          = label :sell_post, :category, "Category"
+          = text_field :sell_post, :category, class: 'form-control'
+
+        .form-group
+          = label :sell_post, :price, 'Price'
+          = text_field :sell_post, :price, class: 'form-control'
+
+        .form-group
+          %br
+          = label :sell_post, :bargain_allowed, 'Do you want to bargain?', class: "form-label"
+          %br
+          = label :sell_post, :bargain_allowed, 'Yes'
+          = radio_button :sell_post, :bargain_allowed, true
+          = label :sell_post, :bargain_allowed, 'No'
+          = radio_button :sell_post, :bargain_allowed, false
+
+        .form-group
+          = submit_tag 'Post Your Item!', class: 'btn btn-primary btn-lg btn-block'
