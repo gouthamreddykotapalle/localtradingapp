@@ -11,6 +11,6 @@ Scenario: register account from the homepage
   When I enter my first name "John"
   And I enter my last name "Doe"
   And I enter my email "john@doe.com"
-  And I enter my password "abc123"
-  And I click "Register" button
+  And I enter my requested password "abc123"
+  And I click the "Register" button
   Then I should see "Hello, John"

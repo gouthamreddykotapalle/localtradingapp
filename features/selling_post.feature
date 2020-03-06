@@ -3,7 +3,7 @@ Feature: Posts regarding selling items
   Posts should be visualized and listed, so that other users can read the posts and contact sellers.
 
   Scenario: post an item to sell
-    Given I am at the "home" page
+    Given I am at the home page
     When I click "sell" button
     Then I should see the "sell an item" webpage
     When I enter "IKEA single bed" into "item"
