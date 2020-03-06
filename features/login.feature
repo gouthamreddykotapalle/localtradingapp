@@ -14,6 +14,7 @@ Feature: login to account
 
   Scenario: successful login
     Given I am on the homepage
+    And An account exists with first name "John", last name "Doe", email "john@doe.com", and password "abc123"
     When I click the "Login" link
     Then I should see the "Login" page
     When I enter my email "john@doe.com"
@@ -23,10 +24,10 @@ Feature: login to account
 
   Scenario: bad password
     Given I am on the homepage
+    And An account exists with first name "John", last name "Doe", email "john@doe.com", and password "abc123"
     When I click the "Login" link
     Then I should see the "Login" page
     And I enter my email "john@doe.com"
     And I enter my incorrect password "xyz321"
     And I click the "Login" button
     Then I should see the "password is incorrect" notice
-
