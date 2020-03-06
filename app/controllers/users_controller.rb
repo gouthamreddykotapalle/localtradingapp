@@ -1,30 +1,36 @@
 class UsersController < ApplicationController
+
+
   def index
-    #need to add this for now
-    @title = 'Login or USERNAME | ' + APP_NAME
+    #renders user/index view automatically?
+    render 'index'
   end
 
   def new
-    @title = 'Register | ' + APP_NAME
-    @new_user = User.new
+    render 'new'
   end
 
   def create
-    @new_user = User.create(post_params)
-    if @new_user.save
-      redirect_to @new_user
+    user = User.new(user_params)
+    if user.save
+      session[:user_id] = user.id
+      redirect_to '/dashboard'
     else
-      render 'new'
+      flash[:register_errors] = user.errors.full_messages
+      redirect_to '/'
     end
   end
 
+
   def show
-    @new_user = User.find(params[:id])
+    # @new_user = User.find_(params[:id])
+    # @new_user = User.find_by(email:params[:email])
   end
 
+
   private
-  def post_params
-    params.require(:post).permit(:first_name, :last_name, :email, :password)
+  def user_params
+    params.require(:users).permit(:first_name, :last_name, :email, :password)
   end
 
 end
