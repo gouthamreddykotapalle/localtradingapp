@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   def set_current_user
     # we exploit the fact that find_by_id(nil) returns nil
     @current_user ||= User.find_by_email(session[:user_id])
-    # redirect_to login_path unless @current_user # => unable to view static pages with this uncommented
+    redirect_to login_path unless @current_user # => unable to view static pages with this uncommented
   end
 end

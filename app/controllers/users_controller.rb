@@ -2,17 +2,18 @@ class UsersController < ApplicationController
   skip_before_action :set_current_user, only: [:login, :new, :create]
 
   def login
-    email = session.fetch(:user_id, nil)
-    if email != nil
-      @user = User.find_by_email email
+    if session.include? :user_id
+      set_current_user
+      redirect_to user_path(@current_user.id)
+      return
     end
     render 'users/login'
   end
 
   def index
-    # GET only
-    # @user = User.find_by_email(session.fetch(:user_id, nil)) # find the user from session obj
-    @current_user ? render('users/show') : redirect_to(login_path)
+    # users list are not supposed to explore by ordinary users
+    # It should always redirect back to home page until we develop Admin role
+    redirect_to '/'
   end
 
   def new
