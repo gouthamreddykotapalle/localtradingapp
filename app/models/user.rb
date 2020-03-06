@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  validates validates_presence_of :email
+  validate validates_presence_of :email
 end
