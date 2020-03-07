@@ -4,12 +4,12 @@ Feature: Posts regarding selling items
 
   Scenario: post an item to sell
     Given I am at the "home" page
-    When I click "sell" button
-    Then I should see the "sell an item" webpage
+    When I click the "sell" button
+    Then I should see the "sell an item" page
     When I enter "IKEA single bed" into "item"
     And I enter "bed" into "category"
     And I click on "get my position"
-    And I click "next" button
+    And I click the "next" button
     Then I should see "tell me about your treasure"
     And I should see "size" within "form.bed_template"
 
@@ -18,9 +18,9 @@ Feature: Posts regarding selling items
     When I enter "single" into "size"
     And I enter "IKEA" into "brand"
     And I enter 1 year in the used year
-    And I click "next" button
-    Then I should see the "nearby potential buyers" webpage
+    And I click the "next" button
+    Then I should see the "nearby potential buyers" page
     And I should see "50" within "div.estimated_price"
     When I enter "60" into "Selling Price"
-    And I click "post my item" button
-    And I should see the "map" webpage
+    And I click the "post my item" button
+    And I should see the "map" page

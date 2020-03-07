@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
     begin
       user = User.authenticate email, password
       session[:user_id] = user.email
-      redirect_back fallback_location: "/"
+      set_current_user
+      redirect_to user_path(@current_user.id)
     rescue => error
       flash[:notice] = error.message.to_s
       redirect_to login_path
@@ -18,7 +19,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :user_id
-    redirect_to users_path
+    redirect_to '/'
   end
 
 end
