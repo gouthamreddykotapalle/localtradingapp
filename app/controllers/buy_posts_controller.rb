@@ -36,7 +36,7 @@ class BuyPostsController < ApplicationController
   def destroy
     @buy_post = BuyPost.find(params[:id])
     @buy_post.destroy
-    flash[:notice] = "Movie '#{@buy_post.title}' deleted."
+    flash[:notice] = "Post '#{@buy_post.title}' deleted."
     redirect_to buy_posts_path
   end
 

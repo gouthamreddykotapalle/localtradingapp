@@ -19,7 +19,7 @@ class SellPostsController < ApplicationController
 
   def show
     id = params[:id] # retrieve movie ID from URI route
-    @sell_post = SellPost.find(id) # look up movie by unique ID
+    @sell_post = SellPost.find(id) # look up post by unique ID
     # will render app/views/movies/show.<extension> by default
   end
 
@@ -37,7 +37,7 @@ class SellPostsController < ApplicationController
   def destroy
     @sell_post = SellPost.find(params[:id])
     @sell_post.destroy
-    flash[:notice] = "Movie '#{@sell_post.title}' deleted."
+    flash[:notice] = "Post '#{@sell_post.title}' deleted."
     redirect_to sell_posts_path
   end
 
