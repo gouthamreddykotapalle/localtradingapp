@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_action :set_current_user, only: [:create]
 
   def create
+    # POST only. Creates a session using email, password
     login_info = params.require :login_info
     email = login_info.require(:email)
     password = login_info.require :password

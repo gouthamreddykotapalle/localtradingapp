@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def index
     # users list are not supposed to explore by ordinary users
     # It should always redirect back to home page until we develop Admin role
-    redirect_to '/'
+    redirect_to user_path(@current_user)
   end
 
   def new
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    # POST only (registration)
+    # POST only. (registration)
     user = User.create(registration_params)
     if user.save
       session[:user_id] = user.email
@@ -34,8 +34,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   private
 

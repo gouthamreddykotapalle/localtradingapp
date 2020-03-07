@@ -1,15 +1,15 @@
 class SellPostsController < ApplicationController
   include PostHelper
 
-  # GET /sell_posts
   def index
+    # GET only. /sell_posts
     before_index
     sort_index
     index_with_categories
   end
 
-  # Post /sell_posts
   def create
+    # POST only. /sell_posts
     sell_post = SellPost.create!(sell_post_params use_current_user: true)
     if sell_post.is_a? SellPost
       flash[:notice] = "#{sell_post.title} was successfully created."
@@ -20,7 +20,6 @@ class SellPostsController < ApplicationController
   def show
     id = params[:id] # retrieve movie ID from URI route
     @sell_post = SellPost.find(id) # look up post by unique ID
-    # will render app/views/movies/show.<extension> by default
   end
 
   def edit

@@ -7,8 +7,8 @@ class BuyPostsController < ApplicationController
     index_with_categories
   end
 
-  # Post /buy_posts
   def create
+    # POST only. /buy_posts
     buy_post = BuyPost.create!(buy_post_params use_current_user: true)
     if buy_post.is_a? BuyPost
       flash[:notice] = "#{buy_post.title} was successfully created."
@@ -19,7 +19,6 @@ class BuyPostsController < ApplicationController
   def show
     id = params[:id] # retrieve movie ID from URI route
     @buy_post = BuyPost.find(id) # look up movie by unique ID
-    # will render app/views/movies/show.<extension> by default
   end
 
   def edit
