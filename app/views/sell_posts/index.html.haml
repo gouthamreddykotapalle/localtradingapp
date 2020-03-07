@@ -14,7 +14,6 @@
   = submit_tag 'Refresh', id: :ratings_submit
 
 
-
 %table#sell-posts.table.table-striped.col-md-12
   %thead
     %tr
@@ -28,7 +27,11 @@
     - @sell_posts.each do |post|
       %tr
         - @columns.each do |column|
-          %td= post.send column[:id]
+          - if column[:id] == :title
+            %td= link_to post.send(column[:id]) || "(no title)", sell_post_path(post.id)
+          - else
+            %td= post.send column[:id]
 
 
+= button_to 'Sell Your Item', new_sell_post_path, method: "get"
 = link_to 'Reset', sell_posts_path(:reset => true), method: "get"

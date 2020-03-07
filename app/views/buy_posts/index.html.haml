@@ -25,7 +25,11 @@
     - @buy_posts.each do |post|
       %tr
         - @columns.each do |column|
-          %td= post.send column[:id]
+          - if column[:id] == :title
+            %td= link_to post.send(column[:id]) || "(no title)", buy_post_path(post.id)
+          - else
+            %td= post.send column[:id]
 
 
+= button_to 'Post Your Request', new_buy_post_path, method: "get"
 = link_to 'Reset', buy_posts_path(:reset => true), method: "get"
