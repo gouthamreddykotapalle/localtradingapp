@@ -8,14 +8,12 @@ class SessionsController < ApplicationController
 
     begin
       user = User.authenticate email, password
+      session[:user_id] = user.email
+      redirect_back fallback_location: "/"
     rescue => error
       flash[:notice] = error.message.to_s
       redirect_to login_path
-      return
     end
-
-    session[:user_id] = user.email
-    redirect_back fallback_location: "/"
   end
 
   def destroy
