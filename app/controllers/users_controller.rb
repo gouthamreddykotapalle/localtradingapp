@@ -26,10 +26,11 @@ class UsersController < ApplicationController
     user = User.create(registration_params)
     if user.save
       session[:user_id] = user.email
-      redirect_to users_path
+      set_current_user
+      redirect_to user_path(@current_user.id)
     else
       flash[:register_errors] = user.errors.full_messages
-      redirect_to login_path
+      redirect_to new_user_path
     end
   end
 

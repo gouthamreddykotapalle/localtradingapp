@@ -1,6 +1,6 @@
 -#  This file is app/views/sell_posts/index.html.haml
-
-%h2 Sell Posts nearby you
+= content_for(:title, 'Selling Items')
+%h2 Selling items nearby you
 
 = form_tag sell_posts_path, :id => :category_form, :method => :get do
   Categories:

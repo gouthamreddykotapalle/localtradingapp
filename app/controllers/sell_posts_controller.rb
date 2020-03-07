@@ -1,4 +1,5 @@
 class SellPostsController < ApplicationController
+  include PostHelper
 
   # GET /sell_posts
   def index
