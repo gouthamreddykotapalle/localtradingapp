@@ -1,5 +1,6 @@
 class StaticPageController < ApplicationController
-  # skip_before_action :set_current_user
+  skip_before_action :set_current_user
+  before_action :define_user
 
   def index
     # GET only
@@ -29,6 +30,12 @@ class StaticPageController < ApplicationController
   def terms
     # GET only
     @title = 'Terms & Conditions | ' + APP_NAME
+  end
+
+  protected
+
+  def define_user
+    @current_user ||= User.find_by_email(session[:user_id])
   end
 
 end
