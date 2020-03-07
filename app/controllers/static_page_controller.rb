@@ -1,5 +1,5 @@
 class StaticPageController < ApplicationController
-  skip_before_action :set_current_user
+  # skip_before_action :set_current_user
 
   def index
     # GET only
