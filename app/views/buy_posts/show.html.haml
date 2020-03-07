@@ -1,28 +1,28 @@
 -# in app/views/movies/show.html.haml
+.container
+  %h1#heading1 #{@buy_post.title}
 
-%h3 #{@buy_post.title}
-
-%ul#details
-  %li
-    Category:
-    = @buy_post.category
-  %li
-    Buyer:
-    = @buy_post.user_id
-  %li
-    Price:
-    %span $
-    = @buy_post.price_low
-    %span ~
-    = @buy_post.price_high
-  %li
-    Posted At:
-    = @buy_post.updated_at.strftime("%B %d, %Y")
+  %ul#details
+    %li
+      Category:
+      = @buy_post.category
+    %li
+      Buyer:
+      = @buy_post.user_id
+    %li
+      Price:
+      %span $
+      = @buy_post.price_low
+      %span ~
+      = @buy_post.price_high
+    %li
+      Posted At:
+      = @buy_post.updated_at.strftime("%B %d, %Y")
 
 
-%h4 Description:
-%p= @buy_post.content
+  %h4 Description:
+  %p= @buy_post.content
 
-= link_to 'Edit', edit_buy_post_path(@buy_post)
-= button_to 'Delete',  buy_post_path(@buy_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
-= link_to 'Back to sell post list', buy_posts_path
+  = link_to 'Edit', edit_buy_post_path(@buy_post)
+  = button_to 'Delete',  buy_post_path(@buy_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+  = link_to 'Back to sell post list', buy_posts_path
