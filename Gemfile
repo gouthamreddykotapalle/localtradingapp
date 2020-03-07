@@ -59,7 +59,7 @@ end
 
 group :test do
   # of course, cucumber. https://cucumber.io/docs/installation/ruby/
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
 
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
