@@ -9,3 +9,7 @@ end
 Then(/^I should see the "([^"]*)" notice$/) do |arg|
   expect(page.find('#notice')).to have_text arg
 end
+
+# And(/^I am logged in with account "([^"]*)" and password "([^"]*)"$/) do |arg1, arg2|
+#   pending
+# end
