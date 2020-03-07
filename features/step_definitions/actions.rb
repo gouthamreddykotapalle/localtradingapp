@@ -11,6 +11,10 @@ And(/^I click the "([^"]*)" button$/) do |arg|
   click_button arg
 end
 
+And(/^I click the big "([^"]*)" button$/) do |arg|
+  find('#big-sell-button').click
+end
+
 And(/^I enter my email "([^"]*)"/) do |arg|
   # pending # Write code here that turns the phrase above into concrete actions
   fill_in 'Email', with: arg
