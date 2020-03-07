@@ -3,15 +3,24 @@ Feature: Posts regarding selling items
   Posts should be visualized and listed, so that other users can read the posts and contact sellers.
 
   Scenario: post an item to sell
-    Given I am at the "home" page
-    When I click the "sell" button
-    Then I should see the "sell an item" page
-    When I enter "IKEA single bed" into "item"
-    And I enter "bed" into "category"
-    And I click on "get my position"
-    And I click the "next" button
-    Then I should see "tell me about your treasure"
-    And I should see "size" within "form.bed_template"
+    Given I am on the homepage
+    And An account exists with first name "John", last name "Doe", email "john@doe.com", and password "abc123"
+    When I click the "Login" link
+    Then I should see the "Login" page
+    When I enter my email "john@doe.com"
+    And I enter my correct password "abc123"
+    And I click the "Login" button
+    Then I should see "Hello, John"
+
+    Given I am on the homepage
+#    And I am logged in with account "john@doe.com" and password "abc123"
+    When I click the big "Sell" button
+    Then I should see the "Sell Your Treasure" page
+    When I enter "IKEA single bed" into "Title"
+    And I enter "bed" into "Category"
+    And I enter "120" into "Price"
+    And I click the "Post Your Item!" button
+    Then I should see the "Selling items nearby you" page
 
   Scenario: provide details on the bed I am selling
     Given I am at the "sell an item - details" page

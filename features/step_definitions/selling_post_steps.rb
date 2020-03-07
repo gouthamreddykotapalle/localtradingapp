@@ -1,5 +1,5 @@
-When(/^I enter "(.*)" into "([^"]*)"$/) do |arg1, arg2|
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I enter "(.*)" into "([^"]*)"$/) do |item, title|
+  fill_in title, with: item
 end
 
 When(/^I click on "get my position"$/) do
