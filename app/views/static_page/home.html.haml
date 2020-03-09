@@ -5,10 +5,9 @@
   .row
     .col-3
     .col-2.text-center
-      %a(href="#" id="big-buy-button" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="false") Buy
+      = link_to 'Buy', { :controller => 'buy_posts', :action => 'new' }, :class => 'btn btn-primary btn-lg btn-block', :id => 'big-buy-button'
     .col-2
     .col-2.text-center
-      -#%a(href="#" id="big-sell-button" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="false") Sell
       = link_to 'Sell', { :controller => 'sell_posts', :action => 'new' }, :class => 'btn btn-success btn-lg btn-block', :id => 'big-sell-button'
     .col-3
   .row#homepage-map

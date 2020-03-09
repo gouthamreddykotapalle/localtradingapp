@@ -10,8 +10,8 @@ Then(/^I should see the "(.*)" page$/) do |arg|
   expect(page.find('#heading1')).to have_text arg
 end
 
-Then(/^I should see "(.*)" within "([^"]*)"$/) do |arg1, arg2|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should see "([^"]*)" in this page"$/) do |value|
+  expect(page).to have_content(value)
 end
 
 Then(/^I should see "([^"]*)"$/) do |arg|

@@ -10,6 +10,14 @@ Then(/^I should see the "([^"]*)" notice$/) do |arg|
   expect(page.find('#notice')).to have_text arg
 end
 
-# And(/^I am logged in with account "([^"]*)" and password "([^"]*)"$/) do |arg1, arg2|
-#   pending
-# end
+Given(/^I have logged in with account "([^"]*)" and password "([^"]*)"$/) do |arg1, arg2|
+  steps %{
+    Given I am on the homepage
+    And An account exists with first name "John", last name "Doe", email "#{arg1}", and password "#{arg2}"
+    When I click the "Login" link
+    Then I should see the "Login" page
+    When I enter my email "#{arg1}"
+    And I enter my correct password "#{arg2}"
+    And I click the "Login" button
+  }
+end

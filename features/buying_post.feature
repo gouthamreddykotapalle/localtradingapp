@@ -4,22 +4,22 @@ Feature: Users search nearby items and post their buy requests
   Posts should be visualized and listed, so that other users can read the posts and contact buyers.
 
 
-  Scenario: search the used cars (Camry 2019) nearby
-    Given I am at the "home" page
-    When I click "buy" button
-    Then I should see the "find your goods" webpage
-    When I enter "vehicle" into "category"
-    And I enter "8000" into "price (low)"
-    And I enter "12000" into "price (high)"
-    And I click "Search" button
-    Then I should see the "find your goods" webpage
-    When I enter "Toyota" into "make"
-    And I enter "Camry" into "type"
-    And I enter "2018" into "year"
-    Then I should see the "find your goods" webpage
+  Scenario: create a request for a used car
+    Given I have logged in with account "a@b.com" and password "123"
+    And I am on the homepage
+    When I click the button with the id "big-buy-button"
+    Then I should see the "Post Your Request" page
+    When I enter "Used Car Wanted" into "Title"
+    When I enter "vehicle" into "Category"
+    And I enter "8000" into "buy_post_price_low"
+    And I enter "12000" into "buy_post_price_low"
+    And I click the "Post Your Request!" button
+    Then I should see the "Item Requests Nearby You" page
+    And I should see "Used Car Wanted" in this page"
 
   Scenario: post an item to sell
-    Given I am at the "find your goods" page
-    When I click "post my buy request" button
-    Then I should see the "create your buy request" webpage
+    Given I have logged in with account "a@b.com" and password "123"
+    And I am on the homepage
+    When I click the button with the id "nav-buy"
+    Then I should see the "Selling items nearby you" page
 

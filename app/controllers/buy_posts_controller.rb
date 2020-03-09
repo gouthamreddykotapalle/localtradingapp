@@ -7,6 +7,8 @@ class BuyPostsController < ApplicationController
     index_with_categories
   end
 
+  def new; end
+
   def create
     # POST only. /buy_posts
     buy_post = BuyPost.create!(buy_post_params use_current_user: true)

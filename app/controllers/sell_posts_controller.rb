@@ -8,6 +8,8 @@ class SellPostsController < ApplicationController
     index_with_categories
   end
 
+  def new; end
+
   def create
     # POST only. /sell_posts
     sell_post = SellPost.create!(sell_post_params use_current_user: true)
