@@ -24,4 +24,13 @@ module PostHelper
       session[:categories] = default
     end
   end
+
+  def authorize_to_edit? (post, redirect_path: root_path)
+    if @current_user.email != post.user_id
+      flash[:warning] = "You are not authorized to edit this post"
+      redirect_to redirect_path
+      return false
+    end
+    true
+  end
 end

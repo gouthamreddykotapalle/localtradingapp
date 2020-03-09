@@ -25,6 +25,7 @@ class BuyPostsController < ApplicationController
 
   def edit
     @buy_post = BuyPost.find params[:id]
+    authorize_to_edit? @buy_post, redirect_path: buy_posts_path
   end
 
   def update

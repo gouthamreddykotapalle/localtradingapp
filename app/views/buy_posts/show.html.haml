@@ -22,6 +22,9 @@
   %h4 Description:
   %p= @buy_post.content
 
-  = link_to 'Edit', edit_buy_post_path(@buy_post)
-  = button_to 'Delete',  buy_post_path(@buy_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+  - if @current_user.email == @buy_post.user_id
+    = button_to 'Edit', edit_buy_post_path(@buy_post), :method => :get, :class => 'btn btn-primary'
+    %br
+    = button_to 'Delete',  buy_post_path(@buy_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+  %br
   = link_to 'Back to sell post list', buy_posts_path

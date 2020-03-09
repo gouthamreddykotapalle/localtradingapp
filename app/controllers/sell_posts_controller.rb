@@ -26,6 +26,7 @@ class SellPostsController < ApplicationController
 
   def edit
     @sell_post = SellPost.find params[:id]
+    authorize_to_edit? @sell_post, redirect_path: sell_posts_path
   end
 
   def update
