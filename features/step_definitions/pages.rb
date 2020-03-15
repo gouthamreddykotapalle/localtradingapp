@@ -17,3 +17,7 @@ end
 Then(/^I should see "([^"]*)"$/) do |arg|
   expect(page.find('#heading1')).to have_text arg
 end
+
+Given(/^I am at the login page$/) do
+  visit login_path
+end

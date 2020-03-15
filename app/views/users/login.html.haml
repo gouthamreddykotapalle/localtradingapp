@@ -13,3 +13,6 @@
 
         .form-group
           = submit_tag 'Login', class: 'btn btn-primary btn-lg btn-block'
+
+        .form-group
+          = link_to 'Register', { :controller => 'users', :action => 'new' }, :id => 'register-button-at-login', :class => 'btn btn-secondary btn-block btn-md'
