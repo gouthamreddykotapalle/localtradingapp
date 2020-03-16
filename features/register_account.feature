@@ -14,3 +14,14 @@ Scenario: register account from the homepage
   And I enter my requested password "abc123"
   And I click the "Register" button
   Then I should see "Hello, John"
+
+Scenario: register account from the login page
+  Given I am at the login page
+  When I click the "Register" link that has ID "#register-button-at-login"
+  Then I should see the "Register account" page
+  When I enter my first name "John"
+  And I enter my last name "Doe"
+  And I enter my email "john@doe.com"
+  And I enter my requested password "abc123"
+  And I click the "Register" button
+  Then I should see "Hello, John"
