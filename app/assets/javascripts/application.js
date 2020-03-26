@@ -14,5 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//
+// Vendor imports
+// Uikit framework
 //= require uikit.js
 //= require uikit-icons.js
