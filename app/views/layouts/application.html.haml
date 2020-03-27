@@ -11,57 +11,11 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
-    %nav{:class => "uk-navbar-container theme-navbar-dark", "uk-navbar" => ""}
-      .uk-navbar-left
-        = link_to ApplicationController::APP_NAME, { :controller => 'static_page', action: 'home' }, :class => 'uk-navbar-item uk-logo'
-      .uk-navbar-center
-
-      .uk-navbar-right
-        %ul.uk-navbar-nav
-          %li
-            %a
-              Browse
-            %div{"uk-dropdown" => "pos: bottom-justify"}
-              %ul.uk-nav.uk-dropdown-nav
-                %li
-                  = link_to "For sale", { :controller => 'sell_posts' }, :class => ""
-                %li
-                  = link_to "For request", { :controller => 'sell_posts' }
-
-          %li
-            %a Register
-          %li
-            %a Login
-
-    -#%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-    -#  = link_to ApplicationController::APP_NAME, { :controller => 'static_page', action: 'home' }, :class => 'navbar-brand'
-    -#  %button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation")
-    -#    %span.navbar-toggler-icon
-    -#  #navbarNavDropdown.collapse.navbar-collapse.justify-content-end
-    -#    %ul.navbar-nav.text-right
-    -#      %li.nav-item.active
-    -#        = link_to "Home", { :controller => 'static_page', :action => 'home'}, :class => 'nav-link'
-    -#      %li.nav-item.active
-    -#        = link_to "Buy", { :controller => 'sell_posts' }, :class => 'nav-link', id: 'nav-buy'
-    -#      %li.nav-item.active
-    -#        = link_to "Sell", { :controller => 'buy_posts' }, :class => 'nav-link', id: 'nav-sell'
-    -#      %li.nav-item.active
-    -#        = link_to 'About', { :controller => 'static_page', :action => 'about' }, :class => 'nav-link'
-    -#      %li.nav-item.active.dropdown
-    -#        %a(class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Account
-    -#        %div(class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink")
-    -#          - if @current_user
-    -#            = link_to 'My Account', { :controller => 'users' }, :class => 'dropdown-item'
-    -#            = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
-    -#          - else
-    -#            = link_to 'Login', { :controller => 'users', :action => 'login' }, :class => 'dropdown-item'
-    -#            = link_to 'Register', { :controller => 'users', :action => 'new' }, :class => 'dropdown-item', :id => 'register-link'
-    -#
-    -##main
-    -#  - if flash[:notice]
-    -#    %div.alert.alert-danger
-    -#      #notice.message= flash[:notice]
-    -#  - elsif flash[:warning]
-    -#    %div.alert.alert-danger
-    -#      #warning.message= flash[:warning]
+    #main
+      - if flash[:notice]
+        %div.alert.alert-danger
+          #notice.message= flash[:notice]
+      - elsif flash[:warning]
+        %div.alert.alert-danger
+          #warning.message= flash[:warning]
     = yield

@@ -5797,7 +5797,7 @@ ul.uk-nav-sub {
  ========================================================================== */
 /*
  * Prepare slide-out animation (Used in reveal and push mode)
- * Using `position: left` instead of `transform` because position `fixed` elements like sticky navbars
+ * Using `position: left` instead of `transform` because position `fixed` elements like sticky navbar
  * lose their fixed state and behaves like `absolute` within a transformed container
  * 1. Provide a fixed width and prevent shrinking
  */

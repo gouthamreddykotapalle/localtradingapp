@@ -2,4 +2,6 @@
   .row
     .col-12
       %h1#heading1= "Hello, #{@current_user.first_name}"
+      %p
+        = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
       %p {Account information here}

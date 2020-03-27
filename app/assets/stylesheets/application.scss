@@ -21,11 +21,18 @@ html {
   font-weight:500;
   font-stretch:normal;
   color: #190000;
+  font-size: 20px;
 }
 
 // Overriding vendor (Uikit) css
 .uk-logo {
   color: #E3E3EA;
+}
+.uk-logo:hover, .uk-logo:focus {
+  color: #9999B2;
+}
+.uk-navbar-nav > li:hover > a, .uk-navbar-nav > li > a:focus, .uk-navbar-nav > li > a.uk-open {
+  color: #9999B2;
 }
 .uk-navbar-container:not(.uk-navbar-transparent) {
   background: #313A63;
@@ -48,6 +55,24 @@ html {
 .uk-dropdown {
   color: #190000;
 }
-.uk-dropdown-nav > li > a {
+.uk-section-primary {
+  background: #313A63;
+}
 
+.lta-footer {
+  padding: 10px 0px;
+  font-weight: 300;
+  color: white;
+  background: #190000;
+}
+.lta-footer-link {
+  margin: 0 1.5em;
+}
+#lta-footer-center-acronym {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.uk-light, .uk-section-primary:not(.uk-preserve-color), .uk-section-secondary:not(.uk-preserve-color), .uk-tile-primary:not(.uk-preserve-color), .uk-tile-secondary:not(.uk-preserve-color), .uk-card-primary.uk-card-body, .uk-card-primary > :not([class*="uk-card-media"]), .uk-card-secondary.uk-card-body, .uk-card-secondary > :not([class*="uk-card-media"]), .uk-overlay-primary, .uk-offcanvas-bar {
+  color: rgba(255, 255, 255, 1);
 }

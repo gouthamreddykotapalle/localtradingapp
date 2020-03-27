@@ -2,12 +2,33 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//#the-question {
-//  font-size: 2em;
-//  text-align: center;
-//  margin: 3em 0;
-//}
-//
-//#homepage-map {
-//  margin-top: 6em;
-//}
+// splash page stuff
+#ns-splash-main-text {
+  color: #E3E3EA;
+  font-family: "HelveticaNeueMedium", "HelveticaNeue-Medium", "Helvetica Neue Medium", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+  font-weight:500;
+  font-stretch:normal;
+  font-size: 5em;
+}
+
+#ns-btn-sell-something {
+  background: white;
+  color: #313A63;
+  text-transform: none;
+  border-radius: 5px;
+  border: 2px solid #00A006;
+}
+#ns-btn-buy-something {
+  background: white;
+  color: #313A63;
+  text-transform: none;
+  border-radius: 5px;
+  border: 2px solid #005ECB;
+}
+#ns-btn-sell-something:hover, #ns-btn-buy-something:hover {
+  background: #E3E3EA;
+}
+#ns-btn-sell-something:active, #ns-btn-buy-something:active {
+  background: #9999B2;
+  color: #190000;
+}
