@@ -1,7 +1,22 @@
-.container
-  .row
-    .col-12
-      %h1#heading1= "Hello, #{@current_user.first_name}"
-      %p
-        = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
-      %p {Account information here}
+= render 'partials/navbar'
+
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1
+      = @current_user.first_name + " " + @current_user.last_name
+
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+    %p
+      = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }
+
+= render 'partials/footer'
+
+
+-#.container
+-#  .row
+-#    .col-12
+-#      %h1#heading1= "Hello, #{@current_user.first_name}"
+-#      %p
+-#        = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
+-#      %p {Account information here}
