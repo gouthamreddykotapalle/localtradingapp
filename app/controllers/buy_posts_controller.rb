@@ -19,8 +19,8 @@ class BuyPostsController < ApplicationController
   end
 
   def show
-    id = params[:id] # retrieve movie ID from URI route
-    @buy_post = BuyPost.find(id) # look up movie by unique ID
+    id = params[:id] # retrieve post ID from URI route
+    @buy_post = BuyPost.find(id) # look up post by unique ID
   end
 
   def edit
@@ -40,6 +40,16 @@ class BuyPostsController < ApplicationController
     @buy_post.destroy
     flash[:notice] = "Post '#{@buy_post.title}' deleted."
     redirect_to buy_posts_path
+  end
+
+  def show_detail
+    category = params['category']
+    if category.nil?
+      @template = []
+      return
+    end
+    @template = BuyPostDetailSchema.where category: category.to_s
+    render json: {html: render_to_string(partial: 'detail')}
   end
 
   private
@@ -86,8 +96,9 @@ class BuyPostsController < ApplicationController
   end
 
   def buy_post_params(use_current_user: false)
-    post_param = params.require(:buy_post).permit(:title, :user_id, :category, :content,
-                                                  :price_low, :price_high, :bargain_allowed)
+    # post_param = params.require(:buy_post).permit(:title, :user_id, :category, :content,
+    #                                               :price_low, :price_high, :bargain_allowed)
+    post_param = params.require(:buy_post)
     if use_current_user && !post_param.include?(:user_id)
       post_param[:user_id] = @current_user.email
     end

@@ -1,5 +1,6 @@
 class BuyPost < Post
   self.table_name = "buy_posts"
+  has_many :buy_post_details
 
   before_validation(on: [:create, :save]) do
     if price_range_are_numbers? && self.price_low > self.price_high

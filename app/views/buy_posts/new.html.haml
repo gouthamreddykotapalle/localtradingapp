@@ -25,5 +25,21 @@
           = label :buy_post, :content, 'Content'
           = text_field :buy_post, :content, class: 'form-control'
 
+        %div{:id => "post_detail"}
+
         .form-group
           = submit_tag 'Post Your Request!', class: 'btn btn-primary btn-lg btn-block'
+
+
+:javascript
+  $('input#buy_post_category').on('change', function(event) {
+    Rails.ajax({
+      type: "Get",
+      url: '/buy_posts/show_detail',
+      data: 'category=' + $(this).val(),
+      success: function(data) {
+        Rails.$("#post_detail")[0].innerHTML = data.html;
+      }
+    })
+  })
+

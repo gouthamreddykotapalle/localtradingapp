@@ -1,0 +1,9 @@
+- @template.each do |schema|
+  .form-group
+    - if schema.datatype == 'string'
+      = label :buy_post, schema.column, schema.column
+      = text_field :buy_post, schema.column, class: 'form-control'
+    - elsif schema.datatype == 'int'
+      = label :buy_post, schema.column, schema.column
+      %br
+      = number_field :buy_post, schema.column, step: 1
