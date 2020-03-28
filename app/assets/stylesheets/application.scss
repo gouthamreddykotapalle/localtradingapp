@@ -167,3 +167,19 @@ html {
 .lta-alert-secondary-message {
   padding: 0 2em;
 }
+
+.lta-section-header {
+  background-color: #E3E3EA;
+  padding: 1em 0;
+}
+.lta-section-header > .uk-container > h1 {
+  font-weight: 500;
+}
+
+.uk-table th {
+  color: #313A63;
+  font-weight: 500;
+}
+.uk-table td {
+  //font-weight: 300;
+}
