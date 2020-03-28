@@ -1,6 +1,6 @@
 = render 'partials/navbar'
 
-%div{:class => "uk-section uk-section-primary", "uk-height-viewport" => "offset-bottom: 35"}
+%div{:class => "uk-section uk-section-primary"}
   .uk-container
     %div{"uk-grid" => "", :class => "uk-grid-collapse uk-child-width-expand@s uk-margin-large-top"}
 
@@ -40,7 +40,7 @@
       %div.uk-text-center
         %img{"data-src" => "#{image_path 'splashimg.png'}", :width => "", :height => "", :alt => "", "uk-img" => ""}
 
-%div{:class => "uk-section"}
+%div{:class => "uk-section", "uk-height-viewport" => "expand: true"}
   .uk-container.uk-text-center
     %p
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non turpis eu ligula aliquet vehicula. Curabitur vitae pretium tortor. Curabitur quis justo in sapien faucibus elementum eu ac lacus.

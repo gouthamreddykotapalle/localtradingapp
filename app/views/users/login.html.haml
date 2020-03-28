@@ -4,7 +4,7 @@
   .uk-container.uk-container-xsmall.lta-modal
     .uk-section.lta-modal-section
       .uk-container.uk-text-center
-        %h1.uk-heading-medium#lta-login-header Login
+        %h1.uk-heading-medium Login
     .uk-section.lta-modal-section
       .uk-container
         = form_tag login_path, method: :post do
@@ -12,7 +12,7 @@
             %div
               .uk-flex
                 %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
-                  %i.fas.fa-user
+                  %i.fas.fa-at
                 %div.uk-width-1-1
                   = email_field :login_info, 'email', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Email"
             %div
@@ -26,7 +26,9 @@
                 %div
                   = submit_tag 'Login', class: 'uk-button uk-button-primary lta-button-large uk-width-1-1'
                 %div
-                  = link_to 'Forgot password?', { :controller => 'users', :action => 'new' }, class: "uk-button uk-button-secondary lta-button-large uk-width-1-1"
+                  %a.uk-button.uk-button-secondary.lta-button-large.uk-width-1-1
+                    Forgot password?
+                  -# = link_to 'Forgot password?', { :controller => 'users', :action => 'new' }, class: "uk-button uk-button-secondary lta-button-large uk-width-1-1"
 
 
 = render 'partials/footer'
