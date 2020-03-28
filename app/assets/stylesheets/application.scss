@@ -73,6 +73,93 @@ html {
   font-size: 20px;
 }
 
-.uk-light, .uk-section-primary:not(.uk-preserve-color), .uk-section-secondary:not(.uk-preserve-color), .uk-tile-primary:not(.uk-preserve-color), .uk-tile-secondary:not(.uk-preserve-color), .uk-card-primary.uk-card-body, .uk-card-primary > :not([class*="uk-card-media"]), .uk-card-secondary.uk-card-body, .uk-card-secondary > :not([class*="uk-card-media"]), .uk-overlay-primary, .uk-offcanvas-bar {
-  color: rgba(255, 255, 255, 1);
+// override primary button
+.uk-light .uk-button-primary, .uk-section-primary:not(.uk-preserve-color) .uk-button-primary, .uk-section-secondary:not(.uk-preserve-color) .uk-button-primary, .uk-tile-primary:not(.uk-preserve-color) .uk-button-primary, .uk-tile-secondary:not(.uk-preserve-color) .uk-button-primary, .uk-card-primary.uk-card-body .uk-button-primary, .uk-card-primary > :not([class*="uk-card-media"]) .uk-button-primary, .uk-card-secondary.uk-card-body .uk-button-primary, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-button-primary, .uk-overlay-primary .uk-button-primary, .uk-offcanvas-bar .uk-button-primary {
+  background-color: #313A63;
+  color: #E3E3EA;
+  border-radius: 5px;
+  text-transform: none;
 }
+.uk-light .uk-button-primary:hover, .uk-section-primary:not(.uk-preserve-color) .uk-button-primary:hover, .uk-section-secondary:not(.uk-preserve-color) .uk-button-primary:hover, .uk-tile-primary:not(.uk-preserve-color) .uk-button-primary:hover, .uk-tile-secondary:not(.uk-preserve-color) .uk-button-primary:hover, .uk-card-primary.uk-card-body .uk-button-primary:hover, .uk-card-primary > :not([class*="uk-card-media"]) .uk-button-primary:hover, .uk-card-secondary.uk-card-body .uk-button-primary:hover, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-button-primary:hover, .uk-overlay-primary .uk-button-primary:hover, .uk-offcanvas-bar .uk-button-primary:hover {
+  background-color: #190000;
+  color: white;
+}
+
+// override secondary button
+.uk-light .uk-button-secondary, .uk-section-primary:not(.uk-preserve-color) .uk-button-secondary, .uk-section-secondary:not(.uk-preserve-color) .uk-button-secondary, .uk-tile-primary:not(.uk-preserve-color) .uk-button-secondary, .uk-tile-secondary:not(.uk-preserve-color) .uk-button-secondary, .uk-card-primary.uk-card-body .uk-button-secondary, .uk-card-primary > :not([class*="uk-card-media"]) .uk-button-secondary, .uk-card-secondary.uk-card-body .uk-button-secondary, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-button-secondary, .uk-overlay-primary .uk-button-secondary, .uk-offcanvas-bar .uk-button-secondary {
+  background-color: white;
+  color: #313A63;
+  border: 1px solid #313A63;
+  border-radius: 5px;
+  text-transform: none;
+}
+.uk-light .uk-button-secondary:hover, .uk-section-primary:not(.uk-preserve-color) .uk-button-secondary:hover, .uk-section-secondary:not(.uk-preserve-color) .uk-button-secondary:hover, .uk-tile-primary:not(.uk-preserve-color) .uk-button-secondary:hover, .uk-tile-secondary:not(.uk-preserve-color) .uk-button-secondary:hover, .uk-card-primary.uk-card-body .uk-button-secondary:hover, .uk-card-primary > :not([class*="uk-card-media"]) .uk-button-secondary:hover, .uk-card-secondary.uk-card-body .uk-button-secondary:hover, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-button-secondary:hover, .uk-overlay-primary .uk-button-secondary:hover, .uk-offcanvas-bar .uk-button-secondary:hover {
+  background-color: #E3E3EA;
+  color: #313A63;
+}
+
+.lta-button-large {
+  padding: 10px 0;
+  font-size: 24px;
+}
+
+//.uk-light .uk-input:focus, .uk-light .uk-select:focus, .uk-light .uk-textarea:focus, .uk-section-primary:not(.uk-preserve-color) .uk-input:focus, .uk-section-primary:not(.uk-preserve-color) .uk-select:focus, .uk-section-primary:not(.uk-preserve-color) .uk-textarea:focus, .uk-section-secondary:not(.uk-preserve-color) .uk-input:focus, .uk-section-secondary:not(.uk-preserve-color) .uk-select:focus, .uk-section-secondary:not(.uk-preserve-color) .uk-textarea:focus, .uk-tile-primary:not(.uk-preserve-color) .uk-input:focus, .uk-tile-primary:not(.uk-preserve-color) .uk-select:focus, .uk-tile-primary:not(.uk-preserve-color) .uk-textarea:focus, .uk-tile-secondary:not(.uk-preserve-color) .uk-input:focus, .uk-tile-secondary:not(.uk-preserve-color) .uk-select:focus, .uk-tile-secondary:not(.uk-preserve-color) .uk-textarea:focus, .uk-card-primary.uk-card-body .uk-input:focus, .uk-card-primary.uk-card-body .uk-select:focus, .uk-card-primary.uk-card-body .uk-textarea:focus, .uk-card-primary > :not([class*="uk-card-media"]) .uk-input:focus, .uk-card-primary > :not([class*="uk-card-media"]) .uk-select:focus, .uk-card-primary > :not([class*="uk-card-media"]) .uk-textarea:focus, .uk-card-secondary.uk-card-body .uk-input:focus, .uk-card-secondary.uk-card-body .uk-select:focus, .uk-card-secondary.uk-card-body .uk-textarea:focus, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-input:focus, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-select:focus, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-textarea:focus, .uk-overlay-primary .uk-input:focus, .uk-overlay-primary .uk-select:focus, .uk-overlay-primary .uk-textarea:focus, .uk-offcanvas-bar .uk-input:focus, .uk-offcanvas-bar .uk-select:focus, .uk-offcanvas-bar .uk-textarea:focus .uk-light .uk-input, .uk-light .uk-select, .uk-light .uk-textarea, .uk-section-primary:not(.uk-preserve-color) .uk-input, .uk-section-primary:not(.uk-preserve-color) .uk-select, .uk-section-primary:not(.uk-preserve-color) .uk-textarea, .uk-section-secondary:not(.uk-preserve-color) .uk-input, .uk-section-secondary:not(.uk-preserve-color) .uk-select, .uk-section-secondary:not(.uk-preserve-color) .uk-textarea, .uk-tile-primary:not(.uk-preserve-color) .uk-input, .uk-tile-primary:not(.uk-preserve-color) .uk-select, .uk-tile-primary:not(.uk-preserve-color) .uk-textarea, .uk-tile-secondary:not(.uk-preserve-color) .uk-input, .uk-tile-secondary:not(.uk-preserve-color) .uk-select, .uk-tile-secondary:not(.uk-preserve-color) .uk-textarea, .uk-card-primary.uk-card-body .uk-input, .uk-card-primary.uk-card-body .uk-select, .uk-card-primary.uk-card-body .uk-textarea, .uk-card-primary > :not([class*="uk-card-media"]) .uk-input, .uk-card-primary > :not([class*="uk-card-media"]) .uk-select, .uk-card-primary > :not([class*="uk-card-media"]) .uk-textarea, .uk-card-secondary.uk-card-body .uk-input, .uk-card-secondary.uk-card-body .uk-select, .uk-card-secondary.uk-card-body .uk-textarea, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-input, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-select, .uk-card-secondary > :not([class*="uk-card-media"]) .uk-textarea, .uk-overlay-primary .uk-input, .uk-overlay-primary .uk-select, .uk-overlay-primary .uk-textarea, .uk-offcanvas-bar .uk-input, .uk-offcanvas-bar .uk-select, .uk-offcanvas-bar .uk-textarea {
+//  background-color: white;
+//  color: #190000;
+//  background-clip: padding-box;
+//  border-color: rgba(12, 16, 30, 0.5);
+//  //border-radius: ;
+//}
+
+// register/login page stuff
+.lta-modal {
+  background: white;
+  border-radius: 5px;
+  color: #190000;
+}
+.lta-modal-section {
+  padding: 20px 0 40px 0;
+}
+
+.lta-form-input {
+  border: 1px solid rgba(12,16,30,0.5);
+  border-radius: 0 5px 5px 0;
+  height: 38px;
+  font-size: 20px;
+  color: #190000;
+}
+.lta-form-input:hover {
+  border:             1px solid #313A63;
+  box-shadow:         10px 0 0 0 #313A63;
+  -moz-box-shadow:    10px 0 0 0 #313A63;
+  -webkit-box-shadow: 10px 0 0 0 #313A63;
+}
+.lta-form-input:focus {
+  border:             1px solid #190000;
+  box-shadow:         10px 0 0 0 #190000;
+  -moz-box-shadow:    10px 0 0 0 #190000;
+  -webkit-box-shadow: 10px 0 0 0 #190000;
+  //background: #E3E3EA;
+}
+.lta-form-large {
+  height: 62px;
+  font-size: 32px;
+  padding-left: 20px;
+}
+
+.lta-form-input-box-left {
+  border: 1px solid rgba(12,16,30,0.5);
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  width: 60px;
+  height: 60px;
+  color: #E3E3EA;
+}
+
+//.uk-button {
+//
+//}
+//.uk-button-primary {
+//  color: #E3E3EA;
+//  background: #313A63;
+//}
