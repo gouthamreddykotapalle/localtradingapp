@@ -12,6 +12,8 @@ class BuyPostsController < ApplicationController
   def create
     # POST only. /buy_posts
     buy_post = BuyPost.create!(buy_post_params use_current_user: true)
+    insert_details(buy_post)
+
     if buy_post.is_a? BuyPost
       flash[:notice] = "#{buy_post.title} was successfully created."
     end
@@ -21,16 +23,20 @@ class BuyPostsController < ApplicationController
   def show
     id = params[:id] # retrieve post ID from URI route
     @buy_post = BuyPost.find(id) # look up post by unique ID
+    prepare_details
   end
 
   def edit
     @buy_post = BuyPost.find params[:id]
+    prepare_details
     authorize_to_edit? @buy_post, redirect_path: buy_posts_path
   end
 
   def update
     @buy_post = BuyPost.find params[:id]
     @buy_post.update_attributes!(buy_post_params)
+    @buy_post.details.destroy_all
+    insert_details(@buy_post)
     flash[:notice] = "#{@buy_post.title} was successfully updated."
     redirect_to buy_post_path(@buy_post)
   end
@@ -42,13 +48,15 @@ class BuyPostsController < ApplicationController
     redirect_to buy_posts_path
   end
 
-  def show_detail
-    category = params['category']
-    if category.nil?
-      @template = []
-      return
+  def detail_form
+    if params[:id].nil?
+      category = params['category']
+      prepare_details category
+    else
+      @buy_post = BuyPost.find(params[:id])
+      @buy_post.category = params['category']
+      prepare_details
     end
-    @template = BuyPostDetailSchema.where category: category.to_s
     render json: {html: render_to_string(partial: 'detail')}
   end
 
@@ -74,6 +82,21 @@ class BuyPostsController < ApplicationController
 
   private
 
+  def insert_details(buy_post)
+    if params.has_key? :detail
+      schemas = BuyPostDetailSchema.where category: buy_post.category
+      details = params[:detail]
+      schemas.each do |schema|
+        detail = {
+            post: buy_post,
+            field: schema,
+            value: details[schema.column]
+        }
+        BuyPostDetail.create! detail
+      end
+    end
+  end
+
   def sort_index
     sorted_key = params.fetch(:sorted, nil)
     if sorted_key != nil
@@ -96,12 +119,28 @@ class BuyPostsController < ApplicationController
   end
 
   def buy_post_params(use_current_user: false)
-    # post_param = params.require(:buy_post).permit(:title, :user_id, :category, :content,
-    #                                               :price_low, :price_high, :bargain_allowed)
-    post_param = params.require(:buy_post)
+    post_param = params.require(:buy_post).permit(:title, :user_id, :category, :content,
+                                                  :price_low, :price_high, :bargain_allowed)
     if use_current_user && !post_param.include?(:user_id)
       post_param[:user_id] = @current_user.email
     end
     post_param
+  end
+
+  def prepare_details(category = nil)
+    unless @buy_post.is_a? BuyPost
+      @details = {}
+      if category.nil?
+        @detail_schema = []
+      else
+        @detail_schema = BuyPostDetailSchema.where category: category
+      end
+      return
+    end
+    @detail_schema = BuyPostDetailSchema.where category: @buy_post.category
+    @details = {}
+    @buy_post.details.all.each do |entity|
+      @details[entity.field.column] = entity.value
+    end
   end
 end

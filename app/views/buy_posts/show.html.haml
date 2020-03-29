@@ -1,7 +1,7 @@
 .container
   %h1#heading1 #{@buy_post.title}
 
-  %ul#details
+  %ul
     %li
       Category:
       = @buy_post.category
@@ -20,7 +20,9 @@
 
 
   %h4 Description:
-  %p= @buy_post.content
+  %ul
+    - @detail_schema.each do |field|
+      %li #{field.column}: #{@details[field.column]}
 
   - if @current_user.email == @buy_post.user_id
     = button_to 'Edit', edit_buy_post_path(@buy_post), :method => :get, :class => 'btn btn-primary'

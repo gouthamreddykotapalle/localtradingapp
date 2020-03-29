@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post 'login',  to: 'sessions#create'
   get  'logout', to: 'sessions#destroy'
 
-  get '/buy_posts/show_detail', to: 'buy_posts#show_detail'
+  get '/buy_posts/detail_form', to: 'buy_posts#detail_form'
 
   resources :users
   resources :sell_posts

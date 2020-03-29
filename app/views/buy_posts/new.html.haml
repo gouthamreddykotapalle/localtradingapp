@@ -35,7 +35,7 @@
   $('input#buy_post_category').on('change', function(event) {
     Rails.ajax({
       type: "Get",
-      url: '/buy_posts/show_detail',
+      url: '/buy_posts/detail_form',
       data: 'category=' + $(this).val(),
       success: function(data) {
         Rails.$("#post_detail")[0].innerHTML = data.html;

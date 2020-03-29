@@ -1,9 +1,9 @@
-- @template.each do |schema|
+- @detail_schema.each do |field|
   .form-group
-    - if schema.datatype == 'string'
-      = label :buy_post, schema.column, schema.column
-      = text_field :buy_post, schema.column, class: 'form-control'
-    - elsif schema.datatype == 'int'
-      = label :buy_post, schema.column, schema.column
+    - if field.datatype == 'string'
+      = label :detail, field.column, field.column
+      = text_field :detail, field.column, class: 'form-control', value: @details[field.column]
+    - elsif field.datatype == 'int'
+      = label :detail, field.column, field.column
       %br
-      = number_field :buy_post, schema.column, step: 1
+      = number_field :detail, field.column, step: 1, value: @details[field.column]
