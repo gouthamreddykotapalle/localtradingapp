@@ -23,6 +23,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # bootstrap for front end library
 gem 'bootstrap', '~> 4.3.1'
+gem "aws-sdk-s3", require: false
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
