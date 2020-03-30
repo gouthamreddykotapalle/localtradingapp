@@ -29,7 +29,7 @@
         %tr
           - @columns.each do |column|
             - if column[:id] == :title
-              %td= link_to post.send(column[:id]) || "(no title)", sell_post_path(post.id)
+              %td= link_to post.title.presence || "(no title)", sell_post_path(post.id)
             - else
               %td= post.send column[:id]
 

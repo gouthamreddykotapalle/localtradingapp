@@ -25,6 +25,9 @@
 
   %h4 Description:
   %p= @sell_post.content
+  %ul
+    - @detail_schema.each do |field|
+      %li #{field.column_name}: #{@details[field.column_id]}
 
   - if @current_user.email == @sell_post.user_id
     = button_to 'Edit', edit_sell_post_path(@sell_post), :method => :get, :class => 'btn btn-primary'

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get  'logout', to: 'sessions#destroy'
 
   get '/buy_posts/detail_form', to: 'buy_posts#detail_form'
+  get '/sell_posts/detail_form', to: 'sell_posts#detail_form'
 
   resources :users
   resources :sell_posts

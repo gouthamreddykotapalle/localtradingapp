@@ -31,5 +31,21 @@
           = label :sell_post, :content, 'Content'
           = text_field :sell_post, :content, class: 'form-control'
 
+        %div{:id => "post_detail"}
+          = render partial:"templates/detail"
+
         .form-group
           = submit_tag 'Update Your Item!', class: 'btn btn-primary btn-lg btn-block'
+
+
+:javascript
+  $('input#sell_post_category').on('change', function(event) {
+    Rails.ajax({
+      type: "Get",
+      url: '/sell_posts/detail_form',
+      data: 'category=' + $(this).val() + '&id=' + #{@sell_post.id},
+      success: function(data) {
+        Rails.$("#post_detail")[0].innerHTML = data.html;
+      }
+    })
+  })

@@ -13,6 +13,8 @@ class SellPostsController < ApplicationController
   def create
     # POST only. /sell_posts
     sell_post = SellPost.create!(sell_post_params use_current_user: true)
+    insert_details(sell_post)
+
     if sell_post.is_a? SellPost
       flash[:notice] = "#{sell_post.title} was successfully created."
     end
@@ -22,16 +24,20 @@ class SellPostsController < ApplicationController
   def show
     id = params[:id] # retrieve movie ID from URI route
     @sell_post = SellPost.find(id) # look up post by unique ID
+    prepare_details
   end
 
   def edit
     @sell_post = SellPost.find params[:id]
+    prepare_details
     authorize_to_edit? @sell_post, redirect_path: sell_posts_path
   end
 
   def update
     @sell_post = SellPost.find params[:id]
     @sell_post.update_attributes!(sell_post_params)
+    @sell_post.details.destroy_all
+    insert_details(@sell_post)
     flash[:notice] = "#{@sell_post.title} was successfully updated."
     redirect_to sell_post_path(@sell_post)
   end
@@ -41,6 +47,18 @@ class SellPostsController < ApplicationController
     @sell_post.destroy
     flash[:notice] = "Post '#{@sell_post.title}' deleted."
     redirect_to sell_posts_path
+  end
+
+  def detail_form
+    if params[:id].nil?
+      category = params['category']
+      prepare_details category
+    else
+      @sell_post = SellPost.find(params[:id])
+      @sell_post.category = params['category']
+      prepare_details
+    end
+    render json: {html: render_to_string(partial: 'templates/detail')}
   end
 
   private
@@ -64,6 +82,21 @@ class SellPostsController < ApplicationController
   end
 
   private
+
+  def insert_details(sell_post)
+    if params.has_key? :detail
+      schemas = SellPostDetailSchema.where category: sell_post.category
+      details = params[:detail]
+      schemas.each do |schema|
+        detail = {
+            post: sell_post,
+            field: schema,
+            value: details[schema.column_id]
+        }
+        SellPostDetail.create! detail
+      end
+    end
+  end
 
   def sort_index
     sorted_key = params.fetch(:sorted, nil)
@@ -92,5 +125,22 @@ class SellPostsController < ApplicationController
       post_param[:user_id] = @current_user.email
     end
     post_param
+  end
+
+  def prepare_details(category = nil)
+    unless @sell_post.is_a? SellPost
+      @details = {}
+      if category.nil?
+        @detail_schema = []
+      else
+        @detail_schema = SellPostDetailSchema.where category: category
+      end
+      return
+    end
+    @detail_schema = SellPostDetailSchema.where category: @sell_post.category
+    @details = {}
+    @sell_post.details.all.each do |entity|
+      @details[entity.field.column_id] = entity.value
+    end
   end
 end

@@ -57,7 +57,7 @@ class BuyPostsController < ApplicationController
       @buy_post.category = params['category']
       prepare_details
     end
-    render json: {html: render_to_string(partial: 'detail')}
+    render json: {html: render_to_string(partial: 'templates/detail')}
   end
 
   private
