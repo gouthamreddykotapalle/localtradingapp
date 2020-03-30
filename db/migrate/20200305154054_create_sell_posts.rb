@@ -10,6 +10,7 @@ class CreateSellPosts < ActiveRecord::Migration[5.2]
       t.boolean :bargain_allowed
 
       t.timestamps
+
     end
   end
 end
