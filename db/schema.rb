@@ -14,7 +14,8 @@ ActiveRecord::Schema.define(version: 2020_03_27_004806) do
 
   create_table "buy_post_detail_schemas", force: :cascade do |t|
     t.string "category"
-    t.string "column"
+    t.string "column_id"
+    t.string "column_name"
     t.string "datatype"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

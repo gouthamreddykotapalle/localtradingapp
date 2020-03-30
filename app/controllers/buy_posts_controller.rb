@@ -90,7 +90,7 @@ class BuyPostsController < ApplicationController
         detail = {
             post: buy_post,
             field: schema,
-            value: details[schema.column]
+            value: details[schema.column_id]
         }
         BuyPostDetail.create! detail
       end
@@ -140,7 +140,7 @@ class BuyPostsController < ApplicationController
     @detail_schema = BuyPostDetailSchema.where category: @buy_post.category
     @details = {}
     @buy_post.details.all.each do |entity|
-      @details[entity.field.column] = entity.value
+      @details[entity.field.column_id] = entity.value
     end
   end
 end

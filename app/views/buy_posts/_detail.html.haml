@@ -1,9 +1,9 @@
 - @detail_schema.each do |field|
   .form-group
     - if field.datatype == 'string'
-      = label :detail, field.column, field.column
-      = text_field :detail, field.column, class: 'form-control', value: @details[field.column]
+      = label :detail, field.column_id, field.column_name
+      = text_field :detail, field.column_id, class: 'form-control', value: @details[field.column_id]
     - elsif field.datatype == 'int'
-      = label :detail, field.column, field.column
+      = label :detail, field.column_id, field.column_name
       %br
-      = number_field :detail, field.column, step: 1, value: @details[field.column]
+      = number_field :detail, field.column_id, step: 1, value: @details[field.column_id]
