@@ -1,4 +1,5 @@
 class BuyPost < Post
+  has_one_attached :upload_image
   self.table_name = "buy_posts"
 
   before_validation(on: [:create, :save]) do

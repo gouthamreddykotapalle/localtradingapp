@@ -27,9 +27,13 @@
         %tr
           - @columns.each do |column|
             - if column[:id] == :title
-              %td= link_to post.send(column[:id]) || "(no title)", buy_post_path(post.id)
+              %td= link_to post.send(column[:id]) || "(no title)", sell_post_path(post.id)
             - else
-              %td= post.send column[:id]
+              - if column[:name] == :upload_image
+                - if post.upload_image.attached?
+                  %td= image_tag(post.upload_image, size: '50x50')
+              - else
+                %td= post.send column[:id]
 
 
   = button_to 'Post Your Request', new_buy_post_path, method: "get"

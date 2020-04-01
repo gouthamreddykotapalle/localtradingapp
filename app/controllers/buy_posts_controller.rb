@@ -11,9 +11,9 @@ class BuyPostsController < ApplicationController
 
   def create
     # POST only. /buy_posts
-    buy_post = BuyPost.create!(buy_post_params use_current_user: true)
-    if buy_post.is_a? BuyPost
-      flash[:notice] = "#{buy_post.title} was successfully created."
+    @buy_post = BuyPost.create!(buy_post_params use_current_user: true)
+    if @buy_post.is_a? BuyPost
+      flash[:notice] = "#{@buy_post.title} was successfully created."
     end
     redirect_to buy_posts_path
   end
@@ -51,7 +51,8 @@ class BuyPostsController < ApplicationController
         {name: "email", id: :user_id, sort_allowed: true},
         {name: "category", id: :category, sort_allowed: true},
         {name: "price_range (low)", id: :price_low, sort_allowed: true},
-        {name: "price_range (high)", id: :price_high, sort_allowed: true}
+        {name: "price_range (high)", id: :price_high, sort_allowed: true},
+        {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
 
     # clear session if indicated
@@ -87,7 +88,7 @@ class BuyPostsController < ApplicationController
 
   def buy_post_params(use_current_user: false)
     post_param = params.require(:buy_post).permit(:title, :user_id, :category, :content,
-                                                  :price_low, :price_high, :bargain_allowed)
+                                                  :price_low, :price_high, :bargain_allowed, :upload_image)
     if use_current_user && !post_param.include?(:user_id)
       post_param[:user_id] = @current_user.email
     end
