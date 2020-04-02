@@ -10,26 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_002057) do
-
-  create_table "buy_post_detail_schemas", force: :cascade do |t|
-    t.string "category"
-    t.string "column_id"
-    t.string "column_name"
-    t.string "datatype"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "buy_post_details", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "field_id"
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["field_id"], name: "index_buy_post_details_on_field_id"
-    t.index ["post_id"], name: "index_buy_post_details_on_post_id"
-  end
+ActiveRecord::Schema.define(version: 2020_03_26_184844) do
 
   create_table "buy_posts", force: :cascade do |t|
     t.string "title"
@@ -40,25 +21,6 @@ ActiveRecord::Schema.define(version: 2020_03_30_002057) do
     t.decimal "price_high"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "sell_post_detail_schemas", force: :cascade do |t|
-    t.string "category"
-    t.string "column_id"
-    t.string "column_name"
-    t.string "datatype"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sell_post_details", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "field_id"
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["field_id"], name: "index_sell_post_details_on_field_id"
-    t.index ["post_id"], name: "index_sell_post_details_on_post_id"
   end
 
   create_table "sell_posts", force: :cascade do |t|
