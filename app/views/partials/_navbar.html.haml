@@ -13,7 +13,12 @@
             %li
               = link_to "For sale", { :controller => 'sell_posts' }, :class => ""
             %li
-              = link_to "For request", { :controller => 'sell_posts' }, :class => ""
+              = link_to "For request", { :controller => 'buy_posts' }, :class => ""
+
+      %li
+        %a{:href => "#{new_sell_post_path}"} Buy
+      %li
+        %a{:href => "#{new_buy_post_path}"} Sell
 
       - if @current_user
         %li
