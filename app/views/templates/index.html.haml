@@ -1,0 +1,19 @@
+.container
+  %h1#heading1 Templates
+
+  %table#templates.table.table-striped.col-md-12
+    %thead
+      %tr
+        - @columns.each do |column|
+          %th= column[:name]
+        %th
+
+    %tbody
+      - @templates.each do |template|
+        %tr
+          - @columns.each do |column|
+            %td= template.send column[:id]
+          %td= link_to "View", template_path(template.id)
+
+
+  = button_to 'Create new template', new_template_path, method: "get"

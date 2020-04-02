@@ -13,6 +13,7 @@
         .form-group
           = label :sell_post, :category, "Category"
           = text_field :sell_post, :category, class: 'form-control'
+          = link_to 'Create a new template', new_template_path
 
         .form-group
           = label :sell_post, :price, 'Price'

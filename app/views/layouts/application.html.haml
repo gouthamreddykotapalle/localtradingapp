@@ -22,9 +22,11 @@
           %li.nav-item.active
             = link_to "Home", { :controller => 'static_page', :action => 'home'}, :class => 'nav-link'
           %li.nav-item.active
-            = link_to "Buy", { :controller => 'sell_posts' }, :class => 'nav-link', id: 'nav-buy'
+            = link_to "Selling Items", { :controller => 'sell_posts' }, :class => 'nav-link', id: 'nav-buy'
           %li.nav-item.active
-            = link_to "Sell", { :controller => 'buy_posts' }, :class => 'nav-link', id: 'nav-sell'
+            = link_to "Buy Requests", { :controller => 'buy_posts' }, :class => 'nav-link', id: 'nav-sell'
+          %li.nav-item.active
+            = link_to "Templates", { :controller => 'templates' }, :class => 'nav-link', id: 'nav-template'
           %li.nav-item.active
             = link_to 'About', { :controller => 'static_page', :action => 'about' }, :class => 'nav-link'
           %li.nav-item.active.dropdown

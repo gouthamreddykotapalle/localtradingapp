@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
   end
 
   create_table "templates", force: :cascade do |t|
-    t.string "trade"
+    t.string "post_type"
     t.string "category"
     t.string "column_id"
     t.string "column_name"

@@ -1,0 +1,14 @@
+.container
+  %h1#heading1 Template: #{@template.category} - #{@template.column_name}
+
+  %ul
+    - @columns.each do |column|
+      %li
+        #{column[:name]}:
+        = @template.send column[:id]
+
+  = button_to 'Edit', edit_template_path(@template), :method => :get, :class => 'btn btn-primary'
+  %br
+  = button_to 'Delete',  template_path(@template), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+  %br
+  = link_to 'Back to template list', templates_path

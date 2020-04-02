@@ -86,7 +86,7 @@ class SellPostsController < ApplicationController
 
   def insert_details(sell_post)
     if params.has_key? :detail
-      templates = Template.where trade: Template::SELL, category: sell_post.category
+      templates = Template.where post_type: Template::SELL, category: sell_post.category
       details = params[:detail]
       templates.each do |template|
         detail = {
@@ -134,11 +134,11 @@ class SellPostsController < ApplicationController
       if category.nil?
         @templates = []
       else
-        @templates = Template.where trade: Template::SELL, category: category
+        @templates = Template.where post_type: Template::SELL, category: category
       end
       return
     end
-    @templates = Template.where trade: Template::SELL, category: @sell_post.category
+    @templates = Template.where post_type: Template::SELL, category: @sell_post.category
     @details = {}
     @sell_post.details.all.each do |entity|
       @details[entity.field.column_id] = entity.value
