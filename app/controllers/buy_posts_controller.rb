@@ -85,13 +85,13 @@ class BuyPostsController < ApplicationController
 
   def insert_details(buy_post)
     if params.has_key? :detail
-      schemas = BuyPostDetailSchema.where category: buy_post.category
+      templates = Template.where trade: Template::BUY, category: buy_post.category
       details = params[:detail]
-      schemas.each do |schema|
+      templates.each do |template|
         detail = {
             post: buy_post,
-            field: schema,
-            value: details[schema.column_id]
+            field: template,
+            value: details[template.column_id]
         }
         BuyPostDetail.create! detail
       end
@@ -132,13 +132,13 @@ class BuyPostsController < ApplicationController
     unless @buy_post.is_a? BuyPost
       @details = {}
       if category.nil?
-        @detail_schema = []
+        @templates = []
       else
-        @detail_schema = BuyPostDetailSchema.where category: category
+        @templates = Template.where trade: Template::BUY, category: category
       end
       return
     end
-    @detail_schema = BuyPostDetailSchema.where category: @buy_post.category
+    @templates = Template.where trade: Template::BUY, category: @buy_post.category
     @details = {}
     @buy_post.details.all.each do |entity|
       @details[entity.field.column_id] = entity.value

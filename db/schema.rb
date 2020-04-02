@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "buy_post_details", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "field_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["field_id"], name: "index_buy_post_details_on_field_id"
+    t.index ["post_id"], name: "index_buy_post_details_on_post_id"
+  end
+
   create_table "buy_posts", force: :cascade do |t|
     t.string "title"
     t.string "user_id"
@@ -42,6 +52,16 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
     t.decimal "price_high"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sell_post_details", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "field_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["field_id"], name: "index_sell_post_details_on_field_id"
+    t.index ["post_id"], name: "index_sell_post_details_on_post_id"
   end
 
   create_table "sell_posts", force: :cascade do |t|
@@ -54,6 +74,16 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "upload"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "trade"
+    t.string "category"
+    t.string "column_id"
+    t.string "column_name"
+    t.string "datatype"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
