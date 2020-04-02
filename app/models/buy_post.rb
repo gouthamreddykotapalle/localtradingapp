@@ -1,4 +1,5 @@
 class BuyPost < Post
+  has_one_attached :upload_image
   self.table_name = "buy_posts"
   has_many :details, class_name: "BuyPostDetail", foreign_key: "post_id", dependent: :destroy
 

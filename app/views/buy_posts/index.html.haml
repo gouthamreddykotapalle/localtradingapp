@@ -28,6 +28,9 @@
           - @columns.each do |column|
             - if column[:id] == :title
               %td= link_to post.title.presence || "(no title)", buy_post_path(post.id)
+            - elsif column[:name] == :upload_image
+              - if post.upload_image.attached?
+                %td= image_tag(post.upload_image, size: '50x50')
             - else
               %td= post.send column[:id]
 

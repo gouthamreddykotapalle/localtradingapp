@@ -71,6 +71,7 @@ class SellPostsController < ApplicationController
         {name: :category, id: :category, sort_allowed: true},
         {name: :price, id: :price, sort_allowed: true},
         {name: :bargain?, id: :bargain_allowed, sort_allowed: false},
+        {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
 
     # clear session if indicated
@@ -120,7 +121,7 @@ class SellPostsController < ApplicationController
   end
 
   def sell_post_params(use_current_user: false)
-    post_param = params.require(:sell_post).permit(:title, :user_id, :category, :content, :price, :bargain_allowed)
+    post_param = params.require(:sell_post).permit(:title, :user_id, :category, :content, :price, :bargain_allowed, :upload_image)
     if use_current_user && !post_param.include?(:user_id)
       post_param[:user_id] = @current_user.email
     end

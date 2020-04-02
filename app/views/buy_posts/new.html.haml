@@ -1,7 +1,7 @@
 .container
   %h1#heading1 Post Your Request
 
-  = form_tag buy_posts_path, :method => "post" do
+  = form_tag buy_posts_path, :method => "post", multipart: true do
 
     .card
       .card-body
@@ -26,6 +26,10 @@
           = text_field :buy_post, :content, class: 'form-control'
 
         %div{:id => "post_detail"}
+
+        .form-group
+          = label :buy_post, :upload_image, 'Upload_Image'
+          = file_field :buy_post, :upload_image, class: 'form-control-file'
 
         .form-group
           = submit_tag 'Post Your Request!', class: 'btn btn-primary btn-lg btn-block'

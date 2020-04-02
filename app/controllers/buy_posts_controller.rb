@@ -69,7 +69,8 @@ class BuyPostsController < ApplicationController
         {name: "email", id: :user_id, sort_allowed: true},
         {name: "category", id: :category, sort_allowed: true},
         {name: "price_range (low)", id: :price_low, sort_allowed: true},
-        {name: "price_range (high)", id: :price_high, sort_allowed: true}
+        {name: "price_range (high)", id: :price_high, sort_allowed: true},
+        {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
 
     # clear session if indicated
@@ -120,7 +121,7 @@ class BuyPostsController < ApplicationController
 
   def buy_post_params(use_current_user: false)
     post_param = params.require(:buy_post).permit(:title, :user_id, :category, :content,
-                                                  :price_low, :price_high, :bargain_allowed)
+                                                  :price_low, :price_high, :bargain_allowed, :upload_image)
     if use_current_user && !post_param.include?(:user_id)
       post_param[:user_id] = @current_user.email
     end
