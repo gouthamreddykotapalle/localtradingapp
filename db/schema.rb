@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "buy_post_detail_schemas", force: :cascade do |t|
+    t.string "category"
+    t.string "column_id"
+    t.string "column_name"
+    t.string "datatype"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "buy_post_details", force: :cascade do |t|
     t.integer "post_id"
     t.integer "field_id"
@@ -50,6 +59,15 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
     t.text "content"
     t.decimal "price_low"
     t.decimal "price_high"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sell_post_detail_schemas", force: :cascade do |t|
+    t.string "category"
+    t.string "column_id"
+    t.string "column_name"
+    t.string "datatype"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -77,7 +95,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
   end
 
   create_table "templates", force: :cascade do |t|
-    t.string "post_type"
+    t.string "trade"
     t.string "category"
     t.string "column_id"
     t.string "column_name"
@@ -87,15 +105,14 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", limit: 40
-    t.string "password", limit: 512
     t.string "first_name"
     t.string "last_name"
-    t.datetime "last_updated"
+    t.string "email"
+    t.string "password"
     t.integer "active_posts"
+    t.datetime "created"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
