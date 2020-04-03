@@ -10,6 +10,11 @@ class SellPostsController < ApplicationController
 
   def new; end
 
+  def map_all
+    @sell_posts = SellPost.all
+    render json: @sell_posts
+  end
+
   def create
     # POST only. /sell_posts
     sell_post = SellPost.create!(sell_post_params use_current_user: true)
@@ -82,22 +87,6 @@ class SellPostsController < ApplicationController
     @sell_posts = SellPost.all
   end
 
-  private
-
-  def insert_details(sell_post)
-    if params.has_key? :detail
-      templates = Template.where post_type: Template::SELL, category: sell_post.category
-      details = params[:detail]
-      templates.each do |template|
-        detail = {
-            post: sell_post,
-            field: template,
-            value: details[template.column_id]
-        }
-        SellPostDetail.create! detail
-      end
-    end
-  end
 
   def sort_index
     sorted_key = params.fetch(:sorted, nil)
@@ -120,12 +109,29 @@ class SellPostsController < ApplicationController
     end
   end
 
+
+
   def sell_post_params(use_current_user: false)
-    post_param = params.require(:sell_post).permit(:title, :user_id, :category, :content, :price, :bargain_allowed, :upload_image)
+    post_param = params.require(:sell_post).permit(:title, :user_id, :category, :content, :price, :bargain_allowed, :upload_image, :latitude, :longitude)
     if use_current_user && !post_param.include?(:user_id)
       post_param[:user_id] = @current_user.email
     end
     post_param
+  end
+
+  def insert_details(sell_post)
+    if params.has_key? :detail
+      templates = Template.where post_type: Template::SELL, category: sell_post.category
+      details = params[:detail]
+      templates.each do |template|
+        detail = {
+            post: sell_post,
+            field: template,
+            value: details[template.column_id]
+        }
+        SellPostDetail.create! detail
+      end
+    end
   end
 
   def prepare_details(category = nil)

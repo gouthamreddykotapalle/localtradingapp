@@ -46,10 +46,12 @@
         test
 
         -# = provide :head_tags do
+        -#
+        -#   - @sell_posts.each do |post|
+        -#     =post.latitude
+        -#
         -#   :javascript
-        -#     $( document).ready(function() {
-        -#       initMap(0, 0);
-        -#     });
+        -#     console.log('locations: ' + locations);
 
   .row
     .col
