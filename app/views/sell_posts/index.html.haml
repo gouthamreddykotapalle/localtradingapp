@@ -23,12 +23,14 @@
           - @columns.each do |column|
             - if column[:sort_allowed]
               - if session[:sorted_key] == column[:id].to_s
-              %th{:class => :hilite}
-                = link_to column[:name], sell_posts_path(:sorted => "nil"), id: column[:id].to_s + "_header"
+                %th{:class => :hilite}
+                  = link_to column[:name], sell_posts_path(:sorted => "nil"), id: column[:id].to_s + "_header"
               - else
-                %th= link_to column[:name], sell_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
+                %th
+                  = link_to column[:name], sell_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
             - else
-              %th= column[:name]
+              %th
+                = column[:name]
       %tbody
         - @sell_posts.each do |post|
           %tr
