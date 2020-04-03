@@ -36,6 +36,19 @@
             - else
               %td= post.send column[:id]
 
+  .row
+    %div{:class => "col", :style => "width:100%; height:600px;"}
+      #selling-posts-map
+        = provide :head_tags do
+          :javascript
+            document.addEventListener("DOMContentLoaded", function(){
+              initMap(0, 0)
+            });
+            // $(document).ready(function() {
+            //   initMap(0, 0)
+            // });
 
-  = button_to 'Sell Your Item', new_sell_post_path, method: "get"
-  = link_to 'Reset', sell_posts_path(:reset => true), method: "get"
+
+
+= button_to 'Sell Your Item', new_sell_post_path, method: "get"
+= link_to 'Reset', sell_posts_path(:reset => true), method: "get"

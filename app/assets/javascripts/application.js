@@ -10,7 +10,20 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require bootstrap
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+function initMap(lat, lng) {
+    let myCoords = new google.maps.LatLng(lat, lng);
+    let mapOptions = {
+        center: myCoords,
+        zoom: 8
+    };
+
+    let map = new google.maps.Map(document.getElementById('selling-posts-map'), mapOptions);
+    // let map = new google.maps.Map($('#selling-posts-map'), mapOptions);
+}
