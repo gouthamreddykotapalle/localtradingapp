@@ -17,13 +17,25 @@
 //= require turbolinks
 //= require_tree .
 
-function initMap(lat, lng) {
-    let myCoords = new google.maps.LatLng(lat, lng);
-    let mapOptions = {
-        center: myCoords,
-        zoom: 8
-    };
+$(document).ready(function () {
+    function initMap(lat, lng) {
+        let locations = [{lat: 44.971730, lng: -93.217200}, {lat:44.971217, lng:-93.214503}, {lat: 44.973251, lng: -93.216284}, {lat: 44.976029, lng: -93.224546}];
 
-    let map = new google.maps.Map(document.getElementById('selling-posts-map'), mapOptions);
-    // let map = new google.maps.Map($('#selling-posts-map'), mapOptions);
-}
+        // let myCoords = new google.maps.LatLng(lat, lng);
+
+        let mapOptions = {
+            center: locations[0],
+            zoom: 8
+        };
+
+        let map = new google.maps.Map(document.getElementById('gmap'), mapOptions);
+        // let map = new google.maps.Map($('#selling-posts-map'), mapOptions);
+    }
+
+    console.log('initializing map')
+    initMap(0,0);
+});
+//
+// $(document).ready(function() {
+//     initMap(0, 0);
+// });

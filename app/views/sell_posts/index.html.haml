@@ -1,54 +1,54 @@
 -#  This file is app/views/sell_posts/index.html.haml
 .container
-  = content_for(:title, 'Selling Items')
-  %h1#heading1 Selling items nearby you
+  .row
+    = content_for(:title, 'Selling Items')
+    %h1#heading1 Selling items nearby you
 
-  = form_tag sell_posts_path, :id => :category_form, :method => :get do
-    Categories:
-    - @all_categories.each do |category|
-      -if category != nil
-        = category
-        = check_box_tag "categories[#{category}]", 1, session[:categories].include?(category)
-      - else
-        Uncategorized
-        = check_box_tag "categories[nil]", 1, session[:categories].include?(category)
-    = submit_tag 'Refresh', id: :ratings_submit
+  .row
+    = form_tag sell_posts_path, :id => :category_form, :method => :get do
+      Categories:
+      - @all_categories.each do |category|
+        -if category != nil
+          = category
+          = check_box_tag "categories[#{category}]", 1, session[:categories].include?(category)
+        - else
+          Uncategorized
+          = check_box_tag "categories[nil]", 1, session[:categories].include?(category)
+      = submit_tag 'Refresh', id: :ratings_submit
 
-
-  %table#sell-posts.table.table-striped.col-md-12
-    %thead
-      %tr
-        - @columns.each do |column|
-          - if column[:sort_allowed]
-            %th{:class => (:hilite if session[:sorted_key] == column[:id].to_s )}
-              = link_to column[:name], sell_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
-          - else
-            %th= column[:name]
-    %tbody
-      - @sell_posts.each do |post|
+  .row
+    %table#sell-posts.table.table-striped.col-md-12
+      %thead
         %tr
           - @columns.each do |column|
-            - if column[:id] == :title
-              %td= link_to post.title.presence || "(no title)", sell_post_path(post.id)
-            - elsif column[:name] == :upload_image
-              - if post.upload_image.attached?
-                %td= image_tag(post.upload_image, size: '50x50')
+            - if column[:sort_allowed]
+              %th{:class => (:hilite if session[:sorted_key] == column[:id].to_s )}
+                = link_to column[:name], sell_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
             - else
-              %td= post.send column[:id]
+              %th= column[:name]
+      %tbody
+        - @sell_posts.each do |post|
+          %tr
+            - @columns.each do |column|
+              - if column[:id] == :title
+                %td= link_to post.title.presence || "(no title)", sell_post_path(post.id)
+              - elsif column[:name] == :upload_image
+                - if post.upload_image.attached?
+                  %td= image_tag(post.upload_image, size: '50x50')
+              - else
+                %td= post.send column[:id]
 
   .row
     %div{:class => "col", :style => "width:100%; height:600px;"}
-      #selling-posts-map
-        = provide :head_tags do
-          :javascript
-            document.addEventListener("DOMContentLoaded", function(){
-              initMap(0, 0)
-            });
-            // $(document).ready(function() {
-            //   initMap(0, 0)
-            // });
-
+      %div{:id => "gmap", :style => "width:100%; height:600px; border: 1px solid red;"}
+        -# = provide :head_tags do
+        -#   :javascript
+        -#     $( document).ready(function() {
+        -#       initMap(0, 0);
+        -#     });
 
 
 = button_to 'Sell Your Item', new_sell_post_path, method: "get"
 = link_to 'Reset', sell_posts_path(:reset => true), method: "get"
+
+-#%script{:src => "https://maps.googleapis.com/maps/api/js?key=" + Rails.application.credentials.google_maps_api_key + "&callback=initMap", :async => "", :defer => ""}
