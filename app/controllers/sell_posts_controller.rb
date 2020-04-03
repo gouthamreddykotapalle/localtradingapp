@@ -73,12 +73,6 @@ class SellPostsController < ApplicationController
         {name: :bargain?, id: :bargain_allowed, sort_allowed: false},
         {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
-
-    # clear session if indicated
-    if !!params.fetch(:reset, nil)
-      reset_session
-    end
-
     @sell_posts = SellPost.all
   end
 
