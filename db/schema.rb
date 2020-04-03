@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_122352) do
+ActiveRecord::Schema.define(version: 2020_04_03_135100) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
     t.decimal "price_high"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "latitude"
+    t.decimal "longitude"
   end
 
   create_table "sell_post_detail_schemas", force: :cascade do |t|
@@ -92,6 +94,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_122352) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "upload"
+    t.decimal "latitude"
+    t.decimal "longitude"
   end
 
   create_table "templates", force: :cascade do |t|
