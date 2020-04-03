@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   self.abstract_class =true
+  has_one_attached :upload_image
   validates_presence_of :user_id
 
   before_save do
