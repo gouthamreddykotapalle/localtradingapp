@@ -34,12 +34,75 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    id = params[:id] # retrieve post ID from URI route
+    @user = User.find(id) # look up post by unique ID
+    if @user.nil?
+      redirect_back static_page_home_path
+      return
+    end
+    @columns = [
+        {name: "Title", id: "title"},
+        {name: "Type", id: "type"},
+        {name: "Category", id: "category"},
+        {name: "Update Time", id: "update_time"},
+        {name: "Create Time", id: "create_time"}
+    ]
+
+    @posts = []
+    filter_with_post_types @posts
+    sort_posts @posts
+  end
 
   private
 
   def registration_params
     params.require(:users).permit(:first_name, :last_name, :email, :password)
+  end
+
+  def filter_with_post_types(posts)
+    set_checked_post_types default: %w(buy sell)
+
+    if session[:post_types].include? "buy"
+      BuyPost.where(user_id: @user.email).each do |post|
+        posts.append({title: post.title, type: "buy", category: post.category, post_id: post.id,
+                      update_time: post.updated_at.strftime("%B %d, %Y"),
+                      create_time: post.created_at.strftime("%B %d, %Y")}
+        )
+      end
+    end
+
+    if session[:post_types].include? "sell"
+      SellPost.where(user_id: @user.email).each do |post|
+        posts.append({title: post.title, type: "sell", category: post.category, post_id: post.id,
+                      update_time: post.updated_at.strftime("%B %d, %Y"),
+                      create_time: post.created_at.strftime("%B %d, %Y")}
+        )
+      end
+    end
+  end
+
+  def set_checked_post_types(default: nil)
+    post_types = params.fetch(:post_types, nil)
+    if post_types != nil
+      session[:post_types] = post_types.keys
+    else
+      session[:post_types] = default
+    end
+  end
+
+  def sort_posts(posts)
+    sorted_key = params.fetch(:sorted, nil)
+    if sorted_key != nil
+      session[:user_profile_sorted_key] = sorted_key
+    end
+
+    column_ids = @columns.map { |column| column[:id].to_s }
+    if column_ids.include? session[:user_profile_sorted_key]
+      posts.sort_by! do |post|
+         post[session[:user_profile_sorted_key].to_sym]
+      end
+    end
   end
 
 end

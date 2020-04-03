@@ -72,12 +72,6 @@ class BuyPostsController < ApplicationController
         {name: "price_range (high)", id: :price_high, sort_allowed: true},
         {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
-
-    # clear session if indicated
-    if !!params.fetch(:reset, nil)
-      reset_session
-    end
-
     @buy_posts = BuyPost.all
   end
 
