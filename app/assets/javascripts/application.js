@@ -17,20 +17,35 @@
 //= require turbolinks
 //= require_tree .
 
-var locations, markers = [];
+var map;
 
-function populateMarkers(map, sell_posts) {
+function populateMarkers(sell_posts) {
+    console.log('populating markers');
+    let locations = [];
+    let markers = [];
+
     for (let i = 0; i < sell_posts.length; i++) {
-        let latlong = {lat: sell_posts[i].latitude, lng: sell_posts[i].longitude};
+        let latlong = {lat: parseFloat(sell_posts[i].latitude), lng: parseFloat(sell_posts[i].longitude)};
 
         locations.push(latlong);
-        markers.push(new google.maps.Marker({position: latlong, map: map}))
+
+        let marker = new google.maps.Marker({position: latlong, map: map});
+        let infoWindow = new google.maps.InfoWindow({
+            content: `<b>${sell_posts[i].title}</b><br>By ${sell_posts[i].user_id}`
+        });
+        marker.addListener('click', function () {
+            infoWindow.open(map, marker);
+        })
+
+        markers.push(marker);
     }
     // let marker = new google.maps.Marker({position: locations[0], map: map});
-    console.log(locations, markers);
+    console.log('locations:', locations, 'markers:', markers);
+
+    // on google map pan event, refresh markers
 }
 
-function init_markers(map) {
+function init_markers() {
     console.log('getAllSalePosts() called');
     Rails.ajax({
         type: "GET",
@@ -40,7 +55,7 @@ function init_markers(map) {
             console.log('success for getting all sell posts ' + data);
 
             populateSellPostsList(data);
-            populateMarkers(map, data);
+            populateMarkers(data);
         }
     })
 }
@@ -70,7 +85,7 @@ function initMap(element, lat, lng) {
         zoom: 8
     };
 
-    return map = new google.maps.Map(element, mapOptions);
+    map = new google.maps.Map(element, mapOptions);
 
     // let marker = new google.maps.Marker({position: locations[0], map: map});
 
@@ -78,7 +93,7 @@ function initMap(element, lat, lng) {
 
 $(document).ready(function () {
     console.log('initializing map');
-    let map = initMap(document.getElementById('gmap'), 40.7128,-74.0060);
+    initMap(document.getElementById('gmap'), 40.7128,-74.0060);
     console.log('map initialized');
 
     init_markers(map);
