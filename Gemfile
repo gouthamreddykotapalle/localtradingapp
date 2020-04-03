@@ -22,8 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 # bootstrap for front end library
-gem 'sprockets'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.3.1'
 gem "aws-sdk-s3", require: false
 
 # Use CoffeeScript for .coffee assets and views
