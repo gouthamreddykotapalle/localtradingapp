@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jquery-rails'
 
+gem 'gmaps4rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
