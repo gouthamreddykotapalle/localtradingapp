@@ -17,5 +17,4 @@
 //
 // Vendor imports
 // Uikit framework
-//= require uikit.js
-//= require uikit-icons.js
+//= require_tree ../../../vendor/assets/javascripts/.
