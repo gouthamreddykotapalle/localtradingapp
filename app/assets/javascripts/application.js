@@ -99,7 +99,4 @@ $(document).ready(function () {
     init_markers(map);
 
 });
-//
-// $(document).ready(function() {
-//     initMap(0, 0);
-// });
+
