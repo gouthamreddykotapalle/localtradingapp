@@ -24,6 +24,11 @@
       - if @current_user
         %li
           = link_to 'Account', { :controller => 'users' }
+          %div{"uk-dropdown" => "pos: bottom-justify"}
+            %ul.uk-nav.uk-dropdown-nav
+              %li
+                = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }
+
         -# = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
       - else
         %li

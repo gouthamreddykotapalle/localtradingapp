@@ -1,56 +1,101 @@
--#  This file is app/views/sell_posts/index.html.haml
-.container
-  .row
-    = content_for(:title, 'Selling Items')
-    %h1#heading1 Selling items nearby you
+= render 'partials/navbar'
 
-  .row
-    = form_tag sell_posts_path, :id => :category_form, :method => :get do
-      Categories:
-      - @all_categories.each do |category|
-        -if category != nil
-          = category
-          = check_box_tag "categories[#{category}]", 1, session[:categories].include?(category)
-        - else
-          Uncategorized
-          = check_box_tag "categories[nil]", 1, session[:categories].include?(category)
-      = submit_tag 'Refresh', id: :ratings_submit
+-# Next row: Grayish title section
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1
+      What people are
+      %span.lta-text-green
+        selling
 
-  .row
-    %table#sell-posts.table.table-striped.col-md-12
-      %thead
-        %tr
-          - @columns.each do |column|
-            - if column[:sort_allowed]
-              - if session[:sorted_key] == column[:id].to_s
-                %th{:class => :hilite}
-                  = link_to column[:name], sell_posts_path(:sorted => "nil"), id: column[:id].to_s + "_header"
-              - else
-                %th
-                  = link_to column[:name], sell_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
-            - else
-              %th
-                = column[:name]
-      %tbody
-        - @sell_posts.each do |post|
-          %tr
-            - @columns.each do |column|
-              - if column[:id] == :title
-                %td= link_to post.title.presence || "(no title)", sell_post_path(post.id)
-              - elsif column[:name] == :upload_image
-                - if post.upload_image.attached?
-                  %td= image_tag(post.upload_image, size: '50x50')
-              - else
-                %td= post.send column[:id]
+-# Next row: Interactive Google maps search
+.uk-section.uk-padding-remove
+  %div{:class => "", "uk-grid" => ""}
 
-  .row
-    %div{:class => "col-6", :style => "height:600px;"}
-      %div{:id => "gmap", :style => "width:100%; height:600px; border: 1px solid red;"}
-    .col-6
-      %div{:id => "sellposts-maplist"}
-        test
+    -# Left half: Google map
+    %div{:style => "border: 1px solid brown;", :class => "uk-width-1-2 uk-flex uk-flex-middle uk-flex-center", "uk-height-viewport" => "expand: true"}
+      %div{:id => "gmap", :style => "width:100%; height:100%;"}
         :javascript
           initMap(document.getElementById('gmap'), 40.7128,-74.0060);
-  .row
-    .col
-      = button_to 'Sell Your Item', new_sell_post_path, method: "get", style: "margin: 50px 0;"
+
+    -# Right half: Filtering and results in Card form
+    %div{:style => "", :class => "uk-width-1-2 uk-padding-remove"}
+
+      -# Search and price filtering section
+      .uk-section.uk-padding-small
+        .uk-text-center
+          %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-search.lta-browse-search-icon
+                %div.uk-width-1-1
+                  = text_field :search, 'query', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Search"
+
+      %hr
+
+      -# Card results section (scrollable)
+      .uk-section.uk-padding-small
+        %div{"uk-height-viewport" => "expand: true"}
+          -# TODO: div here for scrollability?
+          %div{:id => "sellposts-maplist"}
+
+          %div{:class => "uk-grid-match uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l", "uk-grid" => ""}
+
+            -#%div
+            -#  .uk-card.uk-card-default.uk-padding-remove
+            -#
+            -#    .uk-section.uk-padding-remove
+            -#      %img{:class => "lta-radius-top", :width => "", :height => "50px", :alt => "", "data-src" => "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", "uk-img" => ""}
+            -#    .uk-section.uk-padding-remove
+            -#      %h3
+            -#        Lamborghini
+            -#
+            -#%div
+            -#  .uk-card.uk-card-default.uk-padding-remove
+            -#
+            -#    .uk-section.uk-padding-remove.lta-browse-card-media
+            -#      %img{:class => "lta-radius-top", :width => "", :height => "", :alt => "", "data-src" => "data:image/webp;base64,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", "uk-img" => ""}
+            -#    .uk-section.uk-padding-remove
+            -#      %h3
+            -#        Mouse
+
+= render 'partials/footer'
+
+-# .container
+-#   = content_for(:title, 'Selling Items')
+-#   %h1#heading1 Selling items nearby you
+-#
+-#   = form_tag sell_posts_path, :id => :category_form, :method => :get do
+-#     Categories:
+-#     - @all_categories.each do |category|
+-#       -if category != nil
+-#         = category
+-#         = check_box_tag "categories[#{category}]", 1, session[:categories].include?(category)
+-#       - else
+-#         Uncategorized
+-#         = check_box_tag "categories[nil]", 1, session[:categories].include?(category)
+-#     = submit_tag 'Refresh', id: :ratings_submit
+-#
+-#
+-#   %table#sell-posts.table.table-striped.col-md-12
+-#     %thead
+-#       %tr
+-#         - @columns.each do |column|
+-#           - if column[:sort_allowed]
+-#             %th{:class => (:hilite if session[:sorted_key] == column[:id].to_s )}
+-#               = link_to column[:name], sell_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
+-#           - else
+-#             %th= column[:name]
+-#     %tbody
+-#       - @sell_posts.each do |post|
+-#         %tr
+-#           - @columns.each do |column|
+-#             - if column[:id] == :title
+-#               %td= link_to post.send(column[:id]) || "(no title)", sell_post_path(post.id)
+-#             - else
+-#               %td= post.send column[:id]
+-#
+-#
+-#   = button_to 'Sell Your Item', new_sell_post_path, method: "get"
+-#   = link_to 'Reset', sell_posts_path(:reset => true), method: "get"
