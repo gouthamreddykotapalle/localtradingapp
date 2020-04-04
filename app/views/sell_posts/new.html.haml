@@ -57,8 +57,6 @@
     console.log('showPosition called', position.coords.latitude, position.coords.longitude);
     x.value = position.coords.latitude;
     y.value = position.coords.longitude;
-    x.val(position.coords.latitude);
-    y.val(position.coords.longitude);
   }
   function getLocation() {
     if (navigator.geolocation) {
