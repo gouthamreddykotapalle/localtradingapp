@@ -51,6 +51,22 @@
 
 
 :javascript
+  var x = document.getElementById("lat");
+  var y = document.getElementById("long");
+  function showPosition(position) {
+    x.value = position.coords.latitude;
+    y.value = position.coords.longitude;
+  }
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+      y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+    }
+  }
+  getLocation();
+
   $('input#sell_post_category').on('change', function(event) {
     Rails.ajax({
       type: "Get",
