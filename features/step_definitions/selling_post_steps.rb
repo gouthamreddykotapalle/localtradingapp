@@ -1,5 +1,11 @@
 When(/^I enter "(.*)" into "([^"]*)"$/) do |item, title|
-  fill_in title, with: item
+  fill_in(title, with: item)
+end
+
+When(/^trigger change event at the field "([^"]*)"$/) do |title|
+  page.evaluate_script('jQuery.active')
+  field_id = "#" + find_field(title)[:id]
+  page.execute_script("$('#{field_id}').trigger('change');")
 end
 
 When(/^I click on "get my position"$/) do
