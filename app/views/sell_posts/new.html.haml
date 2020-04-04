@@ -21,11 +21,11 @@
 
         .form-group
           = label :sell_post, :latitude, 'Latitude'
-          = text_field :sell_post, :latitude, class: 'form-control'
+          = text_field :sell_post, :latitude, class: 'form-control',  id: 'lat'
 
         .form-group
           = label :sell_post, :longitude, 'Longitude'
-          = text_field :sell_post, :longitude, class: 'form-control'
+          = text_field :sell_post, :longitude, class: 'form-control',  id: 'long'
 
         .form-group
           %br
@@ -51,6 +51,31 @@
 
 
 :javascript
+  console.log("Asas");
+  var x = document.getElementById("lat");
+  console.log(x);
+  var y = document.getElementById("long");
+
+  function showPosition(position) {
+    console.log("ASas");
+    x.value = position.coords.latitude;
+    y.value = position.coords.longitude;
+  }
+
+  function getLocation() {
+    console.log("hello");
+    if (navigator.geolocation) {
+      console.log("asda");
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      console.log("Asa");
+      x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+      y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+    }
+  }
+
+  getLocation();
+
   $('input#sell_post_category').on('change', function(event) {
     Rails.ajax({
       type: "Get",
@@ -60,4 +85,5 @@
         Rails.$("#post_detail")[0].innerHTML = data.html;
       }
     })
-  })
+  });
+

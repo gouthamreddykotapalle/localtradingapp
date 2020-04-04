@@ -35,7 +35,7 @@ function populateMarkers(sell_posts) {
         });
         marker.addListener('click', function () {
             infoWindow.open(map, marker);
-        })
+        });
 
         markers.push(marker);
     }
@@ -86,6 +86,7 @@ function initMap(element, lat, lng) {
     };
 
     map = new google.maps.Map(element, mapOptions);
+    init_markers(map);
 
     // let marker = new google.maps.Marker({position: locations[0], map: map});
 
@@ -93,10 +94,32 @@ function initMap(element, lat, lng) {
 
 $(document).ready(function () {
     console.log('initializing map');
-    initMap(document.getElementById('gmap'), 40.7128,-74.0060);
+    //initMap(document.getElementById('gmap'), 40.7128,-74.0060);
     console.log('map initialized');
 
-    init_markers(map);
+
 
 });
+
+
+var x = document.getElementById("lat");
+var y = document.getElementById("long");
+
+function showPosition(position) {
+    console.log("ASas");
+    x.innerHTML = position.coords.latitude;
+    y.innerHTML = position.coords.longitude;
+}
+
+function getLocation() {
+    console.log("hello");
+    if (navigator.geolocation) {
+        console.log("asda");
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Asa");
+        x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+        y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+    }
+}
 
