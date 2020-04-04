@@ -20,6 +20,14 @@
           = text_field :sell_post, :price, class: 'form-control'
 
         .form-group
+          = label :sell_post, :latitude, 'Latitude'
+          = text_field :sell_post, :latitude, class: 'form-control'
+
+        .form-group
+          = label :sell_post, :longitude, 'Longitude'
+          = text_field :sell_post, :longitude, class: 'form-control'
+
+        .form-group
           %br
           = label :sell_post, :bargain_allowed, 'Do you want to bargain?', class: "form-label"
           %br
@@ -43,6 +51,25 @@
 
 
 :javascript
+  var x = document.getElementById("sell_post_latitude");
+  var y = document.getElementById("sell_post_longitude");
+  function showPosition(position) {
+    console.log('showPosition called', position.coords.latitude, position.coords.longitude);
+    x.value = position.coords.latitude;
+    y.value = position.coords.longitude;
+    x.val(position.coords.latitude);
+    y.val(position.coords.longitude);
+  }
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+      y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+    }
+  }
+  getLocation();
+
   $('input#sell_post_category').on('change', function(event) {
     Rails.ajax({
       type: "Get",
