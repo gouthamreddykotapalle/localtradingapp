@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   # get '/users/login' => 'users#login' #login view rendered
   # post '/users/login', to: 'sessions#create'
 
-
   # post '/sessions' => 'sessions#create'
   #
   # get '/dashboard' => 'users#show'
