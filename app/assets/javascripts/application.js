@@ -88,15 +88,15 @@ function initMap(element, lat, lng) {
     map = new google.maps.Map(element, mapOptions);
 
     // let marker = new google.maps.Marker({position: locations[0], map: map});
-
+    init_markers(map);
 }
 
 $(document).ready(function () {
-    console.log('initializing map');
-    initMap(document.getElementById('gmap'), 40.7128,-74.0060);
-    console.log('map initialized');
+    // console.log('initializing map');
+    // initMap(document.getElementById('gmap'), 40.7128,-74.0060);
+    // console.log('map initialized');
 
-    init_markers(map);
+    // init_markers(map);
 
 });
 
