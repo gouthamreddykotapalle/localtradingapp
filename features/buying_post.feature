@@ -15,7 +15,7 @@ Feature: Users search nearby items and post their buy requests
     And I enter "12000" into "buy_post_price_low"
     And I click the "Post Your Request!" button
     Then I should see the "Item Requests Nearby You" page
-    And I should see "Used Car Wanted" in this page"
+    And I should see "Used Car Wanted" in this page
 
   Scenario: post an item to sell
     Given I have logged in with account "a@b.com" and password "123"

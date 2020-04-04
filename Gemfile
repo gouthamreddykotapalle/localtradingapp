@@ -23,6 +23,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # bootstrap for front end library
 gem 'bootstrap', '~> 4.3.1'
+gem "aws-sdk-s3", require: false
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -32,6 +33,12 @@ gem 'haml-rails', '~> 2.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+
+gem 'jquery-rails'
+
+# gem 'underscore-rails'
+# gem 'gmaps4rails'
+gem 'geocoder'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -67,7 +74,7 @@ group :test do
   gem 'cucumber-rails', require: false
 
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '>= 3.5'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'

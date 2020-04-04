@@ -1,2 +1,9 @@
 rails generate model sell_post title:string user_id:string category:string content:text price:decimal bargain_allowed:boolean
 rails generate model buy_post title:string user_id:string category:string content:text price_low:decimal price_high:decimal
+
+// rails generate model buy_post_detail_schema category:string column_id:string column_name:string datatype:string
+rails generate model template post_type:string category:string column_id:string column_name:string datatype:string
+rails generate model buy_post_detail post:references field:references value:string
+
+// rails generate model sell_post_detail_schema category:string column_id:string column_name:string datatype:string
+rails generate model sell_post_detail post:references field:references value:string

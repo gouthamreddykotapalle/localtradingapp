@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_26_184844) do
+ActiveRecord::Schema.define(version: 2020_04_03_135100) do
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "buy_post_details", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "field_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["field_id"], name: "index_buy_post_details_on_field_id"
+    t.index ["post_id"], name: "index_buy_post_details_on_post_id"
+  end
 
   create_table "buy_posts", force: :cascade do |t|
     t.string "title"
@@ -21,6 +52,18 @@ ActiveRecord::Schema.define(version: 2020_03_26_184844) do
     t.decimal "price_high"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "latitude"
+    t.decimal "longitude"
+  end
+
+  create_table "sell_post_details", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "field_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["field_id"], name: "index_sell_post_details_on_field_id"
+    t.index ["post_id"], name: "index_sell_post_details_on_post_id"
   end
 
   create_table "sell_posts", force: :cascade do |t|
@@ -30,6 +73,19 @@ ActiveRecord::Schema.define(version: 2020_03_26_184844) do
     t.text "content"
     t.decimal "price"
     t.boolean "bargain_allowed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "upload"
+    t.decimal "latitude"
+    t.decimal "longitude"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "post_type"
+    t.string "category"
+    t.string "column_id"
+    t.string "column_name"
+    t.string "datatype"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

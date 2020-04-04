@@ -1,22 +1,35 @@
-= render 'partials/navbar'
+.container
+  .row
+    .col-12
+      %h1#heading1= "Hello, #{@current_user.first_name}"
 
-%div{:class => "uk-section lta-section-header"}
-  .uk-container.uk-text-center
-    %h1
-      = @current_user.first_name + " " + @current_user.last_name
+  = form_tag user_path(@user), :id => :post_type_form, :method => :get do
+    Type:
+    = "Buy"
+    = check_box_tag "post_types[buy]", 1, session[:post_types].include?("buy")
+    = "Sell"
+    = check_box_tag "post_types[sell]", 1, session[:post_types].include?("sell")
+    = submit_tag 'Refresh', id: :ratings_submit
 
-%div{:class => "uk-section"}
-  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
-    %p
-      = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }
-
-= render 'partials/footer'
-
-
--#.container
--#  .row
--#    .col-12
--#      %h1#heading1= "Hello, #{@current_user.first_name}"
--#      %p
--#        = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
--#      %p {Account information here}
+  %table#user-profile.table.table-striped.col-md-12
+    %thead
+      %tr
+        - @columns.each do |column|
+          - if session[:user_profile_sorted_key] == column[:id]
+            %th{:class => (:hilite if session[:user_profile_sorted_key] == column[:id] )}
+              = link_to column[:name], user_path(@user, :sorted => "nil"), id: column[:id].to_s + "_header"
+          - else
+            %th= link_to column[:name], user_path(@user, :sorted => column[:id]), id: column[:id].to_s + "_header"
+        %th
+    %tbody
+      - @posts.each do |post|
+        %tr
+          - @columns.each do |column|
+            - if column[:id].to_sym == :title
+              %td= post[:title].presence || "(no title)"
+            - else
+              %td= post[column[:id].to_sym]
+          - if post[:type] == "buy"
+            %td= link_to "view", buy_post_path(post[:post_id])
+          - else
+            %td= link_to "view", sell_post_path(post[:post_id])

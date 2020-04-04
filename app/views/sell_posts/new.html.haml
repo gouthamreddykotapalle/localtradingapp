@@ -3,7 +3,7 @@
 .container
   %h1#heading1 Sell Your Treasure
 
-  = form_tag sell_posts_path, :method => "post" do
+  = form_tag sell_posts_path, :method => "post", multipart: true do #points to buy_posts_path makes more sense| how does the data model look like?
 
     .card
       .card-body
@@ -15,10 +15,19 @@
         .form-group
           = label :sell_post, :category, "Category"
           = text_field :sell_post, :category, class: 'form-control'
+          = link_to 'Create a new template', new_template_path
 
         .form-group
           = label :sell_post, :price, 'Price'
           = text_field :sell_post, :price, class: 'form-control'
+
+        .form-group
+          = label :sell_post, :latitude, 'Latitude'
+          = text_field :sell_post, :latitude, class: 'form-control'
+
+        .form-group
+          = label :sell_post, :longitude, 'Longitude'
+          = text_field :sell_post, :longitude, class: 'form-control'
 
         .form-group
           %br
@@ -33,5 +42,41 @@
           = label :sell_post, :content, 'Content'
           = text_field :sell_post, :content, class: 'form-control'
 
+        %div{:id => "post_detail"}
+
+        .form-group
+          = label :sell_post, :upload_image, 'Upload_Image'
+          = file_field :sell_post, :upload_image, class: 'form-control-file'
+
         .form-group
           = submit_tag 'Post Your Item!', class: 'btn btn-primary btn-lg btn-block'
+
+
+:javascript
+  var x = document.getElementById("sell_post_latitude");
+  var y = document.getElementById("sell_post_longitude");
+  function showPosition(position) {
+    console.log('showPosition called', position.coords.latitude, position.coords.longitude);
+    x.value = position.coords.latitude;
+    y.value = position.coords.longitude;
+  }
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+      y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+    }
+  }
+  getLocation();
+
+  $('input#sell_post_category').on('change', function(event) {
+    Rails.ajax({
+      type: "Get",
+      url: '/sell_posts/detail_form',
+      data: 'category=' + $(this).val(),
+      success: function(data) {
+        Rails.$("#post_detail")[0].innerHTML = data.html;
+      }
+    })
+  })

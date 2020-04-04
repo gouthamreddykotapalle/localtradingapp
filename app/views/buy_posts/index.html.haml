@@ -28,8 +28,11 @@
       %tr
         - @columns.each do |column|
           - if column[:sort_allowed]
-            %th{:class => (:hilite if session[:sorted_key] == column[:id].to_s )}
-              = link_to column[:name], buy_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
+            - if session[:sorted_key] == column[:id].to_s
+              %th{:class => :hilite}
+                = link_to column[:name], buy_posts_path(:sorted => "nil"), id: column[:id].to_s + "_header"
+            -else
+              %th= link_to column[:name], buy_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
           - else
             %th= column[:name]
     %tbody
@@ -37,10 +40,12 @@
         %tr
           - @columns.each do |column|
             - if column[:id] == :title
-              %td= link_to post.send(column[:id]) || "(no title)", buy_post_path(post.id)
+              %td= link_to post.title.presence || "(no title)", buy_post_path(post.id)
+            - elsif column[:name] == :upload_image
+              - if post.upload_image.attached?
+                %td= image_tag(post.upload_image, size: '50x50')
             - else
               %td= post.send column[:id]
 
 
   = button_to 'Post Your Request', new_buy_post_path, method: "get"
-  = link_to 'Reset', buy_posts_path(:reset => true), method: "get"

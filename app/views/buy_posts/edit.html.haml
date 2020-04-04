@@ -15,6 +15,7 @@
         .form-group
           = label :buy_post, :category, "Category"
           = text_field :buy_post, :category, class: 'form-control'
+          = link_to 'Create a new template', new_template_path
 
         .form-group
           = label :buy_post, :price, 'Price Range'
@@ -27,5 +28,22 @@
           = label :buy_post, :content, 'Content'
           = text_field :buy_post, :content, class: 'form-control'
 
+        %div{:id => "post_detail"}
+          = render partial:"templates/detail"
+
         .form-group
           = submit_tag 'Update Your Request!', class: 'btn btn-primary btn-lg btn-block'
+
+
+
+:javascript
+  $('input#buy_post_category').on('change', function(event) {
+    Rails.ajax({
+      type: "Get",
+      url: '/buy_posts/detail_form',
+      data: 'category=' + $(this).val() + '&id=' + #{@buy_post.id},
+      success: function(data) {
+        Rails.$("#post_detail")[0].innerHTML = data.html;
+      }
+    })
+  })
