@@ -1,8 +1,6 @@
 = content_for :page_js do
   :javascript
     $(document).ready(function() {
-      // var latitude = document.getElementById("sell_post_latitude");
-      // var longitude = document.getElementById("sell_post_longitude");
       let lat = $("#sell_post_latitude");
       let lng = $("#sell_post_longitude");
       function getLocation() {
@@ -12,16 +10,12 @@
         } else {
           lat.val("Geolocation not supported. Enter manually");
           lng.val("Geolocation not supported. Enter manually");
-          // x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
-          // y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
         }
       }
       function showPosition(position) {
         console.log('showPosition called', position.coords.latitude, position.coords.longitude);
         lat.val(position.coords.latitude);
         lng.val(position.coords.longitude);
-        // x.value = position.coords.latitude;
-        // y.value = position.coords.longitude;
       }
       getLocation();
     });
