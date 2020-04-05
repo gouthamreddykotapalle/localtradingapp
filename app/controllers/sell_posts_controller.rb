@@ -12,7 +12,25 @@ class SellPostsController < ApplicationController
 
   def map_all
     @sell_posts = SellPost.all
-    render json: @sell_posts
+
+    @response = []
+    @sell_posts.each do |post|
+      @response << {
+          id: post.id,
+          title: post.title,
+          user: post.user_id,
+          price: post.price,
+          bargain_allowed: post.bargain_allowed,
+          latitude: post.latitude,
+          longitude: post.longitude,
+          upload_image: url_for(post.upload_image),
+          view_link: url_for(post)
+      }
+    end
+
+    render :json => @response
+
+    # render json: @sell_posts, include: :upload_image
   end
 
   def create
