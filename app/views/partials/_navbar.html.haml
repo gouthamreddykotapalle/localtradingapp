@@ -7,19 +7,21 @@
   .uk-navbar-right
     %ul.uk-navbar-nav
       %li
-        %a
-          Browse
-        %div{"uk-dropdown" => "pos: bottom-justify"}
-          %ul.uk-nav.uk-dropdown-nav
-            %li
-              = link_to "For sale", { :controller => 'sell_posts' }, :class => ""
-            %li
-              = link_to "For request", { :controller => 'buy_posts' }, :class => ""
+        -#%a
+        -#  Browse
+        -#%div{"uk-dropdown" => "pos: bottom-justify"}
+        -#  %ul.uk-nav.uk-dropdown-nav
+        -#    %li
+        -#      = link_to "For sale", { :controller => 'sell_posts' }, :class => ""
+        -#    %li
+        -#      = link_to "For request", { :controller => 'buy_posts' }, :class => ""
 
       %li
-        %a{:href => "#{new_sell_post_path}"} Buy
+        %a{:href => "#{sell_posts_path}"} Sell Posts
       %li
-        %a{:href => "#{new_buy_post_path}"} Sell
+        %a{:href => "#{buy_posts_path}"} Buy Posts
+      %li
+        %a{:href => "#{templates_path}"} Templates
 
       - if @current_user
         %li
@@ -28,8 +30,6 @@
             %ul.uk-nav.uk-dropdown-nav
               %li
                 = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }
-
-        -# = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }, :class => 'dropdown-item'
       - else
         %li
           = link_to 'Register', { :controller => 'users', :action => 'new' }

@@ -1,34 +1,41 @@
+= content_for :page_js do
+  :javascript
+
 = render 'partials/navbar'
 
-.container
-  %h1#heading1 #{@buy_post.title}
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 #{@buy_post.title}
 
-  %ul
-    %li
-      Category:
-      = @buy_post.category
-    %li
-      Buyer:
-      = @buy_post.user_id
-    %li
-      Price:
-      %span $
-      = @buy_post.price_low
-      %span ~
-      = @buy_post.price_high
-    %li
-      Posted At:
-      = @buy_post.updated_at.strftime("%B %d, %Y")
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+
+    %ul
+      %li
+        Category:
+        = @buy_post.category
+      %li
+        Buyer:
+        = @buy_post.user_id
+      %li
+        Price:
+        %span $
+        = @buy_post.price_low
+        %span ~
+        = @buy_post.price_high
+      %li
+        Posted At:
+        = @buy_post.updated_at.strftime("%B %d, %Y")
 
 
-  %h4 Description:
-  %ul
-    - @templates.each do |field|
-      %li #{field.column_name}: #{@details[field.column_id]}
+    %h4 Description:
+    %ul
+      - @templates.each do |field|
+        %li #{field.column_name}: #{@details[field.column_id]}
 
-  - if @current_user.email == @buy_post.user_id
-    = button_to 'Edit', edit_buy_post_path(@buy_post), :method => :get, :class => 'btn btn-primary'
+    - if @current_user.email == @buy_post.user_id
+      = button_to 'Edit', edit_buy_post_path(@buy_post), :method => :get, :class => 'btn btn-primary'
+      %br
+      = button_to 'Delete',  buy_post_path(@buy_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
     %br
-    = button_to 'Delete',  buy_post_path(@buy_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
-  %br
-  = link_to 'Back to sell post list', buy_posts_path
+    = link_to 'Back to sell post list', buy_posts_path

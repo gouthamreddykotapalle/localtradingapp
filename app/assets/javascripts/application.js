@@ -73,7 +73,7 @@ function populateSellPostsList(sell_posts) {
 
     for (let i = 0; i < sell_posts.length; i++) {
         $("#sellposts-maplist").append(`
-            <li>${sell_posts[i].title}, ${sell_posts[i].category}, Price: ${sell_posts[i].price}, Bargain? ${sell_posts[i].bargain_allowed}, Location: ${sell_posts[i].latitude} ${sell_posts[i].longitude}</li>
+            <li><img src="${sell_posts[i].upload_image}", style="width:50px;height:50px;" alt="Post Image"/>${sell_posts[i].title}, ${sell_posts[i].category}, Price: ${sell_posts[i].price}, Bargain? ${sell_posts[i].bargain_allowed}, Location: ${sell_posts[i].latitude} ${sell_posts[i].longitude}</li>
         `);
     }
 

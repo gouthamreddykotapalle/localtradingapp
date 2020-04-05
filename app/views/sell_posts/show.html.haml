@@ -1,38 +1,48 @@
+= content_for :page_js do
+  :javascript
+
 = render 'partials/navbar'
 
-.container
-  %h3 #{@sell_post.title}
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 #{@sell_post.title}
 
-  %ul#details
-    %li
-      Category:
-      = @sell_post.category
-    %li
-      Seller:
-      = @sell_post.user_id
-    %li
-      Price:
-      = @sell_post.price
-    %li
-      Seller wants to bargain:
-      - if @sell_post.bargain_allowed
-        Yes
-      - else
-        No
-    %li
-      Posted At:
-      = @sell_post.updated_at.strftime("%B %d, %Y")
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+
+    %ul#details
+      %li
+        Category:
+        = @sell_post.category
+      %li
+        Seller:
+        = @sell_post.user_id
+      %li
+        Price:
+        = @sell_post.price
+      %li
+        Seller wants to bargain:
+        - if @sell_post.bargain_allowed
+          Yes
+        - else
+          No
+      %li
+        Posted At:
+        = @sell_post.updated_at.strftime("%B %d, %Y")
 
 
-  %h4 Description:
-  %p= @sell_post.content
-  %ul
-    - @templates.each do |field|
-      %li #{field.column_name}: #{@details[field.column_id]}
+    %h4 Description:
+    %p= @sell_post.content
+    %ul
+      - @templates.each do |field|
+        %li #{field.column_name}: #{@details[field.column_id]}
 
-  - if @current_user.email == @sell_post.user_id
-    = button_to 'Edit', edit_sell_post_path(@sell_post), :method => :get, :class => 'btn btn-primary'
-    %br
-    = button_to 'Delete', sell_post_path(@sell_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+    - if @current_user.email == @sell_post.user_id
+      = button_to 'Edit', edit_sell_post_path(@sell_post), :method => :get, :class => 'btn btn-primary'
+      %br
+      = button_to 'Delete', sell_post_path(@sell_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
+
   %br
   = link_to 'Back to sell post list', sell_posts_path
+
+= render 'partials/footer'

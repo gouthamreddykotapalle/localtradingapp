@@ -18,6 +18,8 @@
 
     = yield(:head_tags)
 
+    = yield(:page_js)
+
   %body
     #main
       - if flash[:notice]
