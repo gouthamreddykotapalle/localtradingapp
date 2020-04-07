@@ -1,5 +1,24 @@
 = content_for :page_js do
   :javascript
+    $(document).ready(function() {
+      let lat = $("#sell_post_latitude");
+      let lng = $("#sell_post_longitude");
+      function getLocation() {
+        console.log('getLocation called');
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          lat.val("Geolocation not supported. Enter manually");
+          lng.val("Geolocation not supported. Enter manually");
+        }
+      }
+      function showPosition(position) {
+        console.log('showPosition called', position.coords.latitude, position.coords.longitude);
+        lat.val(position.coords.latitude);
+        lng.val(position.coords.longitude);
+      }
+      getLocation();
+    });
 
 = render 'partials/navbar'
 
@@ -58,22 +77,22 @@
 = render 'partials/footer'
 
 :javascript
-  var x = document.getElementById("sell_post_latitude");
-  var y = document.getElementById("sell_post_longitude");
-  function showPosition(position) {
-    console.log('showPosition called', position.coords.latitude, position.coords.longitude);
-    x.value = position.coords.latitude;
-    y.value = position.coords.longitude;
-  }
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
-      y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
-    }
-  }
-  getLocation();
+  // var x = document.getElementById("sell_post_latitude");
+  // var y = document.getElementById("sell_post_longitude");
+  // function showPosition(position) {
+  //   console.log('showPosition called', position.coords.latitude, position.coords.longitude);
+  //   x.value = position.coords.latitude;
+  //   y.value = position.coords.longitude;
+  // }
+  // function getLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(showPosition);
+  //   } else {
+  //     x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+  //     y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
+  //   }
+  // }
+  // getLocation();
 
   $('input#sell_post_category').on('change', function(event) {
     console.log('doing ajax');
