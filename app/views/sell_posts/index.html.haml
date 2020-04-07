@@ -42,6 +42,9 @@
           console.log('success for getting all sell posts ' + data);
           populateSellPostsList(data);
           populateMarkers(data);
+        },
+        error: function(error) {
+          console.log(error);
         }
       });
     }
