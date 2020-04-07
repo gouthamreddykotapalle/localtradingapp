@@ -16,11 +16,7 @@ class SellPostsController < ApplicationController
     @response = []
     @sell_posts.each do |post|
 
-      if post.upload_image.present?
-        @upload_image_url = url_for(post.upload_image)
-      else
-        @upload_image_url = ""
-      end
+      upload_image_url = url_for(post.upload_image) if post.upload_image.attached?
 
       @response << {
           id: post.id,
@@ -30,7 +26,7 @@ class SellPostsController < ApplicationController
           bargain_allowed: post.bargain_allowed,
           latitude: post.latitude,
           longitude: post.longitude,
-          upload_image: @upload_image_url,
+          upload_image: upload_image_url,
           view_link: url_for(post)
       }
     end
