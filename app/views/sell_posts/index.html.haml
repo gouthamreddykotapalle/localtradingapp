@@ -8,7 +8,7 @@
       for (let i = 0; i < sell_posts.length; i++) {
         $("#sellposts-maplist").append(`
           <li>
-          <a href="${sell_posts[i].view_link}"><img src="${sell_posts[i].upload_image}", style="width:50px;height:50px;" alt="IMG"/>${sell_posts[i].title}, Price: ${sell_posts[i].price}, Bargain? ${sell_posts[i].bargain_allowed}, Location: ${sell_posts[i].latitude} ${sell_posts[i].longitude}</a>
+          <a href="${sell_posts[i].view_link}"><img src="${sell_posts[i].upload_image}", style="width:50px;height:50px;" alt="NO IMG"/>${sell_posts[i].title}, Price: ${sell_posts[i].price}, Bargain? ${sell_posts[i].bargain_allowed}, Location: ${sell_posts[i].latitude} ${sell_posts[i].longitude}</a>
           </li>
         `);
       }
@@ -23,7 +23,7 @@
         locations.push(latlong);
         let marker = new google.maps.Marker({position: latlong, map: map});
         let infoWindow = new google.maps.InfoWindow({
-          content: `<b>${sell_posts[i].title}</b><br>By ${sell_posts[i].user}<br><img src="${sell_posts[i].upload_image}", style="width:50px;height:50px;" alt="IMG"/>`
+          content: `<b>${sell_posts[i].title}</b><br>By ${sell_posts[i].user}<br><img src="${sell_posts[i].upload_image}", style="width:50px;height:50px;" alt="NO IMG"/>`
         });
         marker.addListener('click', function () {
           infoWindow.open(map, marker);
