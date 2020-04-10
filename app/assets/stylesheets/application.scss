@@ -203,3 +203,44 @@ html {
 .lta-browse-card-media {
 
 }
+
+// card results in sell posts index and buy posts index
+
+.lta-card {
+  //border: 1px solid orange;
+  box-shadow: 0 1px 5px rgba(25,0,0,0.5);
+  border-radius: 5px;
+}
+
+.lta-card-img-holder {
+  height: 250px;
+  width: 100%;
+  //background-color: white;
+}
+
+.lta-card-img {
+  width: auto;
+  height: 200px;
+}
+
+.lta-card-body {
+  padding: 20px;
+  //height:100px;
+}
+
+.lta-card-title {
+  font-size: 24px;
+  color: #190000;
+}
+.lta-card-title:hover, .lta-card-title:active {
+  color: #313A63;
+}
+
+.lta-card-price-container {
+  padding-top: 15%;
+  color: #313A63;
+}
+
+.lta-card-sell-dollar {
+  color: #00A006;
+}

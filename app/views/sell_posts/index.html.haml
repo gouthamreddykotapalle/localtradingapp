@@ -8,18 +8,39 @@
       for (let i = 0; i < sell_posts.length; i++) {
         console.log(sell_posts[i].title);
         $("#sellposts-maplist").append(`
-        <div>
-          <div class="uk-card uk-card-default uk-padding-remove">
-            <div class="uk-section uk-padding-remove">
-              <a href="${sell_posts[i].view_link}"><img class="" width="" height="50px" alt="[img]" data-src="${sell_posts[i].upload_image}" uk-img></a>
-            </div>
-            <div class="uk-section uk-padding-remove">
-              <a href="${sell_posts[i].view_link}"><h3>${sell_posts[i].title}</h3></a>
+          <div>
+            <div class="lta-card">
+              <div class="lta-card-img-holder uk-flex uk-flex-center uk-flex-middle">
+                <a href="${sell_posts[i].view_link}">
+                  <img src="${sell_posts[i].upload_image}" alt="Image for ${sell_posts[i].title}" class="lta-card-img">
+                </a>
+              </div>
+
+              <div class="lta-card-body">
+                <a href="${sell_posts[i].view_link}" class="lta-card-title">${sell_posts[i].title}</a>
+                <div class="lta-card-price-container uk-text-right">
+                  <i class="fas fa-dollar-sign lta-card-sell-dollar"></i> &nbsp;&nbsp; ${sell_posts[i].price}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
         `);
       }
+      // for (let i = 0; i < sell_posts.length; i++) {
+      //   console.log(sell_posts[i].title);
+      //   $("#sellposts-maplist").append(`
+      //   <div>
+      //     <div class="uk-card uk-card-default uk-padding-remove">
+      //       <div class="">
+      //         <a href="${sell_posts[i].view_link}"><img class="" width="" height="50px" alt="[img]" data-src="${sell_posts[i].upload_image}" uk-img></a>
+      //       </div>
+      //       <div class="uk-section uk-padding-remove">
+      //         <a href="${sell_posts[i].view_link}"><h3>${sell_posts[i].title}</h3></a>
+      //       </div>
+      //     </div>
+      //   </div>
+      //   `);
+      // }
       // $("#sellposts-maplist").append(`<ul>`);
       // for (let i = 0; i < sell_posts.length; i++) {
       //   $("#sellposts-maplist").append(`
@@ -120,7 +141,7 @@
 
           -# TODO: div here for scrollability?
 
-          %div{:id => "sellposts-maplist", :class => "uk-grid-match uk-child-width-1-1@xs uk-child-width-1-2@s uk-child-width-1-3@l uk-child-width-1-4@xl", "uk-grid" => ""}
+          %div{:id => "sellposts-maplist", :class => "uk-grid-small uk-grid-match uk-child-width-1-1@m uk-child-width-1-2@l uk-child-width-1-3@xl", "uk-grid" => ""}
 
             -#%div
             -#  .uk-card.uk-card-default.uk-padding-remove
