@@ -135,7 +135,7 @@
               startMap(lat, lng);
             }
             getLocation();
-            initMap(document.getElementById('gmap'), lat, lng);
+            initMap(document.getElementById('gmap'), "#{@geo_results_from_ip.first.coordinates.first}", "#{@geo_results_from_ip.first.coordinates.second}");
           });
 
     -# Right half: Filtering and results in Card form
