@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   APP_NAME = 'The Local Trading App'
 
-  before_action :set_current_user
+  before_action :set_current_user, :geolocate
 
   protected # prevents method from being invoked by a route
 
@@ -11,5 +11,12 @@ class ApplicationController < ActionController::Base
     # we exploit the fact that find_by_id(nil) returns nil
     @current_user ||= User.find_by_email(session[:user_id])
     redirect_to login_path unless @current_user
+  end
+
+  def geolocate
+    Rails.logger.debug "[DEBUG] ApplicationController#geolocate: Client IP address is #{request.remote_ip.to_s}"
+    @request = request
+    @geo_results_from_ip = Geocoder.search(request.remote_ip.to_s)
+    logger.debug "Test " + @geo_results_from_ip.first.coordinates.to_s
   end
 end

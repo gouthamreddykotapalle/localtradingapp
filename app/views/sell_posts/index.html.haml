@@ -114,7 +114,28 @@
       %div{:id => "gmap", :style => "width:100%; height:100%;"}
         :javascript
           $(document).ready(function() {
-            initMap(document.getElementById('gmap'), 40.7128,-74.0060);
+            let lat = 0;
+            let lng = 0;
+            function startMap(lat, lng) {
+              console.log("startMap called");
+            }
+            function getLocation() {
+              console.log('getLocation called');
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              } else {
+                console.log("Lat Geolocation not supported. Enter manually");
+                console.log("Lng Geolocation not supported. Enter manually");
+              }
+            }
+            function showPosition(position) {
+              console.log('showPosition called', position.coords.latitude, position.coords.longitude);
+              lat = position.coords.latitude;
+              lng = position.coords.longitude;
+              startMap(lat, lng);
+            }
+            getLocation();
+            initMap(document.getElementById('gmap'), lat, lng);
           });
 
     -# Right half: Filtering and results in Card form
@@ -132,6 +153,12 @@
                   = text_field :search, 'query', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Search"
             %div
               = button_to 'Sell Your Item', new_sell_post_path, method: "get"
+            %div
+              Your IP:
+              = @request.remote_ip.to_s
+              %br
+              Coords from IP:
+              = @geo_results_from_ip.first.coordinates.to_s
 
       %hr
 
