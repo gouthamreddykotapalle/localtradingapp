@@ -1,6 +1,7 @@
 = content_for :page_js do
   :javascript
     $(document).ready(function() {
+      // obtain lat and long, then fill in inputs automatically
       let lat = $("#sell_post_latitude");
       let lng = $("#sell_post_longitude");
       function getLocation() {
@@ -31,69 +32,147 @@
 
     = form_tag sell_posts_path, :method => "post", multipart: true do #points to buy_posts_path makes more sense| how does the data model look like?
 
-      = label :sell_post, :title, 'Title'
-      = text_field :sell_post, :title, class: 'form-control'
-      %br
+      %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
 
-      = label :sell_post, :category, "Category"
-      = text_field :sell_post, :category, class: 'form-control'
-      = link_to 'Create a new template', new_template_path
-      %br
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Title
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1
+              = text_field :sell_post, :title, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-      = label :sell_post, :price, 'Price'
-      = text_field :sell_post, :price, class: 'form-control'
-      %br
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Category
+            %a{:href => new_template_path}
+              %i.fas.fa-external-link-alt.uk-text-small
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1
+              = text_field :sell_post, :category, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-      = label :sell_post, :latitude, 'Latitude'
-      = text_field :sell_post, :latitude, class: 'form-control'
-      %br
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Price
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1
+              = text_field :sell_post, :price, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-      = label :sell_post, :longitude, 'Longitude'
-      = text_field :sell_post, :longitude, class: 'form-control'
-      %br
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Location
+        %div.uk-width-2-3
+          .uk-flex
+            %div
+              = text_field :sell_post, :latitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+            %div
+              = text_field :sell_post, :longitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-      = label :sell_post, :bargain_allowed, 'Do you want to bargain?', class: "form-label"
-      %br
+        -#%div.uk-width-1-3.uk-flex.uk-flex-middle
+        -#  %span.lta-form-label
+        -#    Latitude
+        -#%div.uk-width-2-3
+        -#  .uk-flex
+        -#    %div.uk-width-1-1
+        -#      = text_field :sell_post, :latitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+        -#
+        -#%div.uk-width-1-3.uk-flex.uk-flex-middle
+        -#  %span.lta-form-label
+        -#    Longitude
+        -#%div.uk-width-2-3
+        -#  .uk-flex
+        -#    %div.uk-width-1-1
+        -#      = text_field :sell_post, :longitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-      = label :sell_post, :bargain_allowed, 'Yes'
-      = radio_button :sell_post, :bargain_allowed, true
-      = label :sell_post, :bargain_allowed, 'No'
-      = radio_button :sell_post, :bargain_allowed, false
-      %br
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Bargain?
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1.uk-text-right
+              = radio_button :sell_post, :bargain_allowed, true
+              Yes
+              = radio_button :sell_post, :bargain_allowed, false
+              No
 
-      = label :sell_post, :content, 'Content'
-      = text_field :sell_post, :content, class: 'form-control'
-      %br
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Description
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1.uk-text-right
+              = text_area :sell_post, :content, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', style: "height:200px;", placeholder: ""
+
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Image
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1.js-upload.uk-placeholder.uk-text-center
+              %i.fas.fa-cloud-upload-alt
+              %div{"uk-form-custom" => ""}
+                = file_field :sell_post, :upload_image, class: '', style: "", placeholder: ""
+                %span.uk-link
+                  Upload
+              %span.uk-text-middle
+                an image
+
+        -#
+        -# %div
+        -#   .uk-flex
+        -#     %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+        -#       %i.fas.fa-key
+        -#     %div.uk-width-1-1
+        -#       = password_field :login_info, 'password', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Password"
+
+      -# = label :sell_post, :title, 'Title'
+      -# = text_field :sell_post, :title, class: 'form-control'
+      -# %br
+
+      -# = label :sell_post, :category, "Category"
+      -# = text_field :sell_post, :category, class: 'form-control'
+      -# = link_to 'Create a new template', new_template_path
+      -# %br
+
+      -# = label :sell_post, :price, 'Price'
+      -# = text_field :sell_post, :price, class: 'form-control'
+      -# %br
+
+      -# = label :sell_post, :latitude, 'Latitude'
+      -# = text_field :sell_post, :latitude, class: 'form-control'
+      -# %br
+
+      -# = label :sell_post, :longitude, 'Longitude'
+      -# = text_field :sell_post, :longitude, class: 'form-control'
+      -# %br
+
+      -# = label :sell_post, :bargain_allowed, 'Do you want to bargain?', class: "form-label"
+      -# %br
+      -#
+      -# = label :sell_post, :bargain_allowed, 'Yes'
+      -# = radio_button :sell_post, :bargain_allowed, true
+      -# = label :sell_post, :bargain_allowed, 'No'
+      -# = radio_button :sell_post, :bargain_allowed, false
+      -# %br
+
+      -# = label :sell_post, :content, 'Content'
+      -# = text_field :sell_post, :content, class: 'form-control'
+      -# %br
 
       %div{:id => "post_detail"}
       %br
 
-      = label :sell_post, :upload_image, 'Upload_Image'
-      = file_field :sell_post, :upload_image, class: 'form-control-file'
-      %br
+      -# = label :sell_post, :upload_image, 'Upload_Image'
+      -# = file_field :sell_post, :upload_image, class: 'form-control-file'
+      -# %br
 
-      = submit_tag 'Post Your Item!', class: 'btn btn-primary btn-lg btn-block'
+      = submit_tag 'Post Your Item!', class: 'uk-button uk-button-primary lta-button-large uk-width-1-1'
 
 = render 'partials/footer'
 
 :javascript
-  // var x = document.getElementById("sell_post_latitude");
-  // var y = document.getElementById("sell_post_longitude");
-  // function showPosition(position) {
-  //   console.log('showPosition called', position.coords.latitude, position.coords.longitude);
-  //   x.value = position.coords.latitude;
-  //   y.value = position.coords.longitude;
-  // }
-  // function getLocation() {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(showPosition);
-  //   } else {
-  //     x.innerHTML = "Geolocation is not supported by this browser. Enter manually";
-  //     y.innerHTML = "Geolocation is not supported by this browser. Enter manually";
-  //   }
-  // }
-  // getLocation();
-
   $('input#sell_post_category').on('change', function(event) {
     console.log('doing ajax');
     Rails.ajax({
