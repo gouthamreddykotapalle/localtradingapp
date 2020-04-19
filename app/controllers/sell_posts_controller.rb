@@ -16,10 +16,6 @@ class SellPostsController < ApplicationController
     @response = []
     @sell_posts.each do |post|
 
-      # upload_image_url = url_for(post.upload_image) if post.upload_image.attached? else "https://theacres.com/wp-content/uploads/2015/07/placeholder-image-icon-7.png"
-
-      # upload_image_url = ''
-
       if post.upload_image.attached?
         upload_image_url = url_for(post.upload_image)
       else
