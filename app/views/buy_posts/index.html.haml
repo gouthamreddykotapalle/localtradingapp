@@ -19,7 +19,7 @@
               <div class="lta-card-body">
                 <a href="${sell_posts[i].view_link}" class="lta-card-title">${sell_posts[i].title}</a>
                 <div class="lta-card-price-container uk-text-right">
-                  <i class="fas fa-dollar-sign lta-card-buy-dollar"></i> &nbsp;&nbsp; ${sell_posts[i].price_low}
+                  <i class="fas fa-dollar-sign lta-card-buy-dollar"></i> &nbsp;&nbsp; ${sell_posts[i].price_low}&nbsp;&nbsp;-&nbsp;&nbsp;${sell_posts[i].price_high}
                 </div>
               </div>
             </div>
@@ -106,7 +106,7 @@
                 %div.uk-width-1-1
                   = text_field :search, 'query', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Search"
             %div
-              = button_to 'Sell Your Item', new_sell_post_path, method: "get"
+              = button_to 'Post a Request', new_buy_post_path, method: "get"
 
       %hr
 
