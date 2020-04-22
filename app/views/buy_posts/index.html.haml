@@ -1,18 +1,18 @@
 = content_for :page_js do
   :javascript
     let map;
-    function populateBuyPostsList(sell_posts) {
+    function populateBuyPostsList(buy_posts) {
       console.log('populating sell posts list');
       $("#buyposts-maplist").empty();
 
-      for (let i = 0; i < sell_posts.length; i++) {
-        console.log(sell_posts[i].title);
+      for (let i = 0; i < buy_posts.length; i++) {
+        console.log(buy_posts[i].title);
         $("#buyposts-maplist").append(`
           <div>
             <div class="lta-card">
               <div class="lta-card-img-holder uk-flex uk-flex-center uk-flex-middle">
-                <a href="${sell_posts[i].view_link}">
-                  <img src="${sell_posts[i].upload_image}" alt="Image for ${sell_posts[i].title}" class="lta-card-img">
+                <a href="${buy_posts[i].view_link}">
+                  <img src="${buy_posts[i].upload_image}" alt="Image for ${buy_posts[i].title}" class="lta-card-img">
                 </a>
               </div>
 
@@ -27,16 +27,16 @@
         `);
       }
     }
-    function populateMarkers(sell_posts) {
+    function populateMarkers(buy_posts) {
       console.log('populating markers');
       let locations = [];
       let markers = [];
-      for (let i = 0; i < sell_posts.length; i++) {
-        let latlong = {lat: parseFloat(sell_posts[i].latitude), lng: parseFloat(sell_posts[i].longitude)};
+      for (let i = 0; i < buy_posts.length; i++) {
+        let latlong = {lat: parseFloat(buy_posts[i].latitude), lng: parseFloat(buy_posts[i].longitude)};
         locations.push(latlong);
         let marker = new google.maps.Marker({position: latlong, map: map});
         let infoWindow = new google.maps.InfoWindow({
-          content: `<b>${sell_posts[i].title}</b><br>By ${sell_posts[i].user}<br><img src="${sell_posts[i].upload_image}", style="width:50px;height:50px;" alt="NO IMG"/>`
+          content: `<b>${buy_posts[i].title}</b><br>By ${buy_posts[i].user}<br><img src="${buy_posts[i].upload_image}", style="width:50px;height:50px;" alt="NO IMG"/>`
         });
         marker.addListener('click', function () {
           infoWindow.open(map, marker);
