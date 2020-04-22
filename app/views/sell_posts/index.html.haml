@@ -46,7 +46,7 @@
       console.log('locations:', locations, 'markers:', markers);
     }
     function init_markers() {
-      console.log('getAllSalePosts() called');
+      console.log('init_markers() called');
       Rails.ajax({
         type: "GET",
         url: '/sell_posts/map/all', // TODO: proper api conventions
@@ -109,7 +109,6 @@
 
       %hr
 
-      -# Card results section (todo: scrollable)
       .uk-section.uk-padding-small
         %div{:id => "", :class => ""}
 

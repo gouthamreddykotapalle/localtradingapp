@@ -9,6 +9,35 @@ class BuyPostsController < ApplicationController
 
   def new; end
 
+  def map_all
+    @buy_posts = BuyPost.all
+
+    @response = []
+    @buy_posts.each do |post|
+
+      if post.upload_image.attached?
+        upload_image_url = url_for(post.upload_image)
+      else
+        upload_image_url = "https://theacres.com/wp-content/uploads/2015/07/placeholder-image-icon-7.png"
+      end
+
+      @response << {
+          id: post.id,
+          title: post.title,
+          user: post.user_id,
+          price_low: post.price_low,
+          price_high: post.price_high,
+          description: post.content,
+          latitude: post.latitude,
+          longitude: post.longitude,
+          upload_image: upload_image_url,
+          view_link: url_for(post)
+      }
+    end
+
+    render :json => @response
+  end
+
   def create
     # POST only. /buy_posts
     buy_post = BuyPost.create!(buy_post_params use_current_user: true)

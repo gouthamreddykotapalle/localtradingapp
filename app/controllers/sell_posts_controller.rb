@@ -36,8 +36,6 @@ class SellPostsController < ApplicationController
     end
 
     render :json => @response
-
-    # render json: @sell_posts, include: :upload_image
   end
 
   def create
