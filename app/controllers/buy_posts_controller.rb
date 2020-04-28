@@ -35,7 +35,7 @@ class BuyPostsController < ApplicationController
       }
     end
 
-    sleep(1)
+    sleep 1
 
     render json: @response
   end
