@@ -35,7 +35,9 @@ class BuyPostsController < ApplicationController
       }
     end
 
-    render :json => @response
+    sleep(1)
+
+    render json: @response
   end
 
   def create
