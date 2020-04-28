@@ -35,6 +35,8 @@ class SellPostsController < ApplicationController
       }
     end
 
+    sleep 1
+
     render :json => @response
   end
 
