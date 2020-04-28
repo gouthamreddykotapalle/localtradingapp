@@ -1,12 +1,11 @@
 = content_for :page_js do
   :javascript
-    let map;
-    function populateSellPostsList(sell_posts) {
-      console.log('populating sell posts list');
+    function populateSellPostsList(map, sell_posts) {
+      console.log('populateSellPostsList() called with ' + sell_posts.length + ' sell posts');
+
       $("#sellposts-maplist").empty();
 
       for (let i = 0; i < sell_posts.length; i++) {
-        console.log(sell_posts[i].title);
         $("#sellposts-maplist").append(`
           <div>
             <div class="lta-card">
@@ -27,8 +26,8 @@
         `);
       }
     }
-    function populateMarkers(sell_posts) {
-      console.log('populating markers');
+    function populateMarkers(map, sell_posts) {
+      console.log('populateMarkers() called with ' + sell_posts.length + ' sell posts');
       let locations = [];
       let markers = [];
       for (let i = 0; i < sell_posts.length; i++) {
@@ -43,34 +42,34 @@
         })
         markers.push(marker);
       }
-      console.log('locations:', locations, 'markers:', markers);
-    }
-    function init_markers() {
-      console.log('init_markers() called');
-      Rails.ajax({
-        type: "GET",
-        url: '/sell_posts/map/all', // TODO: proper api conventions
-        data: '',
-        success: function(data) {
-          console.log('success for getting all sell posts ' + data);
-          populateSellPostsList(data);
-          populateMarkers(data);
-        },
-        error: function(error) {
-          console.log('there was an error', error);
-        }
-      });
+      // console.log('locations:', locations, 'markers:', markers);
     }
     function initMap(element, lat, lng) {
+      let map;
+      console.log('initMap() called')
       let myCoords = new google.maps.LatLng(lat, lng);
       let mapOptions = {
           center: myCoords,
           zoom: 8
       };
       map = new google.maps.Map(element, mapOptions);
-      init_markers(map);
+      // init_markers(map);
+      Rails.ajax({
+        type: "GET",
+        url: '/sell_posts/map/all', // TODO: proper api conventions
+        data: '',
+        success: function(data) {
+          console.log('Success getting sell posts. Total returned from AJAX query: ' + data.length);
+          populateMarkers(map, data);
+          populateSellPostsList(map, data);
+        },
+        error: function(error) {
+          console.log('there was an error', error);
+        }
+      });
     }
 
+-# First row: Navbar
 = render 'partials/navbar'
 
 -# Next row: Grayish title section
@@ -81,15 +80,16 @@
       %span.lta-text-green
         selling
 
--# Next row: Interactive Google maps search
+-# Next row: Interactive Google maps search element
 .uk-section.uk-padding-remove
   %div{:class => "", "uk-grid" => ""}
 
     -# Left half: Google map
-    %div{:style => "", :class => "uk-width-1-2 uk-flex uk-flex-middle uk-flex-center", "uk-height-viewport" => "expand: true"}
+    %div{:style => "", :class => "uk-width-1-2", "uk-height-viewport" => "expand: true"}
       %div{:id => "gmap", :style => "width:100%; height:100%;"}
         :javascript
           initMap(document.getElementById('gmap'), "#{@geo_results_from_ip.first.coordinates.first}", "#{@geo_results_from_ip.first.coordinates.second}");
+
 
     -# Right half: Filtering and results in Card form
     %div{:style => "", :class => "uk-width-1-2 uk-padding-remove"}
