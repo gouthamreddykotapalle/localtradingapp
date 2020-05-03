@@ -251,7 +251,7 @@
     %div{:style => "", :class => "uk-width-1-2", "uk-height-viewport" => "expand: true"}
       %div{:id => "gmap", :style => "width:100%; height:100%;"}
         :javascript
-          initMap(document.getElementById('gmap'), "#{@geo_results_from_ip.first.coordinates.first}", "#{@geo_results_from_ip.first.coordinates.second}");
+          initMap(document.getElementById('gmap'), "#{@user_coordinates.first}", "#{@user_coordinates.second}");
 
 
     -# Right half: Filtering and results in Card form

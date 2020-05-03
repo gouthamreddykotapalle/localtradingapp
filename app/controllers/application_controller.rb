@@ -14,9 +14,12 @@ class ApplicationController < ActionController::Base
   end
 
   def geolocate
-    Rails.logger.debug "[DEBUG] ApplicationController#geolocate: Client IP address is #{request.remote_ip.to_s}"
-    @request = request
-    @geo_results_from_ip = Geocoder.search(@request.remote_ip.to_s)
-    logger.debug "Test " + @geo_results_from_ip.first.coordinates.to_s
+    @user_coordinates = Geocoder.search(request.remote_ip.to_s).first.coordinates
+
+    if @user_coordinates.empty?  # localhost
+      @user_coordinates = [40.7209, -74.0007]  # Wall St
+    end
+
+    Rails.logger.debug "[DEBUG] User Coords: #{@user_coordinates}"
   end
 end
