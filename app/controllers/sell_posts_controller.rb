@@ -12,7 +12,32 @@ class SellPostsController < ApplicationController
 
   def map_all
     @sell_posts = SellPost.all
-    render json: @sell_posts
+
+    @response = []
+    @sell_posts.each do |post|
+
+      if post.upload_image.attached?
+        upload_image_url = url_for(post.upload_image)
+      else
+        upload_image_url = "https://theacres.com/wp-content/uploads/2015/07/placeholder-image-icon-7.png"
+      end
+
+      @response << {
+          id: post.id,
+          title: post.title,
+          user: post.user_id,
+          price: post.price,
+          bargain_allowed: post.bargain_allowed,
+          latitude: post.latitude,
+          longitude: post.longitude,
+          upload_image: upload_image_url,
+          view_link: url_for(post)
+      }
+    end
+
+    sleep 1
+
+    render :json => @response
   end
 
   def create

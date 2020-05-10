@@ -1,34 +1,39 @@
-.container
-  %h1#heading1 Create new template
+= content_for :page_js do
+  :javascript
 
-  = form_tag templates_path, :method => "post" do
-    .card
-      .card-body
+= render 'partials/navbar'
 
-        .form-group
-          = label "template", "category", "Category"
-          = text_field "template", "category", class: 'form-control'
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 Create new template
 
-        .form-group
-          = label "template", "post_type", 'Post Type'
-          = radio_button "template", "post_type", "buy"
-          Buy &nbsp &nbsp
-          = radio_button "template", "post_type", "sell"
-          Sell
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+    = form_tag templates_path, :method => "post" do
 
-        .form-group
-          = label "template", "column_id", 'Column ID'
-          = text_field "template", "column_id", class: 'form-control'
+      = label "template", "category", "Category"
+      = text_field "template", "category", class: 'form-control'
+      %br
 
-        .form-group
-          = label "template", "column_name", 'Column Name'
-          = text_field "template", "column_name", class: 'form-control'
+      = label "template", "post_type", 'Post Type'
+      = radio_button "template", "post_type", "buy"
+      Buy &nbsp &nbsp
+      = radio_button "template", "post_type", "sell"
+      Sell
+      %br
 
-        .form-group
-          = label "template", "datatype", 'Datatype'
-          = text_field "template", "datatype", class: 'form-control'
+      = label "template", "column_id", 'Column ID'
+      = text_field "template", "column_id", class: 'form-control'
+      %br
 
-        .form-group
-          = submit_tag 'Create', class: 'btn btn-primary btn-lg btn-block'
+      = label "template", "column_name", 'Column Name'
+      = text_field "template", "column_name", class: 'form-control'
+      %br
 
+      = label "template", "datatype", 'Datatype'
+      = text_field "template", "datatype", class: 'form-control'
+      %br
 
+      = submit_tag 'Create', class: 'btn btn-primary btn-lg btn-block'
+
+= render 'partials/footer'

@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   # get '/users/login' => 'users#login' #login view rendered
   # post '/users/login', to: 'sessions#create'
 
-
   # post '/sessions' => 'sessions#create'
   #
   # get '/dashboard' => 'users#show'
@@ -38,7 +37,9 @@ Rails.application.routes.draw do
   get '/buy_posts/detail_form', to: 'buy_posts#detail_form'
   get '/sell_posts/detail_form', to: 'sell_posts#detail_form'
 
+  # these return JSON - these are an API to retrieve a list of all buy/sell posts
   get '/sell_posts/map/all', to: 'sell_posts#map_all'
+  get '/buy_posts/map/all', to: 'buy_posts#map_all'
 
   resources :users
   resources :sell_posts

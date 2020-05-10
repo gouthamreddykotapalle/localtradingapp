@@ -1,17 +1,48 @@
-.container
-  .row
-    .col-12
-      %h1#the-question What would you like to do?
-  .row
-    .col-3
-    .col-2.text-center
-      = link_to 'Buy', { :controller => 'buy_posts', :action => 'new' }, :class => 'btn btn-primary btn-lg btn-block', :id => 'big-buy-button'
-    .col-2
-    .col-2.text-center
-      = link_to 'Sell', { :controller => 'sell_posts', :action => 'new' }, :class => 'btn btn-success btn-lg btn-block', :id => 'big-sell-button'
-    .col-3
-  .row#homepage-map
-    .col-3
-    .col-6
-      %img(src="https://coxauto.com.au/wp-content/uploads/2019/07/Map-Placeholder@2x.jpg" class="img-fluid")
-    .col-3
+= render 'partials/navbar'
+
+%div{:class => "uk-section uk-section-primary"}
+  .uk-container
+    %div{"uk-grid" => "", :class => "uk-grid-collapse uk-child-width-expand@s uk-margin-large-top"}
+
+      -# LEFT COLUMN
+      %div
+
+        -# NESTED GRID IN LEFT COLUMN. EACH CHILD IS A ROW
+        %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
+
+          -# FIRST ROW: BIG SPLASH TEXT
+          %div
+            %h1.uk-heading-large#ns-splash-main-text
+              An app for local trades
+
+          -# SECOND ROW: SLOGAN
+          %div
+            %p
+              Buy or sell anything with anyone in your local area
+
+          -# THIRD ROW: BUTTONS
+          %div
+
+            -# NESTED GRID IN ROW
+            %div{:class => "uk-child-width-1-1@s uk-child-width-1-2@m", "uk-grid" => ""}
+
+              -# FIRST COLUMN
+              %div
+                %a{:id => "ns-btn-sell-something", :class => "uk-button uk-button-default uk-button-large uk-width-1-1", :href => "#{new_sell_post_path}"}
+                  Sell something
+
+              -# SECOND COLUMN
+              %div
+                %a{:id => "ns-btn-buy-something", :class => "uk-button uk-button-default uk-button-large uk-width-1-1", :href => "#{new_buy_post_path}"}
+                  Buy something
+
+      -# RIGHT COLUMN
+      %div.uk-text-center
+        %img{"data-src" => "#{image_path 'splashimg.png'}", :width => "", :height => "", :alt => "splash image", "uk-img" => ""}
+
+%div{:class => "uk-section", "uk-height-viewport" => "expand: true"}
+  .uk-container.uk-text-center
+    %p
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non turpis eu ligula aliquet vehicula. Curabitur vitae pretium tortor. Curabitur quis justo in sapien faucibus elementum eu ac lacus.
+
+= render 'partials/footer'

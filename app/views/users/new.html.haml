@@ -1,27 +1,87 @@
-.container
-  %h1#heading1 Register account
+= render 'partials/navbar'
 
-  = form_tag users_path do
+%div{:class => "uk-section uk-section-primary", "uk-height-viewport" => "offset-top: true"}
+  .uk-container.uk-container-xsmall.lta-modal
+    .uk-section.lta-modal-section
+      .uk-container.uk-text-center
+        %h1.uk-heading-medium Register
+    .uk-section.lta-modal-section
+      .uk-container
+        = form_tag users_path, method: :post do
+          %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
 
-    .card
-      .card-body
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-user
+                %div.uk-width-1-1
+                  = text_field :users, 'first_name', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "First name"
 
-        .form-group
-          = label :users, :first_name, 'First name'
-          = text_field :users, 'first_name', class: 'form-control'
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-user
+                %div.uk-width-1-1
+                  = text_field :users, 'last_name', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Last name"
 
-        .form-group
-          = label :users, :last_name, 'Last name'
-          = text_field :users, 'last_name', class: 'form-control'
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-at
+                %div.uk-width-1-1
+                  = email_field :users, 'email', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Email"
 
-        .form-group
-          = label :users, :email, 'Email'
-          = email_field :users, 'email', class: 'form-control'
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-key
+                %div.uk-width-1-1
+                  = password_field :users, 'password', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Password"
 
-        .form-group
-          = label :users, :password, 'Password'
-          = password_field :users, 'password', class: 'form-control'
-          %small(id="passwordHelp" class="form-text text-muted") Enter a secure password
+            %div
+              = submit_tag 'Register', class: 'uk-button uk-button-primary lta-button-large uk-width-1-1'
 
-        .form-group
-          = submit_tag 'Register', class: 'btn btn-primary btn-lg btn-block'
+            %div
+              %div{:class => "lta-alert-secondary-container uk-padding-small", "uk-grid" => ""}
+                %div.lta-alert-secondary-icon.uk-flex-left.uk-flex-center.uk-width-1-6
+                  %i.fas.fa-info-circle
+                %div.lta-alert-secondary-message.uk-width-5-6
+                  You will need to verify your email address to use specific features.
+
+
+            -#%div
+            -#  %div{:class => "uk-child-width-1-2@s", "uk-grid" => ""}
+            -#    %div
+            -#      = submit_tag 'Login', class: 'uk-button uk-button-primary lta-button-large uk-width-1-1'
+            -#    %div
+            -#      %a.uk-button.uk-button-secondary.lta-button-large.uk-width-1-1
+            -#        Forgot password?
+
+= render 'partials/footer'
+-#.container
+-#  %h1#heading1 Register account
+-#
+-#  = form_tag users_path do
+-#
+-#    .card
+-#      .card-body
+-#
+-#        .form-group
+-#          = label :users, :first_name, 'First name'
+-#          = text_field :users, 'first_name', class: 'form-control'
+-#
+-#        .form-group
+-#          = label :users, :last_name, 'Last name'
+-#          = text_field :users, 'last_name', class: 'form-control'
+-#
+-#        .form-group
+-#          = label :users, :email, 'Email'
+-#          = email_field :users, 'email', class: 'form-control'
+-#
+-#        .form-group
+-#          = label :users, :password, 'Password'
+-#          = password_field :users, 'password', class: 'form-control'
+-#          %small(id="passwordHelp" class="form-text text-muted") Enter a secure password
+-#
+-#        .form-group
+-#          = submit_tag 'Register', class: 'btn btn-primary btn-lg btn-block'

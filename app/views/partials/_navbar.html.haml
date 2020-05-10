@@ -1,0 +1,71 @@
+%div{:class => "uk-hidden@l"}
+  %nav{:class => "uk-navbar-container theme-navbar-dark", "uk-navbar" => "mode:click"}
+    .uk-navbar-left
+      = link_to ApplicationController::APP_NAME, { :controller => 'static_page', action: 'home' }, :class => 'uk-navbar-item uk-logo'
+
+    .uk-navbar-center
+
+    .uk-navbar-right
+      %ul.uk-navbar-nav
+        %li
+          %a{:href => "", :class => "uk-navbar-toggle", "uk-navbar-toggle-icon" => ""}
+          %div{:class => "uk-navbar-dropdown"}
+            %ul.uk-nav.uk-navbar-dropdown-nav
+              %li.uk-nav-header Browse
+              %li
+                %a{:href => "#{sell_posts_path}"} Sell Posts
+              %li
+                %a{:href => "#{buy_posts_path}"} Buy Posts
+              %li
+                %a{:href => "#{templates_path}"} Templates
+              %li.uk-nav-header Account
+
+              - if @current_user
+                %li
+                  = link_to 'View my account', { :controller => 'users' }
+                %li
+                  = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }
+              - else
+                %li
+                  = link_to 'Register', { :controller => 'users', :action => 'new' }
+                %li
+                  = link_to 'Login', { :controller => 'users', :action => 'login' }
+
+%div{:class => "uk-visible@l"}
+  %nav{:class => "uk-navbar-container theme-navbar-dark", "uk-navbar" => ""}
+    .uk-navbar-left
+      = link_to ApplicationController::APP_NAME, { :controller => 'static_page', action: 'home' }, :class => 'uk-navbar-item uk-logo'
+
+    .uk-navbar-center
+
+    .uk-navbar-right
+      %ul.uk-navbar-nav
+        %li
+          -#%a
+          -#  Browse
+          -#%div{"uk-dropdown" => "pos: bottom-justify"}
+          -#  %ul.uk-nav.uk-dropdown-nav
+          -#    %li
+          -#      = link_to "For sale", { :controller => 'sell_posts' }, :class => ""
+          -#    %li
+          -#      = link_to "For request", { :controller => 'buy_posts' }, :class => ""
+
+        %li
+          %a{:href => "#{sell_posts_path}"} Sell Posts
+        %li
+          %a{:href => "#{buy_posts_path}"} Buy Posts
+        %li
+          %a{:href => "#{templates_path}"} Templates
+
+        - if @current_user
+          %li
+            = link_to 'Account', { :controller => 'users' }
+            %div{"uk-dropdown" => "pos: bottom-justify"}
+              %ul.uk-nav.uk-dropdown-nav
+                %li
+                  = link_to 'Logout', { :controller => 'sessions', :action => 'destroy' }
+        - else
+          %li
+            = link_to 'Register', { :controller => 'users', :action => 'new' }
+          %li
+            = link_to 'Login', { :controller => 'users', :action => 'login' }

@@ -1,18 +1,53 @@
-.container
-  %h1#heading1 Login
-  = form_tag login_path, method: :post do
-    .card
-      .card-body
-        .form-group
-          = label :login_info, :email, 'Email'
-          = email_field :login_info, 'email', class: 'form-control'
+= render 'partials/navbar'
 
-        .form-group
-          = label :login_info, :password, 'Password'
-          = password_field :login_info, 'password', class: 'form-control'
+%div{:class => "uk-section uk-section-primary", "uk-height-viewport" => "offset-top: true"}
+  .uk-container.uk-container-xsmall.lta-modal
+    .uk-section.lta-modal-section
+      .uk-container.uk-text-center
+        %h1.uk-heading-medium Login
+    .uk-section.lta-modal-section
+      .uk-container
+        = form_tag login_path, method: :post do
+          %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-at
+                %div.uk-width-1-1
+                  = email_field :login_info, 'email', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Email"
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-key
+                %div.uk-width-1-1
+                  = password_field :login_info, 'password', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Password"
+            %div
+              %div{:class => "uk-child-width-1-2@s", "uk-grid" => ""}
+                %div
+                  = submit_tag 'Login', class: 'uk-button uk-button-primary lta-button-large uk-width-1-1'
+                %div
+                  %a.uk-button.uk-button-secondary.lta-button-large.uk-width-1-1
+                    Forgot password?
+                  -# = link_to 'Forgot password?', { :controller => 'users', :action => 'new' }, class: "uk-button uk-button-secondary lta-button-large uk-width-1-1"
 
-        .form-group
-          = submit_tag 'Login', class: 'btn btn-primary btn-lg btn-block'
 
-        .form-group
-          = link_to 'Register', { :controller => 'users', :action => 'new' }, :id => 'register-button-at-login', :class => 'btn btn-secondary btn-block btn-md'
+= render 'partials/footer'
+
+-#.container
+-#  %h1#heading1 Login
+-#  = form_tag login_path, method: :post do
+-#    .card
+-#      .card-body
+-#        .form-group
+-#          = label :login_info, :email, 'Email'
+-#          = email_field :login_info, 'email', class: 'form-control'
+-#
+-#        .form-group
+-#          = label :login_info, :password, 'Password'
+-#          = password_field :login_info, 'password', class: 'form-control'
+-#
+-#        .form-group
+-#          = submit_tag 'Login', class: 'btn btn-primary btn-lg btn-block'
+-#
+-#        .form-group
+-#          = link_to 'Register', { :controller => 'users', :action => 'new' }, :id => 'register-button-at-login', :class => 'btn btn-secondary btn-block btn-md'

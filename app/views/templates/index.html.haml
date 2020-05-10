@@ -1,19 +1,27 @@
-.container
-  %h1#heading1 Templates
+= content_for :page_js do
+  :javascript
 
-  %table#templates.table.table-striped.col-md-12
-    %thead
-      %tr
-        - @columns.each do |column|
-          %th= column[:name]
-        %th
+= render 'partials/navbar'
 
-    %tbody
-      - @templates.each do |template|
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 Templates
+
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+    = button_to 'Create new template', new_template_path, method: "get"
+    %table.uk-table
+      %thead
         %tr
           - @columns.each do |column|
-            %td= template.send column[:id]
-          %td= link_to "View", template_path(template.id)
+            %th= column[:name]
+          %th
 
+      %tbody
+        - @templates.each do |template|
+          %tr
+            - @columns.each do |column|
+              %td= template.send column[:id]
+            %td= link_to "View", template_path(template.id)
 
-  = button_to 'Create new template', new_template_path, method: "get"
+= render 'partials/footer'

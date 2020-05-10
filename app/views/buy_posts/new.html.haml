@@ -1,40 +1,217 @@
-.container
-  %h1#heading1 Post Your Request
+= content_for :page_js do
+  :javascript
+    $(document).ready(function() {
+      // obtain lat and long, then fill in inputs automatically
+      let lat = $("#buy_post_latitude");
+      let lng = $("#buy_post_longitude");
+      function getLocation() {
+        console.log('getLocation called');
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          lat.val("Geolocation not supported. Enter manually");
+          lng.val("Geolocation not supported. Enter manually");
+        }
+      }
+      function showPosition(position) {
+        console.log('showPosition called', position.coords.latitude, position.coords.longitude);
+        lat.val(position.coords.latitude);
+        lng.val(position.coords.longitude);
+      }
+      getLocation();
+    });
 
-  = form_tag buy_posts_path, :method => "post", multipart: true do
+= render 'partials/navbar'
 
-    .card
-      .card-body
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 Post your request
 
-        .form-group
-          = label :buy_post, :title, 'Title'
-          = text_field :buy_post, :title, class: 'form-control'
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
 
-        .form-group
-          = label :buy_post, :category, "Category"
-          = text_field :buy_post, :category, class: 'form-control'
-          = link_to 'Create a new template', new_template_path
+    = form_tag buy_posts_path, :method => "post", multipart: true do
 
-        .form-group
-          = label :buy_post, :price, 'Price Range'
-          %br
-          = number_field :buy_post, :price_low, step: 0.01
-          %b ~
-          = number_field :buy_post, :price_high, step: 0.01
+      %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
 
-        .form-group
-          = label :buy_post, :content, 'Content'
-          = text_field :buy_post, :content, class: 'form-control'
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Title
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1
+              = text_field :buy_post, :title, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-        %div{:id => "post_detail"}
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Category
+            %a{:href => new_template_path}
+              %i.fas.fa-external-link-alt.uk-text-small
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1
+              = text_field :buy_post, :category, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-        .form-group
-          = label :buy_post, :upload_image, 'Upload_Image'
-          = file_field :buy_post, :upload_image, class: 'form-control-file'
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Price Low
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1
+              = text_field :buy_post, :price_low, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
-        .form-group
-          = submit_tag 'Post Your Request!', class: 'btn btn-primary btn-lg btn-block'
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Price High
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1
+              = text_field :buy_post, :price_high, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
 
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Location
+        %div.uk-width-2-3
+          .uk-flex
+            %div
+              = text_field :buy_post, :latitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+            %div
+              = text_field :buy_post, :longitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Description
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1.uk-text-right
+              = text_area :buy_post, :content, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', style: "height:200px;", placeholder: ""
+
+        %div.uk-width-1-3.uk-flex.uk-flex-middle
+          %span.lta-form-label
+            Image
+        %div.uk-width-2-3
+          .uk-flex
+            %div.uk-width-1-1.js-upload.uk-placeholder.uk-text-center
+              %i.fas.fa-cloud-upload-alt
+              %div{"uk-form-custom" => ""}
+                = file_field :buy_post, :upload_image, class: '', style: "", placeholder: ""
+                %span.uk-link
+                  Upload
+              %span.uk-text-middle
+                an image
+
+        %div{:id => "post_detail", :class => "uk-width-3-3"}
+
+      -# = label :sell_post, :upload_image, 'Upload_Image'
+      -# = file_field :sell_post, :upload_image, class: 'form-control-file'
+      -# %br
+
+      = submit_tag 'Post!', class: 'uk-button uk-button-primary lta-button-large uk-width-1-1'
+
+
+-#%div{:class => "uk-section"}
+-#  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+-#
+-#    = form_tag buy_posts_path, :method => "post", multipart: true do
+-#
+-#      %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
+-#
+-#        %div.uk-width-1-3.uk-flex.uk-flex-middle
+-#          %span.lta-form-label
+-#            Title
+-#          %div.uk-width-2-3
+-#            .uk-flex
+-#              %div.uk-width-1-1
+-#                = text_field :buy_post, :title, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+-#
+-#        %div.uk-width-1-3.uk-flex.uk-flex-middle
+-#          %span.lta-form-label
+-#            Category
+-#            %a{:href => new_template_path}
+-#              %i.fas.fa-external-link-alt.uk-text-small
+-#        %div.uk-width-2-3
+-#          .uk-flex
+-#            %div.uk-width-1-1
+-#              = text_field :buy_post, :category, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+-#
+-#        %div.uk-width-1-3.uk-flex.uk-flex-middle
+-#          %span.lta-form-label
+-#            Price Low
+-#        %div.uk-width-2-3
+-#          .uk-flex
+-#            %div.uk-width-1-1
+-#              = number_field :buy_post, :price_low, step: 1.0
+-#
+-#        %div.uk-width-1-3.uk-flex.uk-flex-middle
+-#          %span.lta-form-label
+-#            Price High
+-#        %div.uk-width-2-3
+-#          .uk-flex
+-#            %div.uk-width-1-1
+-#              = number_field :buy_post, :price_high, step: 1.0
+-#
+-#      -# = label :buy_post, :category, "Category"
+-#      -# = text_field :buy_post, :category, class: 'form-control'
+-#      -# = link_to 'Create a new template', new_template_path
+-#      -# %br
+-#
+-#      -# = label :buy_post, :price, 'Price Range'
+-#      -# %br
+-#      -# = number_field :buy_post, :price_low, step: 0.01
+-#      -# %b ~
+-#      -# = number_field :buy_post, :price_high, step: 0.01
+-#      -# %br
+-#
+-#      %div.uk-width-1-3.uk-flex.uk-flex-middle
+-#        %span.lta-form-label
+-#          Location
+-#        %div.uk-width-2-3
+-#          .uk-flex
+-#            %div
+-#              = text_field :buy_post, :latitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+-#            %div
+-#              = text_field :buy_post, :longitude, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', placeholder: ""
+-#
+-#
+-#        %div.uk-width-1-3.uk-flex.uk-flex-middle
+-#          %span.lta-form-label
+-#            Description
+-#        %div.uk-width-2-3
+-#          .uk-flex
+-#            %div.uk-width-1-1.uk-text-right
+-#              = text_area :buy_post, :content, class: 'lta-form-input lta-form-large lta-input-round uk-width-1-1', style: "height:200px;", placeholder: ""
+-#
+-#
+-#
+-#      -# = label :buy_post, :content, 'Content'
+-#      -# = text_field :buy_post, :content, class: 'form-control'
+-#      -# %br
+-#
+-#        %div{:id => "post_detail"}
+-#        %br
+-#
+-#
+-#        %div.uk-width-1-3.uk-flex.uk-flex-middle
+-#          %span.lta-form-label
+-#            Image
+-#        %div.uk-width-2-3
+-#          .uk-flex
+-#            %div.uk-width-1-1.js-upload.uk-placeholder.uk-text-center
+-#              %i.fas.fa-cloud-upload-alt
+-#              %div{"uk-form-custom" => ""}
+-#                = file_field :buy_post, :upload_image, class: '', style: "", placeholder: ""
+-#                %span.uk-link
+-#                  Upload
+-#              %span.uk-text-middle
+-#                an image
+-#
+-#      -# = label :buy_post, :upload_image, 'Upload_Image'
+-#      -# = file_field :buy_post, :upload_image, class: 'form-control-file'
+-#      -# %br
+-#
+-#      = submit_tag 'Post!', class: 'uk-button uk-button-primary lta-button-large uk-width-1-1'
+
+= render 'partials/footer'
 
 :javascript
   $('input#buy_post_category').on('change', function(event) {

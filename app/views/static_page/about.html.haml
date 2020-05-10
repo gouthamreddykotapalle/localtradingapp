@@ -1,22 +1,55 @@
-.container
-  %h1 About us
-  %p Meet the team:
-  %table.table.table-borderless
-    %thead
-      %tr
-        %th(scope="col") Name
-        %th(scope="col") Website
-    %tbody
-      %tr
-        %td Nathan Smalley
-        %td
-          %a(href="https://github.com/nasmal/" ) https://github.com/nasmal/
+= render 'partials/navbar'
 
-      %tr
-        %td Goutham Reddy Kotapalle
-        %td
-          %a(href="https://github.com/Gouthamkreddy1234" ) https://github.com/Gouthamkreddy1234
-      %tr
-        %td Mingen Pan
-        %td
-          %a(href="https://github.com/mingen-pan" ) https://github.com/mingen-pan
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 About
+
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+    %table.uk-table
+      %thead
+        %tr
+          %th Name
+          %th Website
+      %tbody
+        %tr
+          %td Nathan Smalley
+          %td https://github.com/nasmal/
+        %tr
+          %td Goutham Reddy Kotapalle
+          %td https://github.com/Gouthamkreddy1234
+        %tr
+          %td Mingen Pan
+          %td https://github.com/mingen-pan
+
+    -#%hr
+    -#%p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lacinia, lacus quis convallis imperdiet, massa enim porttitor diam, eu accumsan ante neque non mi. Integer fermentum turpis sem, non venenatis nisi vulputate eget. Pellentesque quis sapien sit amet lorem pretium lobortis id tempus dui. Nunc euismod, ligula a imperdiet pellentesque, arcu odio euismod urna, sed dictum libero felis in tellus. Fusce ante eros, cursus ac nulla sit amet, volutpat dictum metus. Etiam et dignissim nulla. Nullam semper venenatis scelerisque. Aenean porttitor vel massa a tempus. Fusce scelerisque magna at nisi luctus luctus. Etiam venenatis egestas rhoncus. Ut mauris ex, suscipit sit amet bibendum sit amet, interdum quis ante. Etiam dictum consequat nulla. Ut hendrerit imperdiet auctor.
+    -#%p Nunc tempor leo ac odio ultricies, ac tempus quam rutrum. Vestibulum orci massa, pellentesque nec risus et, tincidunt egestas lorem. Maecenas sit amet nisi eu nulla eleifend cursus. Proin vel lobortis leo. Curabitur sit amet fringilla neque. Aliquam erat volutpat. Aliquam sed varius ipsum, id luctus ante. Quisque faucibus fringilla aliquet. In scelerisque aliquam nisl, quis egestas augue accumsan nec. In in tincidunt purus. Aliquam convallis sollicitudin diam consectetur varius.
+    -#%p Morbi molestie, erat tristique sodales congue, urna felis maximus ante, nec pretium libero urna eget mauris. Nulla luctus eros at augue euismod, in luctus nibh suscipit. Duis non augue leo. Vivamus eget eros suscipit, eleifend magna quis, imperdiet erat. Donec id mauris magna. Etiam a ligula vel justo lobortis cursus non vitae sem. Integer iaculis sapien vitae elementum commodo. Pellentesque placerat hendrerit nibh ut porttitor. Vestibulum eu tincidunt dolor, dignissim interdum lorem. Proin ullamcorper suscipit iaculis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate velit ex. Integer porttitor facilisis mi, nec lobortis velit mattis quis. Nam vestibulum semper ipsum ut posuere. Nulla congue non diam ac fermentum. Mauris tincidunt tortor dui, a ultrices dui suscipit id.
+    -#%p In hac habitasse platea dictumst. Pellentesque faucibus vel eros imperdiet convallis. Mauris quis rhoncus mauris, ut aliquam lacus. Curabitur nec viverra nibh. Vivamus et orci posuere, venenatis purus a, iaculis diam. Curabitur dignissim consequat leo ut sodales. Proin pharetra, felis et interdum pretium, quam nunc posuere nisi, non laoreet urna odio id purus. Sed posuere, mauris at molestie tristique, massa tortor hendrerit erat, nec ullamcorper quam ligula vel ligula. Sed euismod interdum tincidunt. Nulla facilisi. Donec sagittis interdum posuere. Aliquam dictum non elit viverra aliquet.
+    -#%p Sed vestibulum mattis eros eget ullamcorper. Vestibulum lobortis lectus interdum turpis fermentum consectetur quis id nibh. Morbi eleifend tortor ac tortor dictum elementum et vel neque. Sed augue odio, dignissim id dolor non, mollis venenatis lectus. Nunc justo neque, congue vitae enim et, pretium rutrum elit. Mauris sit amet tellus ut purus blandit commodo. Sed tincidunt hendrerit placerat. Integer venenatis, orci congue sollicitudin scelerisque, mi nulla euismod risus, ut vulputate mi metus non diam. Vivamus sit amet leo ante. Nullam non turpis maximus, tempus leo in, placerat mi. Etiam quis nulla turpis. Proin ornare tempor efficitur. Duis augue nunc, convallis vel nisi vitae, hendrerit placerat nunc.
+
+= render 'partials/footer'
+
+-#.container
+-#  %h1 About us
+-#  %p Meet the team:
+-#  %table.table.table-borderless
+-#    %thead
+-#      %tr
+-#        %th(scope="col") Name
+-#        %th(scope="col") Website
+-#    %tbody
+-#      %tr
+-#        %td Nathan Smalley
+-#        %td
+-#          %a(href="https://github.com/nasmal/" ) https://github.com/nasmal/
+-#
+-#      %tr
+-#        %td Goutham Reddy Kotapalle
+-#        %td
+-#          %a(href="https://github.com/Gouthamkreddy1234" ) https://github.com/Gouthamkreddy1234
+-#      %tr
+-#        %td Mingen Pan
+-#        %td
+-#          %a(href="https://github.com/mingen-pan" ) https://github.com/mingen-pan

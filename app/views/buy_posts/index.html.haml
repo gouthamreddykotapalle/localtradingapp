@@ -1,41 +1,326 @@
-.container
-  %h1#heading1 Item Requests Nearby You
+= content_for :page_js do
+  :javascript
+    function populateBuyPostsList(map, buy_posts) {
+      console.log('populateBuyPostsList() called with ' + buy_posts.length + ' sell posts');
 
-  = form_tag buy_posts_path, :id => :category_form, :method => :get do
-    Categories:
-    - @all_categories.each do |category|
-      -if category != nil
-        = category
-        = check_box_tag "categories[#{category}]", 1, session[:categories].include?(category)
-      - else
-        Uncategorized
-        = check_box_tag "categories[nil]", 1, session[:categories].include?(category)
-    = submit_tag 'Refresh'
+      $("#buyposts-maplist").empty();
+
+      for (let i = 0; i < buy_posts.length; i++) {
+        console.log(buy_posts[i].title);
+        $("#buyposts-maplist").append(`
+          <div>
+            <div class="lta-card">
+              <div class="lta-card-img-holder uk-flex uk-flex-center uk-flex-middle">
+                <a href="${buy_posts[i].view_link}">
+                  <img src="${buy_posts[i].upload_image}" alt="Image for ${buy_posts[i].title}" class="lta-card-img">
+                </a>
+              </div>
+
+              <div class="lta-card-body">
+                <a href="${buy_posts[i].view_link}" class="lta-card-title">${buy_posts[i].title}</a>
+                <div class="lta-card-price-container uk-text-right">
+                  <i class="fas fa-dollar-sign lta-card-buy-dollar"></i> &nbsp;&nbsp; ${buy_posts[i].price_low}&nbsp;&nbsp;-&nbsp;&nbsp;${buy_posts[i].price_high}
+                </div>
+              </div>
+            </div>
+          </div>
+        `);
+      }
+    }
+    function populateMarkers(map, buy_posts) {
+      console.log('populateMarkers() called with ' + buy_posts.length + ' sell posts');
+      let locations = [];
+      let markers = [];
+      for (let i = 0; i < buy_posts.length; i++) {
+        let latlong = {lat: parseFloat(buy_posts[i].latitude), lng: parseFloat(buy_posts[i].longitude)};
+        locations.push(latlong);
+        let marker = new google.maps.Marker({position: latlong, map: map});
+        let infoWindow = new google.maps.InfoWindow({
+          content: `<b>${buy_posts[i].title}</b><br>By ${buy_posts[i].user}<br><img src="${buy_posts[i].upload_image}", style="width:50px;height:50px;" alt="NO IMG"/>`
+        });
+        marker.addListener('click', function () {
+          infoWindow.open(map, marker);
+        })
+        markers.push(marker);
+      }
+      // console.log('locations:', locations, 'markers:', markers);
+    }
+    function initMap(element, lat, lng) {
+      console.log('initMap() called')
+      let map;
+      let myCoords = new google.maps.LatLng(lat, lng);
+      let mapOptions = {
+          center: myCoords,
+          zoom: 10,
+          styles: [
+            {
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#f5f5f5"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#bdbdbd"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#ffffff"
+                }
+              ]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#757575"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dadada"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#616161"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e5e5e5"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.station",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#eeeeee"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#c9c9c9"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#2d3a69"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#9e9e9e"
+                }
+              ]
+            }
+          ]
+      };
+      map = new google.maps.Map(element, mapOptions);
+      Rails.ajax({
+        type: "GET",
+        url: '/buy_posts/map/all', // TODO: proper api conventions
+        data: '',
+        success: function(data) {
+          console.log('Success getting buy posts. Total returned from AJAX query: ' + data.length);
+          populateMarkers(map, data);
+          populateBuyPostsList(map, data);
+        },
+        error: function(error) {
+          console.log('there was an error', error);
+        }
+      });
+    }
 
 
-  %table#buy-posts.table.table-striped.col-md-12
-    %thead
-      %tr
-        - @columns.each do |column|
-          - if column[:sort_allowed]
-            - if session[:sorted_key] == column[:id].to_s
-              %th{:class => :hilite}
-                = link_to column[:name], buy_posts_path(:sorted => "nil"), id: column[:id].to_s + "_header"
-            -else
-              %th= link_to column[:name], buy_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
-          - else
-            %th= column[:name]
-    %tbody
-      - @buy_posts.each do |post|
-        %tr
-          - @columns.each do |column|
-            - if column[:id] == :title
-              %td= link_to post.title.presence || "(no title)", buy_post_path(post.id)
-            - elsif column[:name] == :upload_image
-              - if post.upload_image.attached?
-                %td= image_tag(post.upload_image, size: '50x50')
-            - else
-              %td= post.send column[:id]
+
+= render 'partials/navbar'
+
+-# Next row: Grayish title section
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1
+      What people are
+      %span.lta-text-blue
+        buying
 
 
-  = button_to 'Post Your Request', new_buy_post_path, method: "get"
+-# Next row: Interactive Google maps search
+.uk-section.uk-padding-remove
+  %div{:class => "", "uk-grid" => ""}
+
+    -# Left half: Google map
+    %div{:style => "", :class => "uk-width-1-2", "uk-height-viewport" => "expand: true"}
+      %div{:id => "gmap", :style => "width:100%; height:100%;"}
+        :javascript
+          initMap(document.getElementById('gmap'), "#{@user_coordinates.first}", "#{@user_coordinates.second}");
+
+
+    -# Right half: Filtering and results in Card form
+    %div{:style => "", :class => "uk-width-1-2 uk-padding-remove"}
+
+      -# Search and price filtering section
+      .uk-section.uk-padding-small
+        .uk-text-center
+          %div{:class => "uk-child-width-1-1@s", "uk-grid" => ""}
+            %div
+              .uk-flex
+                %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
+                  %i.fas.fa-search.lta-browse-search-icon
+                %div.uk-width-1-1
+                  = text_field :search, 'query', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Search"
+            %div
+              = button_to 'Post a Request', new_buy_post_path, method: "get"
+
+      %hr
+
+      .uk-section.uk-padding-small
+        %div{:id => "", :class => ""}
+
+          %div{:class => "uk-panel uk-panel-scrollable uk-height-1-1", :style => "height:800px;"}
+
+            %div{:id => "buyposts-maplist", :style => "", :class => "uk-grid-small uk-grid-match uk-child-width-1-1@m uk-child-width-1-2@l uk-child-width-1-3@xl", "uk-grid" => ""}
+              %img{:alt => 'Loading', :src => "#{image_path 'loading.gif'}", :style => 'width:200px;height:200px;'}
+
+-#%div{:class => "uk-section"}
+-#  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+-#
+-#    = button_to 'Post Your Request', new_buy_post_path, method: "get"
+-#
+-#    %hr
+-#
+-#    = form_tag buy_posts_path, :id => :category_form, :method => :get do
+-#      Categories:
+-#      - @all_categories.each do |category|
+-#        -if category != nil
+-#          = category
+-#          = check_box_tag "categories[#{category}]", 1, session[:categories].include?(category)
+-#        - else
+-#          Uncategorized
+-#          = check_box_tag "categories[nil]", 1, session[:categories].include?(category)
+-#      = submit_tag 'Refresh'
+-#
+-#
+-#      %table.uk-table
+-#        %thead
+-#          %tr
+-#            - @columns.each do |column|
+-#              - if column[:sort_allowed]
+-#                - if session[:sorted_key] == column[:id].to_s
+-#                  %th{:class => :hilite}
+-#                    = link_to column[:name], buy_posts_path(:sorted => "nil"), id: column[:id].to_s + "_header"
+-#                -else
+-#                  %th= link_to column[:name], buy_posts_path(:sorted => column[:id]), id: column[:id].to_s + "_header"
+-#              - else
+-#                %th= column[:name]
+-#        %tbody
+-#          - @buy_posts.each do |post|
+-#            %tr
+-#              - @columns.each do |column|
+-#                - if column[:id] == :title
+-#                  %td= link_to post.title.presence || "(no title)", buy_post_path(post.id)
+-#                - elsif column[:name] == :upload_image
+-#                  - if post.upload_image.attached?
+-#                    %td= image_tag(post.upload_image, size: '50x50')
+-#                - else
+-#                  %td= post.send column[:id]
+
+= render 'partials/footer'

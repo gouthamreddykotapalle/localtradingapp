@@ -1,38 +1,44 @@
-.container
-  %h1#heading1 Edit your buying request
+= content_for :page_js do
+  :javascript
 
-  = form_tag buy_post_path(@buy_post), :method => :put do
+= render 'partials/navbar'
 
-    .card
-      .card-body
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 Edit your buying request
 
-        .form-group
-          = label :buy_post, :title, 'Title'
-          = text_field :buy_post, :title, class: 'form-control'
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
 
-        .form-group
-          = label :buy_post, :category, "Category"
-          = text_field :buy_post, :category, class: 'form-control'
-          = link_to 'Create a new template', new_template_path
+    = form_tag buy_post_path(@buy_post), :method => :put do
 
-        .form-group
-          = label :buy_post, :price, 'Price Range'
-          %br
-          = number_field :buy_post, :price_low, step: 0.01
-          %b ~
-          = number_field :buy_post, :price_high, step: 0.01
+      = label :buy_post, :title, 'Title'
+      = text_field :buy_post, :title, class: 'form-control'
+      %br
 
-        .form-group
-          = label :buy_post, :content, 'Content'
-          = text_field :buy_post, :content, class: 'form-control'
+      = label :buy_post, :category, "Category"
+      = text_field :buy_post, :category, class: 'form-control'
+      = link_to 'Create a new template', new_template_path
+      %br
 
-        %div{:id => "post_detail"}
-          = render partial:"templates/detail"
+      = label :buy_post, :price, 'Price Range'
+      %br
+      = number_field :buy_post, :price_low, step: 0.01
+      %b ~
+      = number_field :buy_post, :price_high, step: 0.01
+      %br
 
-        .form-group
-          = submit_tag 'Update Your Request!', class: 'btn btn-primary btn-lg btn-block'
+      = label :buy_post, :content, 'Content'
+      = text_field :buy_post, :content, class: 'form-control'
+      %br
 
+      %div{:id => "post_detail"}
+      = render partial: "templates/detail"
+      %br
 
+      = submit_tag 'Update Your Request!', class: 'btn btn-primary btn-lg btn-block'
+
+= render 'partials/footer'
 
 :javascript
   $('input#buy_post_category').on('change', function(event) {
