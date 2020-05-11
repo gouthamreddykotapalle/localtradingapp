@@ -3,12 +3,15 @@ class SellPostsController < ApplicationController
 
   def index
     # GET only. /sell_posts
+    logger.info("inside the sell posts controller")
     before_index
     sort_index
     index_with_categories
   end
 
-  def new; end
+  def new
+    logger.info("calling new in sell")
+  end
 
   def map_all
     @sell_posts = SellPost.all
@@ -104,6 +107,7 @@ class SellPostsController < ApplicationController
         {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
     @sell_posts = SellPost.all
+    logger.info("inside see posts before index")
   end
 
 
@@ -117,6 +121,7 @@ class SellPostsController < ApplicationController
     if column_ids.include? session[:sorted_key]
       @sell_posts = @sell_posts.order session[:sorted_key]
     end
+    logger.info("inside see posts sort")
   end
 
   def index_with_categories
@@ -126,6 +131,7 @@ class SellPostsController < ApplicationController
     if session[:categories] != nil
       @sell_posts = @sell_posts.with_categories session[:categories]
     end
+    logger.info("inside see posts index")
   end
 
 

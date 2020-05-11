@@ -1,7 +1,7 @@
 = content_for :page_js do
   :javascript
     function populateBuyPostsList(map, buy_posts) {
-      console.log('populateBuyPostsList() called with ' + buy_posts.length + ' sell posts');
+      console.log('populateBuyPostsList() called with ' + buy_posts.length + ' buy posts');
 
       $("#buyposts-maplist").empty();
 
@@ -28,7 +28,7 @@
       }
     }
     function populateMarkers(map, buy_posts) {
-      console.log('populateMarkers() called with ' + buy_posts.length + ' sell posts');
+      console.log('populateMarkers() called with ' + buy_posts.length + ' buy posts');
       let locations = [];
       let markers = [];
       for (let i = 0; i < buy_posts.length; i++) {
@@ -40,13 +40,13 @@
         });
         marker.addListener('click', function () {
           infoWindow.open(map, marker);
-        })
+        });
         markers.push(marker);
       }
       // console.log('locations:', locations, 'markers:', markers);
     }
     function initMap(element, lat, lng) {
-      console.log('initMap() called')
+      console.log('initMap() in buy called');
       let map;
       let myCoords = new google.maps.LatLng(lat, lng);
       let mapOptions = {

@@ -2,12 +2,15 @@ class BuyPostsController < ApplicationController
   include PostHelper
 
   def index
+    logger.info("inside buy posts controller")
     before_index
     sort_index
     index_with_categories
   end
 
-  def new; end
+  def new
+    logger.info("calling new in buy")
+  end
 
   def map_all
     @buy_posts = BuyPost.all
@@ -19,6 +22,16 @@ class BuyPostsController < ApplicationController
         upload_image_url = url_for(post.upload_image)
       else
         upload_image_url = "https://theacres.com/wp-content/uploads/2015/07/placeholder-image-icon-7.png"
+      end
+
+      if post.price_high.blank?
+        logger.info("Price high not present")
+        post.price_high = 0
+      end
+
+      if post.price_low.blank?
+        logger.info("Price low not present")
+        post.price_low = 0
       end
 
       @response << {
@@ -104,6 +117,7 @@ class BuyPostsController < ApplicationController
         {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
     @buy_posts = BuyPost.all
+    logger.info("inside buy posts before index")
   end
 
   private
@@ -133,6 +147,8 @@ class BuyPostsController < ApplicationController
     if column_ids.include? session[:sorted_key]
       @buy_posts = @buy_posts.order session[:sorted_key]
     end
+
+    logger.info("inside buy posts sort index")
   end
 
   def index_with_categories
@@ -142,6 +158,7 @@ class BuyPostsController < ApplicationController
     if session[:categories] != nil
       @buy_posts = @buy_posts.with_categories session[:categories]
     end
+    logger.info("inside buy posts index with categories")
   end
 
   def buy_post_params(use_current_user: false)
