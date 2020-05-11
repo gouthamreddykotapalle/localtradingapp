@@ -27,7 +27,6 @@ class SellPostsController < ApplicationController
 
       # TODO: Error handling
 
-
       @response << {
           id: post.id,
           title: post.title,
