@@ -1,5 +1,6 @@
 = content_for :page_js do
   :javascript
+    console.log("inside sell");
     function populateSellPostsList(map, sell_posts) {
       console.log('populateSellPostsList() called with ' + sell_posts.length + ' sell posts');
 
@@ -26,7 +27,7 @@
         `);
       }
     }
-    function populateMarkers(map, sell_posts) {
+    function populateMarkersSell(map, sell_posts) {
       console.log('populateMarkers() called with ' + sell_posts.length + ' sell posts');
       let locations = [];
       let markers = [];
@@ -39,18 +40,18 @@
         });
         marker.addListener('click', function () {
           infoWindow.open(map, marker);
-        })
+        });
         markers.push(marker);
       }
       // console.log('locations:', locations, 'markers:', markers);
     }
-    function initMap(element, lat, lng) {
-      console.log('initMap() called')
+    function initMapSell(element, lat, lng) {
+      console.log('initMap() in sell called', lat, lng);
       let map;
-      let myCoords = new google.maps.LatLng(lat, lng);
+      let myCoords = {lat, lng};
       let mapOptions = {
           center: myCoords,
-          zoom: 10,
+          zoom: 12,
           styles: [
             {
               "elementType": "labels.icon",
@@ -221,7 +222,7 @@
         data: '',
         success: function(data) {
           console.log('Success getting sell posts. Total returned from AJAX query: ' + data.length);
-          populateMarkers(map, data);
+          populateMarkersSell(map, data);
           populateSellPostsList(map, data);
         },
         error: function(error) {
@@ -245,12 +246,31 @@
 .uk-section.uk-padding-remove
   %div{:class => "", "uk-grid" => ""}
 
-    -# Left half: Google map
+    -# Left half: Google map - starts here
     %div{:style => "", :class => "uk-width-1-2", "uk-height-viewport" => "expand: true"}
       %div{:id => "gmap", :style => "width:100%; height:100%;"}
         :javascript
-          initMap(document.getElementById('gmap'), "#{@user_coordinates.first}", "#{@user_coordinates.second}");
 
+          var lati = 40.7209, longi = -74.0007;
+          function getLocationSell() {
+            console.log("inside get geo for sell");
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPositionSell);
+            } else {
+              console.log("Geolocation is not supported by this browser.");
+              initMapBuy(document.getElementById('gmap'), latis, longis); //call with default vals if geolocation not available
+            }
+          }
+
+          function showPositionSell(position) {
+            console.log("Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude);
+            lati = position.coords.latitude;
+            longi = position.coords.longitude;
+            initMapSell(document.getElementById('gmap'), lati, longi);
+          }
+
+          getLocationSell();
 
     -# Right half: Filtering and results in Card form
     %div{:style => "", :class => "uk-width-1-2 uk-padding-remove"}
@@ -266,7 +286,7 @@
                 %div.uk-width-1-1
                   = text_field :search, 'query', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Search"
             %div
-              = button_to 'Sell Your Item', new_sell_post_path, method: "get"
+              = button_to 'Sell Your Item', new_sell_post_path, method: "get", :style => "background-color: #008CBA; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
 
       %hr
 
