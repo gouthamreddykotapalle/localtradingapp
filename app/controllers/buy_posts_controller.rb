@@ -34,6 +34,8 @@ class BuyPostsController < ApplicationController
         post.price_low = 0
       end
 
+      # TODO: More error handling
+
       @response << {
           id: post.id,
           title: post.title,

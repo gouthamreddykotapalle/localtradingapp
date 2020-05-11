@@ -25,6 +25,9 @@ class SellPostsController < ApplicationController
         upload_image_url = "https://theacres.com/wp-content/uploads/2015/07/placeholder-image-icon-7.png"
       end
 
+      # TODO: Error handling
+
+
       @response << {
           id: post.id,
           title: post.title,
