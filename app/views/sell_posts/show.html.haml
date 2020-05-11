@@ -36,10 +36,6 @@
       - else
         "No Image Available"
 
-    %div
-      = link_to 'Buy this Item', 'TODO: ADD the link here', {:style => "width: 100%; display: inline-block; text-align: center;"}
-    -#  Add a link to Buy Page built by Mingen!
-
 
     %h4 Description:
     %p= @sell_post.content
@@ -58,7 +54,7 @@
         - if @paid_transaction.payer.email == @current_user.email
           = button_to 'Refund', transaction_path(@paid_transaction), :method => :delete, :class => 'btn btn-primary'
       - else
-        = button_to 'Buy', new_transaction_path, :method => :get, :params => @payment_info, :class => 'btn btn-primary'
+        = button_to 'Buy', new_transaction_path, :method => :get, :params => @payment_info, :class => 'btn btn-primary', :style => "background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
 
   %br
   %div
