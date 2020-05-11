@@ -27,6 +27,7 @@ Direct Known Subclasses -
                 Instance Method Summary:
                 
                     #price_range_are_numbers? ⇒ Boolean
+                    .search_by: For searching items by title or category
 
         *    SellPost <br>
             Class for generating a seller post. <br><br>
@@ -41,6 +42,7 @@ Direct Known Subclasses -
         
             .all_categories ⇒ Object
             .with_categories(categories) ⇒ Object
+            .search_by: For searching items by title or category
 
         
 * #### BuyPostDetail < ApplicationRecord

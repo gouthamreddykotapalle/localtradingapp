@@ -13,4 +13,16 @@ class BuyPost < Post
     attribute_present?("price_low") && attribute_present?("price_high") &&
         self.price_low.is_a?(Numeric) && self.price_high.is_a?(Numeric)
   end
+
+  def self.search_by(search_term)
+    # code here
+    search_term = search_term.downcase
+    logger.info("search term is - ")
+    logger.info(search_term)
+    result = where("LOWER(title) LIKE ? or LOWER(category) LIKE ?", "%" + search_term + "%", "%" + search_term + "%")
+    logger.info("result=")
+    logger.info(result)
+    return result
+  end
+
 end
