@@ -85,50 +85,50 @@ Direct Known Subclasses -
 
 * buy_posts
         
-    ```edit.html.haml - Page to edit a buyer post.```
-    ```index.html.haml - Landing page that displays all buyer posts.```
-    ```new.html.haml - Page to create a new Buyer Post.```
+    ```edit.html.haml - Page to edit a buyer post.```<br>
+    ```index.html.haml - Landing page that displays all buyer posts.```<br>
+    ```new.html.haml - Page to create a new Buyer Post.```<br>
     ```show.html.haml - Individual product page```
 
 * layouts
         
-    ```Application.html.haml - Root html file that manages the initialization like loading the map, fetching current location, etc```
-    ```mailer.html.haml```
+    ```Application.html.haml - Root html file that manages the initialization like loading the map, fetching current location, etc```<br>
+    ```mailer.html.haml```<br>
     ```mailer.text.haml```
 
 * partials
         
-    ```_footer.html.haml - Footer for all pages```
+    ```_footer.html.haml - Footer for all pages```<br>
    ``` _header.html.haml - Header for all pages```
         
 * sell_posts
         
-    ```edit.html.haml - Page to edit a seller post.```
-    ```index.html.haml - Landing page that displays all seller posts.```
-    ```new.html.haml - Page to create a new seller Post.```
+    ```edit.html.haml - Page to edit a seller post.```<br>
+    ```index.html.haml - Landing page that displays all seller posts.```<br>
+    ```new.html.haml - Page to create a new seller Post.```<br>
     ```show.html.haml - Individual product page```
         
 * static_page
 
-    ```about.html.haml - About details of developers```
-    ```contact.html.haml - Contact details for support```
-    ```home.html.haml```
-    ```index.html.haml```
-    ```privacy_policy.html.haml - Privacy policy```
+    ```about.html.haml - About details of developers```<br>
+    ```contact.html.haml - Contact details for support```<br>
+    ```home.html.haml```<br>
+    ```index.html.haml```<br>
+    ```privacy_policy.html.haml - Privacy policy```<br>
     ```terms.html.haml -  Terms and conditions```
         
 * templates
         
-    ```_detials.html.haml```
-    ```edit.html.haml - Editing a template```
-    ```index.html.haml - Listing all template```
-    ```new.html.haml - Creating a new template```
+    ```_detials.html.haml```<br>
+    ```edit.html.haml - Editing a template```<br>
+    ```index.html.haml - Listing all template```<br>
+    ```new.html.haml - Creating a new template```<br>
     ```show.html.haml - Showing a particular template```
 * users
 
-    ```index.html.haml```
-    ```login.html.haml - Login Page```
-    ```new.html.haml - Register Page```
+    ```index.html.haml```<br>
+    ```login.html.haml - Login Page```<br>
+    ```new.html.haml - Register Page```<br>
     ```show.html.haml - User detials Page```
 
 # **Controllers:**
