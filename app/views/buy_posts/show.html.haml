@@ -26,6 +26,15 @@
       %li
         Posted At:
         = @buy_post.updated_at.strftime("%B %d, %Y")
+      %li
+        - if @buy_post.upload_image.attached?
+          =image_tag @buy_post.upload_image
+        - else
+          "No Image Available"
+
+    %div
+      = link_to 'Buy this Item', 'TODO: ADD the link here', {:style => "width: 100%; display: inline-block; text-align: center;"}
+    -#  Add a link to Buy Page built by Mingen!
 
 
     %h4 Description:
@@ -37,5 +46,7 @@
       = button_to 'Edit', edit_buy_post_path(@buy_post), :method => :get, :class => 'btn btn-primary'
       %br
       = button_to 'Delete',  buy_post_path(@buy_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
-    %br
-    = link_to 'Back to buy post list', buy_posts_path
+
+  %br
+  %div
+    = link_to 'Back to Buy post list', buy_posts_path, {:style => "width: 100%; display: inline-block; text-align: center;"}

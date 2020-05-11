@@ -257,9 +257,11 @@
           function getLocationbuy() {
             console.log("inside get geo for buy");
             if (navigator.geolocation) {
+              console.log("passing the callback now!");
               navigator.geolocation.getCurrentPosition(showPositionbuy);
             } else {
               console.log("Geolocation is not supported by this browser.");
+              initMapBuy(document.getElementById('gmap'), latis, longis); //call with default vals if geolocation not available
             }
           }
 
@@ -272,7 +274,6 @@
           }
 
           getLocationbuy();
-
 
     -# Right half: Filtering and results in Card form
     %div{:style => "", :class => "uk-width-1-2 uk-padding-remove"}
