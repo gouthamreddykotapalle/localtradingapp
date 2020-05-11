@@ -31,3 +31,9 @@
 /config/master.key
 
 .idea
+
+
+# docs
+/.yardoc
+/doc
+

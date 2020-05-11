@@ -30,6 +30,16 @@
         Posted At:
         = @sell_post.updated_at.strftime("%B %d, %Y")
 
+      %li
+      - if @sell_post.upload_image.attached?
+        =image_tag @sell_post.upload_image
+      - else
+        "No Image Available"
+
+    %div
+      = link_to 'Buy this Item', 'TODO: ADD the link here', {:style => "width: 100%; display: inline-block; text-align: center;"}
+    -#  Add a link to Buy Page built by Mingen!
+
 
     %h4 Description:
     %p= @sell_post.content
@@ -43,6 +53,7 @@
       = button_to 'Delete', sell_post_path(@sell_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
 
   %br
-  = link_to 'Back to sell post list', sell_posts_path
+  %div
+    = link_to 'Back to sell post list', sell_posts_path, {:style => "width: 100%; display: inline-block; text-align: center;"}
 
 = render 'partials/footer'
