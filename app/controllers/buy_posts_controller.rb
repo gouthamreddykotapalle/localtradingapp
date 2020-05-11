@@ -34,6 +34,11 @@ class BuyPostsController < ApplicationController
         post.price_low = 0
       end
 
+      if post.latitude.present?
+        logger.info("lat"+post.latitude.to_s)
+        logger.info("long"+post.longitude.to_s)
+      end
+
       # TODO: More error handling
 
       @response << {
@@ -165,7 +170,7 @@ class BuyPostsController < ApplicationController
 
   def buy_post_params(use_current_user: false)
     post_param = params.require(:buy_post).permit(:title, :user_id, :category, :content,
-                                                  :price_low, :price_high, :bargain_allowed, :upload_image)
+                                                  :price_low, :price_high, :bargain_allowed, :upload_image, :latitude, :longitude)
     if use_current_user && !post_param.include?(:user_id)
       post_param[:user_id] = @current_user.email
     end
