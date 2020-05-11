@@ -45,7 +45,7 @@
       }
       // console.log('locations:', locations, 'markers:', markers);
     }
-    function initMapSell(element, lat, lng) {
+    function initMapSell(element, lat, lng, search = "blank") {
       console.log('initMap() in sell called', lat, lng);
       let map;
       let myCoords = {lat, lng};
@@ -216,10 +216,15 @@
       };
       map = new google.maps.Map(element, mapOptions);
       // init_markers(map);
+      var url1 = '/sell_posts/map/all';
+      console.log("search=",search);
+      if(search!="blank") //very important condition
+      {
+        url1 += "?search="+search;
+      }
       Rails.ajax({
         type: "GET",
-        url: '/sell_posts/map/all', // TODO: proper api conventions
-        data: '',
+        url: url1, // TODO: proper api conventions
         success: function(data) {
           console.log('Success getting sell posts. Total returned from AJAX query: ' + data.length);
           populateMarkersSell(map, data);
@@ -230,6 +235,7 @@
         }
       });
     }
+
 
 -# First row: Navbar
 = render 'partials/navbar'
@@ -258,7 +264,7 @@
               navigator.geolocation.getCurrentPosition(showPositionSell);
             } else {
               console.log("Geolocation is not supported by this browser.");
-              initMapBuy(document.getElementById('gmap'), latis, longis); //call with default vals if geolocation not available
+              initMapSell(document.getElementById('gmap'), lati, longi); //call with default vals if geolocation not available
             }
           }
 
@@ -282,9 +288,15 @@
             %div
               .uk-flex
                 %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
-                  %i.fas.fa-search.lta-browse-search-icon
+                  %i.fas.fa-search.lta-browse-search-icon{:onclick => "my_function(); return false"}
                 %div.uk-width-1-1
-                  = text_field :search, 'query', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Search"
+                  = text_field_tag :search, @search_term, class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Type & click on left side icon to search"
+                  :javascript
+                    function my_function()
+                    {
+                      console.log("hello", document.getElementById("search").value);
+                      initMapSell(document.getElementById('gmap'), lati, longi, document.getElementById("search").value);
+                    }
             %div
               = button_to 'Sell Your Item', new_sell_post_path, method: "get", :style => "background-color: #008CBA; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
 

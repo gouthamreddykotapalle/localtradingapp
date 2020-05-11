@@ -14,7 +14,20 @@ class SellPostsController < ApplicationController
   end
 
   def map_all
-    @sell_posts = SellPost.all
+    # @sell_posts = SellPost.all
+    logger.info("params=")
+    logger.info(params)
+    if params[:search]
+      logger.info("search")
+      logger.info(params)
+      @search_term = params[:search]
+      logger.info("search term first is ")
+      logger.info(@search_term)
+      @sell_posts = SellPost.search_by(@search_term)
+    else
+      logger.info("no search")
+      @sell_posts = SellPost.all
+    end
 
     @response = []
     @sell_posts.each do |post|
@@ -109,7 +122,18 @@ class SellPostsController < ApplicationController
         {name: :bargain?, id: :bargain_allowed, sort_allowed: false},
         {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
-    @sell_posts = SellPost.all
+    # Add an if else here for search
+    if params[:search]
+      logger.info("search")
+      logger.info(params)
+      @search_term = params[:search]
+      logger.info("search term first is ")
+      logger.info(@search_term)
+      @sell_posts = SellPost.search_by(@search_term)
+    else
+      logger.info("no search")
+      @sell_posts = SellPost.all
+    end
     logger.info("inside see posts before index")
   end
 

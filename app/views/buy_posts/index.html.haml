@@ -46,7 +46,7 @@
       }
       console.log('locations:', locations, 'markers:', markers);
     }
-    function initMapBuy(element, lat, lng) {
+    function initMapBuy(element, lat, lng, search = "blank") {
       console.log('initMap() in buy called', lat, lng);
       let map;
       let myCoords = {lat, lng};
@@ -216,9 +216,15 @@
           ]
       };
       map = new google.maps.Map(element, mapOptions);
+      var url2 = '/buy_posts/map/all';
+      console.log("search=",search);
+      if(search!="blank") //very important condition
+      {
+        url2 += "?search="+search;
+      }
       Rails.ajax({
         type: "GET",
-        url: '/buy_posts/map/all', // TODO: proper api conventions
+        url: url2, // TODO: proper api conventions
         data: '',
         success: function(data) {
           console.log('Success getting buy posts. Total returned from AJAX query: ' + data.length);
@@ -285,9 +291,15 @@
             %div
               .uk-flex
                 %div{:class => "lta-form-input-box-left uk-flex uk-flex-middle uk-flex-center"}
-                  %i.fas.fa-search.lta-browse-search-icon
+                  %i.fas.fa-search.lta-browse-search-icon{:onclick => "search_func(); return false"}
                 %div.uk-width-1-1
-                  = text_field :search, 'query', class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Search"
+                  = text_field_tag :search, @search_term, id:"search_buy", class: 'lta-form-input lta-form-large uk-width-1-1', placeholder: "Type & click on left side icon to search"
+                  :javascript
+                    function search_func()
+                    {
+                      console.log("hello", document.getElementById("search_buy").value);
+                      initMapBuy(document.getElementById('gmap'), latis, longis, document.getElementById("search_buy").value);
+                    }
             %div
               = button_to 'Post a Request', new_buy_post_path, method: "get", :style => "background-color: #008CBA; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;"
 

@@ -13,7 +13,21 @@ class BuyPostsController < ApplicationController
   end
 
   def map_all
-    @buy_posts = BuyPost.all
+    # @buy_posts = BuyPost.all
+
+    logger.info("params=")
+    logger.info(params)
+    if params[:search]
+      logger.info("search")
+      logger.info(params)
+      @search_term = params[:search]
+      logger.info("search term first is ")
+      logger.info(@search_term)
+      @buy_posts = BuyPost.search_by(@search_term)
+    else
+      logger.info("no search")
+      @buy_posts = BuyPost.all
+    end
 
     @response = []
     @buy_posts.each do |post|
@@ -123,7 +137,18 @@ class BuyPostsController < ApplicationController
         {name: "price_range (high)", id: :price_high, sort_allowed: true},
         {name: :upload_image, id: :upload_image_id, sort_allowed: false},
     ]
-    @buy_posts = BuyPost.all
+    # @buy_posts = BuyPost.all
+    if params[:search]
+      logger.info("search")
+      logger.info(params)
+      @search_term = params[:search]
+      logger.info("search term first is ")
+      logger.info(@search_term)
+      @buy_posts = BuyPost.search_by(@search_term)
+    else
+      logger.info("no search")
+      @buy_posts = BuyPost.all
+    end
     logger.info("inside buy posts before index")
   end
 
