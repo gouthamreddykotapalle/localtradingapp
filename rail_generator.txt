@@ -7,3 +7,5 @@ rails generate model buy_post_detail post:references field:references value:stri
 
 // rails generate model sell_post_detail_schema category:string column_id:string column_name:string datatype:string
 rails generate model sell_post_detail post:references field:references value:string
+
+rails generate model transaction payer:references payee:references amount:decimal payment_type:string card_number:string card_holder:string expiration_date:string cvv:string zip_code:string

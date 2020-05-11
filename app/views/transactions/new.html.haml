@@ -1,0 +1,66 @@
+= content_for :page_js do
+  :javascript
+
+= render 'partials/navbar'
+
+%div{:class => "uk-section lta-section-header"}
+  .uk-container.uk-text-center
+    %h1 Payment Page
+
+%div{:class => "uk-section"}
+  %div{:class => "uk-container uk-container-small", "uk-height-viewport" => "expand: true"}
+    = form_tag transactions_path, :method => "post" do
+
+      = label "transaction", "post", "Post: "
+      = @post_title
+      = hidden_field "transaction", "post_type", value: params['post_type'], class: 'form-control'
+      - if params['post_type'] == 'sell'
+        = hidden_field "transaction", "sell_post_id", value: params['post_id'], class: 'form-control'
+      - else
+        = hidden_field "transaction", "buy_post_id", value: params['post_id'], class: 'form-control'
+      %br
+
+      = label "transaction", "payer_id", 'Payer Email: '
+      = params['payer_id']
+      = hidden_field "transaction", "payer_id", value: params['payer_id'], class: 'form-control'
+      %br
+
+      = label "transaction", "payee_id", 'Payee Email: '
+      = params['payee_id']
+      = hidden_field "transaction", "payee_id", value: params['payee_id'], class: 'form-control'
+      %br
+
+      = label "transaction", "amount", 'Amount: '
+      = "$#{params['amount']}"
+      = hidden_field "transaction", "amount", value: params['amount'], class: 'form-control'
+      %br
+      %br
+
+      = label "transaction", "payment_type", 'Payment Type'
+      = radio_button "transaction", "payment_type", "credit card", checked: true
+      Credit Card &nbsp &nbsp
+      %br
+
+      = label "transaction", "card_number", 'Card Number'
+      = text_field "transaction", "card_number", class: 'form-control'
+      %br
+
+      = label "transaction", "card_holder", 'Card Holder'
+      = text_field "transaction", "card_holder", class: 'form-control'
+      %br
+
+      = label "transaction", "expiration_date", 'Expiration Date'
+      = date_field "transaction", "expiration_date", class: 'form-control', placeholder: "MM/YY"
+      %br
+
+      = label "transaction", "cvv", 'CVV'
+      = text_field "transaction", "cvv", class: 'form-control'
+      %br
+
+      = label "transaction", "zip_code", 'Zip Code'
+      = text_field "transaction", "zip_code", class: 'form-control'
+      %br
+
+      = submit_tag 'Pay', class: 'btn btn-primary btn-lg btn-block'
+
+= render 'partials/footer'

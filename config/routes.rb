@@ -45,5 +45,6 @@ Rails.application.routes.draw do
   resources :sell_posts
   resources :buy_posts
   resources :templates
+  resources :transactions
 
 end

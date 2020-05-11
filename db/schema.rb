@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_135100) do
+ActiveRecord::Schema.define(version: 2020_05_11_144742) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,15 +90,37 @@ ActiveRecord::Schema.define(version: 2020_04_03_135100) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "password"
-    t.integer "active_posts"
-    t.datetime "created"
+  create_table "transactions", force: :cascade do |t|
+    t.integer "payer_id"
+    t.integer "payee_id"
+    t.integer "buy_post_id"
+    t.integer "sell_post_id"
+    t.string "post_type"
+    t.decimal "amount"
+    t.string "payment_type"
+    t.string "card_number"
+    t.string "card_holder"
+    t.string "expiration_date"
+    t.string "cvv"
+    t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["buy_post_id"], name: "index_transactions_on_buy_post_id"
+    t.index ["payee_id"], name: "index_transactions_on_payee_id"
+    t.index ["payer_id"], name: "index_transactions_on_payer_id"
+    t.index ["sell_post_id"], name: "index_transactions_on_sell_post_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", limit: 40
+    t.string "password", limit: 512
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "last_updated"
+    t.integer "active_posts"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

@@ -55,6 +55,7 @@ class SellPostsController < ApplicationController
     id = params[:id] # retrieve movie ID from URI route
     @sell_post = SellPost.find(id) # look up post by unique ID
     prepare_details
+    prepare_payment
   end
 
   def edit
@@ -168,5 +169,19 @@ class SellPostsController < ApplicationController
     @sell_post.details.all.each do |entity|
       @details[entity.field.column_id] = entity.value
     end
+  end
+
+  def prepare_payment
+    @paid_transaction = Transaction.find_by_sell_post_id(@sell_post.id)
+    unless @paid_transaction.present?
+      @payment_info = {
+          post_type: "sell",
+          post_id: @sell_post.id,
+          payee_id: @sell_post.user_id,
+          payer_id: @current_user.email,
+          amount: @sell_post.price
+      }
+    end
+
   end
 end

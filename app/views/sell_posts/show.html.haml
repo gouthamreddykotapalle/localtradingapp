@@ -42,6 +42,14 @@
       %br
       = button_to 'Delete', sell_post_path(@sell_post), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-primary'
 
+    - else
+      - if @paid_transaction != nil
+        = "This item was bought by #{@paid_transaction.payer.email}"
+        - if @paid_transaction.payer.email == @current_user.email
+          = button_to 'Refund', transaction_path(@paid_transaction), :method => :delete, :class => 'btn btn-primary'
+      - else
+        = button_to 'Buy', new_transaction_path, :method => :get, :params => @payment_info, :class => 'btn btn-primary'
+
   %br
   = link_to 'Back to sell post list', sell_posts_path
 
