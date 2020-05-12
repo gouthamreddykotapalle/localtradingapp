@@ -83,6 +83,22 @@ Direct Known Subclasses -
         
             .authenticate(email, password) ⇒ Object
 
+* #### Transaction < ApplicationRecord
+
+    Class that manages the buy and transaction.
+    
+    - Define in:
+        app/models/transaction.rb
+        
+        Class Summary:
+        
+        ```validates :card_number, length: {maximum: 19}, format: { with: number_only_regex, message: "only allows numbers" }```
+         ```validates :expiration_date, format: { with: expiration_date_regex, message: "only mm/yy" }```
+        ```validates :cvv, length: {maximum: 4}, format: { with: number_only_regex, message: "max 4 digits" }```
+        ```validates :zip_code, length: {maximum: 6}, format: { with: number_only_regex, message: "max 6 digits" }```
+        
+            
+
 # **Views:**
 
 * buy_posts
@@ -91,6 +107,10 @@ Direct Known Subclasses -
     ```index.html.haml - Landing page that displays all buyer posts.```<br>
     ```new.html.haml - Page to create a new Buyer Post.```<br>
     ```show.html.haml - Individual product page```
+
+* transactions
+
+    ```new.html.haml - Payment gateway page.```
 
 * layouts
         
@@ -206,6 +226,22 @@ Direct Known Subclasses -
 
     ```#index_with_categories: sort posts by a particular category and index them.```
     
+   
+* #### TransactionsController < ApplicationController
+
+    Defined in:
+    - app/controllers/sessions_controller.rb
+    
+    Instance Method Summary:
+    
+    ```#create ⇒ Object: Creates a user session and logs the user in.```
+
+    ```#destroy ⇒ Object: Destroys a user Session and logs the user out.```
+    
+    ```#new => Object: Trasaction form.```
+    
+    ```transaction_params => Object: Handles the payment logic.```
+   
 * ####  SessionsController < ApplicationController
         
     Defined in:
