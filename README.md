@@ -1,5 +1,5 @@
 
-[https://thelocaltradingapp.herokuapp.com/](The Local Trading App)
+[The Local Trading App](https://thelocaltradingapp.herokuapp.com/)
 
 ### Documentation - TheLocalTradingApp
 
